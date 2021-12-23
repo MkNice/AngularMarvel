@@ -13,6 +13,7 @@ import { ComicsComponent } from './components/comics/comics.component';
 import { ComicsHeaderComponent } from './components/comics-header/comics-header.component';
 import { ComicsListComponent } from './components/comics-list/comics-list.component';
 import { NotfoundComponent } from './components/notfound/notfound.component';
+import { MarvelService } from './share/services/marvel.service';
 
 @NgModule({
   declarations: [
@@ -32,7 +33,7 @@ import { NotfoundComponent } from './components/notfound/notfound.component';
     BrowserModule,
     AppRoutingModule
   ],
-  providers: [],
+  providers: [MarvelService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
