@@ -2,16 +2,22 @@
   display: flex;
   justify-content: space-between;;
   align-items: center;
+  margin-bottom: 15px;
 
   img {
     border-radius: 100%;
   }
+  .img {
+    width: 150px;
+    height: 150px;
+  }
   p{
     width: 390px;
-    padding-left: 35px;
+    text-align: center;
   }
   button {
     width: 100px;
     height: 50px;
+    float: right;
   }
 }

@@ -1,10 +1,7 @@
-<!--<p *ngFor="let character of allCharacters | async">
-  фывфы
-</p>-->
-<pre>{{allCharacters2 | json }}</pre>
-
-<!--<div class="heroes-list" *ngIf="response">
-  <img src="/assets/images/heroes/deadpool.jpg" alt="deadpool" width="150" height="150">
-  <p>Any useful info</p>
+<div class="heroes-list" *ngFor="let character of allCharacters | async">
+  <div class="img">
+  <img src="{{character.thumbnail.path}}.{{character.thumbnail.extension}}" alt="deadpool" width="150" height="150">
+</div>
+  <p>{{character.name}}<p>
   <button class="btn">more info</button>
-</div>-->
+</div>

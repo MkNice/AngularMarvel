@@ -1,8 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { Subscription } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 import { MarvelService } from 'src/app/share/services/marvel.service';
-import { delay } from 'rxjs/operators';
-import { Observable } from 'rxjs';
+import { marvelCharacters } from 'src/app/share/interfaces/interface-marvel';
 
 @Component({
   selector: 'app-heroes-list',
@@ -10,29 +9,22 @@ import { Observable } from 'rxjs';
   styleUrls: ['./heroes-list.component.scss']
 })
 
-export class HeroesListComponent implements OnInit, OnDestroy {
+export class HeroesListComponent implements OnInit {
 
-  subscription: Subscription;
+  public subscription: Subscription;
   public loading: boolean = true;
   public searchString: string = '';
-  allCharacters: Observable<any>;
-  allCharacters2: any;
+  public allCharacters: Observable<marvelCharacters>;
+
   constructor(public marvelService: MarvelService) { }
 
   ngOnInit() {
     this.getCharacters();
   }
   getCharacters() {
-    // this.allCharacters = this.marvelService.getAllCharacters();
-    console.log(this.allCharacters)
-    this.marvelService.getAllCharacters().subscribe(
-      data => this.allCharacters2 = data
-    )
+    this.allCharacters = this.marvelService.getAllCharacters();
   }
-  ngOnDestroy() {
-    // this.subscription.unsubscribe();
 
-  }
 }
 
 
