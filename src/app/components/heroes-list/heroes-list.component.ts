@@ -16,14 +16,18 @@ export class HeroesListComponent implements OnInit, OnDestroy {
   public loading: boolean = true;
   public searchString: string = '';
   allCharacters: Observable<any>;
-
+  allCharacters2: any;
   constructor(public marvelService: MarvelService) { }
 
   ngOnInit() {
     this.getCharacters();
   }
   getCharacters() {
-    this.allCharacters = this.marvelService.getAllCharacters();
+    // this.allCharacters = this.marvelService.getAllCharacters();
+    console.log(this.allCharacters)
+    this.marvelService.getAllCharacters().subscribe(
+      data => this.allCharacters2 = data
+    )
   }
   ngOnDestroy() {
     // this.subscription.unsubscribe();

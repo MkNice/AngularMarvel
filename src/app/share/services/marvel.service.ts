@@ -16,9 +16,13 @@ export class MarvelService {
   constructor(public http: HttpClient) { }
 
   getAllCharacters(): Observable<marvelCharacters> {
-    return this.http.get<marvelCharacters>((`${environment['LINK_MARVEL']}/comics?apikey=${this.PUBLIC_KEY}&hash=${this.HASH}`))
+    return this.http.get<marvelCharacters>((`${environment['LINK_MARVEL']}/characters?ts=1&hash=${this.HASH}&apikey=${this.PUBLIC_KEY}`))
     .pipe(map((data: any) => data));
   }
+
+
+
+
 
   fetchMarvelsssssss(): Observable<marvelCharacters[]> {
     return this.http.get<marvelCharacters[]>(`${environment['LINK_MARVEL']}`)
