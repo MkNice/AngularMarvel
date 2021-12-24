@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  LINK_MARVEL: "https://gateway.marvel.com:443/v1/public/"
+  LINK_MARVEL: "https://gateway.marvel.com:443/v1/public"
 };
 
 /*

@@ -1,5 +1,9 @@
-<div class="heroes-list">
+<p *ngFor="let character of allCharacters | async">
+  {{character | json}}
+</p>
+
+<!--<div class="heroes-list" *ngIf="response">
   <img src="/assets/images/heroes/deadpool.jpg" alt="deadpool" width="150" height="150">
   <p>Any useful info</p>
   <button class="btn">more info</button>
-</div>
+</div>-->

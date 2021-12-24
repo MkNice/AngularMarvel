@@ -1,5 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { HttpClientModule } from '@angular/common/http';
+import { FormsModule } from '@angular/forms';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -14,6 +16,8 @@ import { ComicsHeaderComponent } from './components/comics-header/comics-header.
 import { ComicsListComponent } from './components/comics-list/comics-list.component';
 import { NotfoundComponent } from './components/notfound/notfound.component';
 import { MarvelService } from './share/services/marvel.service';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
 
 @NgModule({
   declarations: [
@@ -31,7 +35,10 @@ import { MarvelService } from './share/services/marvel.service';
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    HttpClientModule,
+    FormsModule,
+    BrowserAnimationsModule
   ],
   providers: [MarvelService],
   bootstrap: [AppComponent]
