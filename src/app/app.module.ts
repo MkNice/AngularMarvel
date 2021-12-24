@@ -27,7 +27,7 @@ import { MarvelService } from './share/services/marvel.service';
     ComicsComponent,
     ComicsHeaderComponent,
     ComicsListComponent,
-    NotfoundComponent
+    NotfoundComponent,
   ],
   imports: [
     BrowserModule,
