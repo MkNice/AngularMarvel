@@ -19,7 +19,7 @@ export class SearchComponent implements OnInit, OnDestroy {
       .subscribe(response => {
         this.response = response;
         console.log(this.response);
-        this.hero = ''
+        this.hero = '';
       });
   }
   ngOnDestroy(): void {
