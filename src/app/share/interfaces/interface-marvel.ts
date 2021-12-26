@@ -1,6 +1,6 @@
 export interface marvelCharacters {
   id: number,
   name: string,
-  img: string,
+  url: string,
   info: string
 }

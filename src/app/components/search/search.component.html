@@ -1,5 +1,17 @@
 <div class="search-form">
-  <input type="text" />
+  <input type="text" [(ngModel)]="hero" />
   <app-sort></app-sort>
-  <button class="btn">search</button>
+  <button class="btn" (click)="search()">Search</button>
+</div>
+<div *ngIf="response" class="response-container">
+  <img
+    src="{{ response.data.results[0].thumbnail.path }}.{{
+      response.data.results[0].thumbnail.extension
+    }}"
+    alt=""
+    width="150"
+    height="150px"
+  />
+  <span>{{ response.data.results[0].name | json }}</span>
+  <button class="btn">more info</button>
 </div>

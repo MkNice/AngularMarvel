@@ -1,7 +1,16 @@
-<div class="heroes-list" *ngFor="let character of allCharacters | async">
-  <div class="img">
-  <img src="{{character.thumbnail.path}}.{{character.thumbnail.extension}}" alt="deadpool" width="150" height="150">
+<app-search></app-search>
+<div class="hero-list-container" *ngIf="!loading">
+  <div class="heroes-list" *ngFor="let character of marvelService.heroes">
+    <div class="img">
+      <img
+        src="{{ character.thumbnail.path }}.{{ character.thumbnail.extension }}"
+        alt="{{ character.name }}"
+        width="150"
+        height="150"
+      />
+    </div>
+    <p>{{ character.name }}</p>
+      <button class="btn">more info</button>
+  </div>
 </div>
-  <p>{{character.name}}<p>
-  <button class="btn">more info</button>
-</div>
+<p *ngIf="loading" class="loading"> Loading...</p>

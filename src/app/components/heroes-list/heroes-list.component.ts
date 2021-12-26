@@ -1,7 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { Observable, Subscription } from 'rxjs';
+import { Subscription } from 'rxjs';
 import { MarvelService } from 'src/app/share/services/marvel.service';
-import { marvelCharacters } from 'src/app/share/interfaces/interface-marvel';
+import { delay } from 'rxjs/operators';
 
 @Component({
   selector: 'app-heroes-list',
@@ -9,39 +9,15 @@ import { marvelCharacters } from 'src/app/share/interfaces/interface-marvel';
   styleUrls: ['./heroes-list.component.scss']
 })
 
-export class HeroesListComponent implements OnInit {
+export class HeroesListComponent implements OnInit, OnDestroy {
 
   public subscription: Subscription;
   public loading: boolean = true;
-  public searchString: string = '';
-  public allCharacters: Observable<marvelCharacters>;
 
   constructor(public marvelService: MarvelService) { }
 
   ngOnInit() {
-    this.getCharacters();
-  }
-  getCharacters() {
-    this.allCharacters = this.marvelService.getAllCharacters();
-  }
-
-}
-
-
-
-
-
-/*this.subscription = this.marvelService.fetchMarvel()
- .subscribe(response => {
-  this.response = response;
-  this.loading = false;
-  console.log(this.response);
-});*/
-
-/*
-
-  ngOnInit() {
-    this.subscription = this.todosService.fetchTodos()
+    this.subscription = this.marvelService.fetchMarvel()
       .pipe(delay(1000))
       .subscribe(() => {
         this.loading = false;
@@ -50,12 +26,4 @@ export class HeroesListComponent implements OnInit {
   ngOnDestroy() {
     this.subscription.unsubscribe();
   }
-  onChange(id: number) {
-    this.todosService.onToggle(id);
-  }
-  removeTodo(id: number) {
-    this.todosService.removeTodo(id);
-  }
 }
-
-*/

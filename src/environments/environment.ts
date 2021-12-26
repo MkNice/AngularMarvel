@@ -4,7 +4,10 @@
 
 export const environment = {
   production: false,
-  LINK_MARVEL: "https://gateway.marvel.com:443/v1/public"
+  LINK_MARVEL: "https://gateway.marvel.com:443/v1/public",
+  PUBLIC_KEY: '7288dd042f6ab7b5972df81296c85109',
+  PRIVATE_KEY: '955c8e9ade6624038ac81f64083c0be3161782c6',
+  HASH: '595293072ed6acf04ae2708233f23cf9',
 };
 
 /*
