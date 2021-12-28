@@ -1,6 +1,6 @@
 <app-search></app-search>
 <div class="hero-list-container" *ngIf="!loading">
-  <div class="heroes-list" *ngFor="let character of marvelService.heroes">
+  <div class="heroes-list" *ngFor="let character of marvelService.marvelHeroes">
     <div class="img">
       <img
         src="{{ character.thumbnail.path }}.{{ character.thumbnail.extension }}"

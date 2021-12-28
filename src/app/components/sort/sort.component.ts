@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { MarvelService } from 'src/app/share/services/marvel.service';
 
 @Component({
   selector: 'app-sort',
@@ -7,9 +8,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SortComponent implements OnInit {
 
-  constructor() { }
+  constructor(public heroes : MarvelService) { }
 
   ngOnInit(): void {
   }
-
+  sort(){
+    this.heroes.marvelHeroes.reverse()
+  }
 }

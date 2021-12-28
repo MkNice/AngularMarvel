@@ -1,3 +1,7 @@
+/* Importing Bootstrap SCSS file. */
+
+@import '~bootstrap/scss/bootstrap';
+
 html,body,h1,img{
   margin: 0;
   padding: 0;
@@ -7,6 +11,9 @@ html,body,h1,img{
   color: #fff;
   border-radius: 50px;
   border: 1px solid;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 .btn:hover {
   color: rgb(255, 0, 0);
