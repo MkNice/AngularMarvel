@@ -19,8 +19,6 @@ import { NotfoundComponent } from './components/notfound/notfound.component';
 import { MarvelService } from './share/services/marvel.service';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
-
-
 @NgModule({
   declarations: [
     AppComponent,

@@ -4,23 +4,24 @@
   align-items: center;
   margin-bottom: 15px;
 
-  img {
-    border-radius: 100%;
-  }
-  .img {
+  .img-hero {
     width: 150px;
     height: 150px;
+    border-radius: 100%;
   }
-  p {
+
+  .hero-name {
     width: 390px;
     text-align: center;
   }
-  button {
+
+  .btn-info {
     width: 100px;
     height: 50px;
     float: right;
   }
 }
+
 .loading {
   font-size: 24px;
   font-weight: bold;

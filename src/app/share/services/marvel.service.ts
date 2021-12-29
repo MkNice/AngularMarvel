@@ -7,18 +7,29 @@ import { environment } from 'src/environments/environment';
 
 @Injectable()
 export class MarvelService {
+
   public loading: boolean = true;
   public marvelHeroes: marvelCharacters[] = [];
 
   constructor(public http: HttpClient) { }
 
-  fetchMarvel(page: number, itemsPerPage: number): Observable<marvelCharacters[]> {
+  fetchMarvel(): Observable<marvelCharacters[]> {
     return this.http.get<marvelCharacters[]>(`${environment['LINK_MARVEL']}/characters?ts=1&hash=${environment['HASH']}&apikey=${environment['PUBLIC_KEY']}`)
       .pipe(
         tap((heroes: any) => this.marvelHeroes = heroes.data.results) // results: marvelCharacters[], а вот что за тип данных у data, я не знаю :(
       );
   }
-  getPageItems(users: any, page: number, itemsPerPage: number): any{
-    return users
+
+  fetchMarvelPagination(page: number, itemsPerPage: number): Observable<marvelCharacters[]> {
+   let heroes = this.http.get<marvelCharacters[]>(`${environment['LINK_MARVEL']}/characters?ts=1&hash=${environment['HASH']}&apikey=${environment['PUBLIC_KEY']}`)
+      .pipe(
+        tap((heroes: any) => this.marvelHeroes = heroes.data.results) // results: marvelCharacters[], а вот что за тип данных у data, я не знаю :(
+      );
+    return this.getPageItems(heroes, page, itemsPerPage);
   }
+
+  getPageItems(users: any, page: number, itemsPerPage: number): any {
+    return users;
+  }
+
 }

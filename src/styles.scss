@@ -1,8 +1,11 @@
 /* Importing Bootstrap SCSS file. */
 
-@import '~bootstrap/scss/bootstrap';
+@import "~bootstrap/scss/bootstrap";
 
-html,body,h1,img{
+html,
+body,
+h1,
+img {
   margin: 0;
   padding: 0;
 }
@@ -15,10 +18,24 @@ html,body,h1,img{
   justify-content: center;
   align-items: center;
 }
+
 .btn:hover {
+  background-color: #000;
   color: rgb(255, 0, 0);
   box-shadow: 0 0 25px #000;
+  border: none;
 }
-.btn:active{
+
+.btn:active {
+  border-color: rgb(65, 64, 64);
   color: #fff;
+  box-shadow: 0 0 0 1px #000 !important;
+  border: none !important;
+}
+
+.btn:focus {
+  background-color: #000 !important;
+  border-color: #000;
+  outline: #000;
+  box-shadow: 0 0 15px rgb(65, 64, 64);
 }

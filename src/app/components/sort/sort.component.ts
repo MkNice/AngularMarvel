@@ -6,13 +6,15 @@ import { MarvelService } from 'src/app/share/services/marvel.service';
   templateUrl: './sort.component.html',
   styleUrls: ['./sort.component.scss']
 })
+
 export class SortComponent implements OnInit {
 
-  constructor(public heroes : MarvelService) { }
+  constructor(public heroes: MarvelService) { }
 
   ngOnInit(): void {
   }
-  sort(){
-    this.heroes.marvelHeroes.reverse()
+
+  sort() {
+    this.heroes.marvelHeroes.reverse();
   }
 }

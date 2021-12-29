@@ -1,16 +1,17 @@
 <app-search></app-search>
 <div class="hero-list-container" *ngIf="!loading">
   <div class="heroes-list" *ngFor="let character of marvelService.marvelHeroes">
-    <div class="img">
+    <div>
       <img
+        class="img-hero"
         src="{{ character.thumbnail.path }}.{{ character.thumbnail.extension }}"
         alt="{{ character.name }}"
         width="150"
         height="150"
       />
     </div>
-    <p>{{ character.name }}</p>
-    <button class="btn">more info</button>
+    <p class="hero-name">{{ character.name }}</p>
+    <button class="btn btn-info">more info</button>
   </div>
 </div>
 <p *ngIf="loading" class="loading">Loading...</p>

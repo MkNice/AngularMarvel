@@ -23,7 +23,9 @@ export class HeroesListComponent implements OnInit, OnDestroy {
         this.loading = false;
       });
   }
+
   ngOnDestroy() {
     this.subscription.unsubscribe();
   }
+
 }

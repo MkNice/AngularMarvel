@@ -8,7 +8,9 @@ import { environment } from 'src/environments/environment';
   templateUrl: './search.component.html',
   styleUrls: ['./search.component.scss']
 })
+
 export class SearchComponent implements OnInit, OnDestroy {
+
   hero: string = '';
   response: any;
   subscription: Subscription;
@@ -26,4 +28,5 @@ export class SearchComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     this.subscription.unsubscribe();
   }
+
 }
