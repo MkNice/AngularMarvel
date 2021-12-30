@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MarvelService } from 'src/app/share/services/marvel.service';
+import { MarvelCharacters } from 'src/app/share/interfaces/interface-marvel';
 
 @Component({
   selector: 'app-pagination',
@@ -11,7 +12,7 @@ export class PaginationComponent implements OnInit {
 
   public page: number;
   public collectionSize: number;
-  public heroes: any;
+  public heroes: MarvelCharacters[] = [];;
   public itemsPerPage: number = 4;
 
   constructor(public marvelService: MarvelService) {

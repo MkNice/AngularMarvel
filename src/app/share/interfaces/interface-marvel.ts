@@ -1,4 +1,4 @@
-export interface marvelCharacters {
+export interface MarvelCharacters {
   id: number,
   name: string,
   url: string,

@@ -2,6 +2,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Subscription } from 'rxjs';
 import { environment } from 'src/environments/environment';
+import { MarvelCharacters } from 'src/app/share/interfaces/interface-marvel';
 
 @Component({
   selector: 'app-search',
@@ -11,9 +12,9 @@ import { environment } from 'src/environments/environment';
 
 export class SearchComponent implements OnInit, OnDestroy {
 
-  hero: string = '';
-  response: any;
-  subscription: Subscription;
+  public hero: string = '';
+  public response: any;
+  public subscription: Subscription;
 
   constructor(private http: HttpClient) { }
 
