@@ -1,1 +1,41 @@
-/* You can add global styles to this file, and also import other style files */
+/* Importing Bootstrap SCSS file. */
+
+@import "~bootstrap/scss/bootstrap";
+
+html,
+body,
+h1,
+img {
+  margin: 0;
+  padding: 0;
+}
+.btn {
+  background-color: #000;
+  color: #fff;
+  border-radius: 50px;
+  border: 1px solid;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.btn:hover {
+  background-color: #000;
+  color: rgb(255, 0, 0);
+  box-shadow: 0 0 25px #000;
+  border: none;
+}
+
+.btn:active {
+  border-color: rgb(65, 64, 64);
+  color: #fff;
+  box-shadow: 0 0 0 1px #000 !important;
+  border: none !important;
+}
+
+.btn:focus {
+  background-color: #000 !important;
+  border-color: #000;
+  outline: #000;
+  box-shadow: 0 0 15px rgb(65, 64, 64);
+}

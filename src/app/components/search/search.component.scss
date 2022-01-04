@@ -1,0 +1,38 @@
+.search-form {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 20px 0;
+
+  .search-input {
+    width: 500px;
+    height: 27px;
+    font-size: 18px;
+    box-shadow: 0 0 5px #000;
+    border: none;
+  }
+
+  .btn-search {
+    width: 60px;
+    height: 25px;
+  }
+}
+
+.response-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  .img-hero {
+    border-radius: 100%;
+  }
+
+  .btn-info {
+    width: 100px;
+    height: 50px;
+  }
+
+  .btn-info:active {
+    background-color: #000;
+  }
+}
