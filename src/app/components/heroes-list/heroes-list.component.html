@@ -11,7 +11,14 @@
       />
     </div>
     <p class="hero-name">{{ character.name }}</p>
-    <button class="btn btn-info">more info</button>
+    <button class="btn btn-info" (click)="moreInfo()">more info</button>
+    <dialog open *ngIf="extraInfo">
+      <p>comics with him: {{ character.comics.available }}</p>
+      last modify:
+      <time> {{ character.modified }}</time>
+    </dialog>
   </div>
 </div>
-<p *ngIf="loading" class="loading">Loading...</p>
+<div class="loading-container" *ngIf="loading">
+  <progress></progress>
+</div>

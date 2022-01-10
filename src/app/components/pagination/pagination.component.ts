@@ -12,7 +12,7 @@ export class PaginationComponent implements OnInit {
 
   public page: number;
   public collectionSize: number;
-  public heroes: MarvelCharacters[] = [];;
+  public heroes: MarvelCharacters[] = [];
   public itemsPerPage: number = 4;
 
   constructor(public marvelService: MarvelService) {
@@ -20,7 +20,7 @@ export class PaginationComponent implements OnInit {
     marvelService.fetchMarvelPagination(this.page, this.itemsPerPage)
       .subscribe(heroes => {
         this.heroes = heroes;
-        this.collectionSize = marvelService.marvelHeroes.length;
+        this.collectionSize = marvelService.collectionSize;
       });
   }
 
@@ -29,5 +29,4 @@ export class PaginationComponent implements OnInit {
   onPageChanged(pageNumber) {
     console.log("page changed:" + pageNumber);
   }
-
 }

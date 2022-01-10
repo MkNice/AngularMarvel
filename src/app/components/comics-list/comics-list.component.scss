@@ -1,12 +1,12 @@
 .comics-list {
   display: flex;
 
-  &.img-comics {
+  .img-comics {
     width: 150px;
     height: 150px;
   }
 
-  &.descrioption-comics {
+  .description-comics {
     padding-left: 30px;
   }
 }

@@ -2,6 +2,7 @@ import { MarvelCharacters } from './interface-marvel';
 
 export interface DataMarvel {
   data: {
-    results: MarvelCharacters[]
-  }
+    results: MarvelCharacters[],
+    total: number
+  };
 }
