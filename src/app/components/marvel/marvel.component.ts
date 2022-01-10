@@ -12,5 +12,4 @@ export class MarvelComponent implements OnInit {
 
   ngOnInit(): void {
   }
-
 }

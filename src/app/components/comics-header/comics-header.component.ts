@@ -11,5 +11,4 @@ export class ComicsHeaderComponent implements OnInit {
 
   ngOnInit(): void {
   }
-
 }

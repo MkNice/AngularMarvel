@@ -35,5 +35,4 @@ export class ComicsListComponent implements OnInit, OnDestroy {
   ngOnDestroy() {
     this.subscriptions.forEach((subscription) => subscription.unsubscribe()); // Можно через forEach, а можно через ...  takeUntil()... destroy until
   }
-
 }
