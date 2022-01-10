@@ -1,7 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { Subscription, Observable } from 'rxjs';
+import { Subscription } from 'rxjs';
 import { MarvelService } from 'src/app/share/services/marvel.service';
-import { delay, tap, takeUntil } from 'rxjs/operators';
+import { delay, tap } from 'rxjs/operators';
 import { MarvelCharacters } from 'src/app/share/interfaces/interface-marvel';
 import { DataMarvel } from 'src/app/share/interfaces/interface-data';
 
@@ -16,6 +16,7 @@ export class HeroesListComponent implements OnInit, OnDestroy {
   public marvelHeroes: MarvelCharacters[] = [];
   public subscriptions: Subscription[] = [];
   public loading: boolean = true;
+  public extraInfo: boolean = false;
 
   constructor(public marvelService: MarvelService) { }
 
@@ -35,5 +36,7 @@ export class HeroesListComponent implements OnInit, OnDestroy {
   ngOnDestroy() {
     this.subscriptions.forEach((subscription) => subscription.unsubscribe()); // Можно через forEach, а можно через ...  takeUntil()... destroy until
   }
-
+ moreInfo() {
+    this.extraInfo = !this.extraInfo;
+  }
 }

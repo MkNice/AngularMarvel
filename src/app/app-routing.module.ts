@@ -6,10 +6,22 @@ import { NotfoundComponent } from './components/notfound/notfound.component';
 import { SearchComponent } from './components/search/search.component';
 
 const routes: Routes = [
-  { path: '', component: MarvelComponent },
-  { path: 'comics', component: ComicsComponent },
-  { path: 'search', component: SearchComponent },
-  { path: '**', component: NotfoundComponent }
+  {
+    path: '',
+    component: MarvelComponent
+  },
+  {
+    path: 'comics',
+    component: ComicsComponent
+  },
+  {
+    path: 'search',
+    component: SearchComponent,
+  },
+  {
+    path: '**',
+    component: NotfoundComponent
+  }
 ];
 
 @NgModule({

@@ -11,6 +11,7 @@ export class MarvelService {
 
   public loading: boolean = true;
   public marvelHeroes: MarvelCharacters[] = [];
+  public collectionSize: number;
 
   constructor(public http: HttpClient) { }
 
@@ -19,13 +20,12 @@ export class MarvelService {
   }
 
   fetchMarvelPagination(page: number, itemsPerPage: number): Observable<MarvelCharacters[]> {
-    let heroes = this.http.get<DataMarvel>(`${environment['LINK_MARVEL']}/characters?ts=1&hash=${environment['HASH']}&apikey=${environment['PUBLIC_KEY']}`)
+    const heroes = this.http.get<DataMarvel>(`${environment['LINK_MARVEL']}/characters?ts=1&hash=${environment['HASH']}&apikey=${environment['PUBLIC_KEY']}`)
       .pipe(
         tap((heroes: DataMarvel) => {
           this.marvelHeroes = heroes.data.results;
-          console.log(heroes)
+          this.collectionSize = heroes.data.total;
         })
-        // results: marvelCharacters[], а вот что за тип данных у data, я не знаю :(
       );
 
     return this.getPageItems(heroes, page, itemsPerPage);
