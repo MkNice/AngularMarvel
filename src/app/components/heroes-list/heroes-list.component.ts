@@ -1,10 +1,10 @@
-import { Component, OnInit, OnDestroy, ChangeDetectorRef } from '@angular/core';
-import { Subscription, Observable } from 'rxjs';
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Subscription } from 'rxjs';
 import { MarvelService } from 'src/app/share/services/marvel.service';
-import { delay, tap, takeUntil } from 'rxjs/operators';
+import { delay, tap } from 'rxjs/operators';
 import { MarvelCharacters } from 'src/app/share/interfaces/interface-marvel';
 import { DataMarvel } from 'src/app/share/interfaces/interface-data';
-import { TestService } from 'src/app/test.service';
+
 
 
 
@@ -21,14 +21,13 @@ export class HeroesListComponent implements OnInit, OnDestroy {
   public loading: boolean = true;
   public extraInfo: boolean = false;
 
-  constructor(public marvelService: MarvelService, public testService: TestService) { }
+  constructor(public marvelService: MarvelService) { }
 
   ngOnInit() {
     const subscriptions = this.marvelService.fetchMarvel()
       .pipe(
         delay(1000),
         tap((heroes: DataMarvel) => this.marvelHeroes = heroes.data.results),
-
       )
       .subscribe(() => {
         this.loading = false;
