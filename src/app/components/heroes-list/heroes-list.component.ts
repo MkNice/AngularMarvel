@@ -5,9 +5,6 @@ import { delay, tap } from 'rxjs/operators';
 import { MarvelCharacters } from 'src/app/share/interfaces/interface-marvel';
 import { DataMarvel } from 'src/app/share/interfaces/interface-data';
 
-
-
-
 @Component({
   selector: 'app-heroes-list',
   templateUrl: './heroes-list.component.html',
@@ -24,22 +21,22 @@ export class HeroesListComponent implements OnInit, OnDestroy {
   constructor(public marvelService: MarvelService) { }
 
   ngOnInit() {
-    const subscriptions = this.marvelService.fetchMarvel()
+    const subs = this.marvelService.fetchMarvel()
       .pipe(
         delay(1000),
         tap((heroes: DataMarvel) => this.marvelHeroes = heroes.data.results),
+
       )
       .subscribe(() => {
         this.loading = false;
       });
-    this.subscriptions.push(subscriptions);
+    this.subscriptions.push(subs);
   }
 
   ngOnDestroy() {
     this.subscriptions.forEach((subscription) => subscription.unsubscribe()); // Можно через forEach, а можно через ...  takeUntil()... destroy until
   }
-
-  moreInfo() {
+ moreInfo() {
     this.extraInfo = !this.extraInfo;
   }
 }
