@@ -7,8 +7,8 @@ import { SearchComponent } from './components/search/search.component';
 
 const routes: Routes = [
   {
-    path: '',
-    component: MarvelComponent
+    path: 'home',
+    component: MarvelComponent,
   },
   {
     path: 'comics',
@@ -17,6 +17,11 @@ const routes: Routes = [
   {
     path: 'search',
     component: SearchComponent,
+  },
+  {
+    path: '',
+    redirectTo: 'home',
+    pathMatch: 'full'
   },
   {
     path: '**',

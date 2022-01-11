@@ -2,7 +2,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Subscription } from 'rxjs';
 import { environment } from 'src/environments/environment';
-import { MarvelCharacters } from 'src/app/share/interfaces/interface-marvel';
+import { NavigationExtras, Router } from '@angular/router';
 
 @Component({
   selector: 'app-search',
@@ -12,21 +12,29 @@ import { MarvelCharacters } from 'src/app/share/interfaces/interface-marvel';
 
 export class SearchComponent implements OnInit, OnDestroy {
 
-  public hero: string = '';
-  public response: any;
-  public subscription: Subscription;
-
-  constructor(private http: HttpClient) { }
+  private hero: string = '';
+  private response: any;
+  private subscriptions: Subscription[] = [];
+  /*
+    private navigationExtras: NavigationExtras = {
+      queryParamsHandling: 'preserve',
+      preserveFragment: true
+    };
+  */
+  constructor(private http: HttpClient, private router: Router) { }
 
   ngOnInit() { }
 
   search() {
-    this.subscription = this.http.get(`${environment['LINK_MARVEL']}/characters?name=${this.hero}&ts=1&hash=${environment['HASH']}&apikey=${environment['PUBLIC_KEY']}`)
+
+    const subs = this.http.get(`${environment['LINK_MARVEL']}/characters?name=${this.hero}&ts=1&hash=${environment['HASH']}&apikey=${environment['PUBLIC_KEY']}`)
       .subscribe(response => {
         this.response = response;
       });
+    this.subscriptions.push(subs);
+    this.router.navigate(['search'], { queryParams: { search: subs }, queryParamsHandling: 'preserve' });
   }
   ngOnDestroy(): void {
-    this.subscription.unsubscribe();
+    this.subscriptions.forEach((subscription) => subscription.unsubscribe());
   }
 }

@@ -25,7 +25,6 @@ export class HeroesListComponent implements OnInit, OnDestroy {
       .pipe(
         delay(1000),
         tap((heroes: DataMarvel) => this.marvelHeroes = heroes.data.results),
-
       )
       .subscribe(() => {
         this.loading = false;
