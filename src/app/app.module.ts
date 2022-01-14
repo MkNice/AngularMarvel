@@ -24,6 +24,8 @@ import { environment } from '../environments/environment';
 import { StoreRouterConnectingModule } from '@ngrx/router-store';
 import { EffectsModule } from '@ngrx/effects';
 import { reducers } from './reducers';
+import { MoreInfoComponent } from './components/more-info/more-info.component';
+
 
 @NgModule({
   declarations: [
@@ -38,6 +40,7 @@ import { reducers } from './reducers';
     ComicsHeaderComponent,
     ComicsListComponent,
     NotfoundComponent,
+    MoreInfoComponent
   ],
   imports: [
     BrowserModule,

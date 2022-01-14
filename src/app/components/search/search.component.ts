@@ -12,8 +12,8 @@ import { NavigationExtras, Router } from '@angular/router';
 
 export class SearchComponent implements OnInit, OnDestroy {
 
-  private hero: string = '';
-  private response: any;
+  public hero: string = '';
+  public response: any;
   private subscriptions: Subscription[] = [];
   /*
     private navigationExtras: NavigationExtras = {
@@ -30,6 +30,7 @@ export class SearchComponent implements OnInit, OnDestroy {
     const subs = this.http.get(`${environment['LINK_MARVEL']}/characters?name=${this.hero}&ts=1&hash=${environment['HASH']}&apikey=${environment['PUBLIC_KEY']}`)
       .subscribe(response => {
         this.response = response;
+        console.log(response)
       });
     this.subscriptions.push(subs);
     this.router.navigate(['search'], { queryParams: { search: subs }, queryParamsHandling: 'preserve' });

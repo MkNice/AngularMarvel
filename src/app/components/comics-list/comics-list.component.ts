@@ -20,7 +20,7 @@ export class ComicsListComponent implements OnInit, OnDestroy {
   constructor(public marvelService: MarvelService) { }
 
   ngOnInit() {
-    const subscriptions = this.marvelService.fetchMarvel()
+    const subscriptions = this.marvelService.fetchCharacters()
       .pipe(
         delay(1000),
         tap((heroes: DataMarvel) => this.marvelHeroes = heroes.data.results),
