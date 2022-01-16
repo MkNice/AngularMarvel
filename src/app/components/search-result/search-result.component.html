@@ -1,0 +1,13 @@
+<div *ngIf="response" class="response-container">
+  <img
+    class="img-hero"
+    src="{{ response.data.results[0].thumbnail.path }}.{{
+      response.data.results[0].thumbnail.extension
+    }}"
+    alt=""
+    width="150"
+    height="150px"
+  />
+  <span>{{ response.data.results[0].name }}</span>
+  <button class="btn btn-info">more info</button>
+</div>

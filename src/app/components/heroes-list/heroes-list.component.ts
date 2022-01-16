@@ -25,7 +25,7 @@ export class HeroesListComponent implements OnInit, OnDestroy {
   ngOnInit() {
     const subs = this.marvelService.fetchCharacters()
       .pipe(
-        delay(1000),
+       // delay(1000),
         tap((heroes: DataMarvel) => this.marvelHeroes = heroes.data.results),
       )
       .subscribe(() => {

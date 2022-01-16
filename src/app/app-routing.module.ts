@@ -4,7 +4,8 @@ import { ComicsComponent } from './components/comics/comics.component';
 import { MarvelComponent } from './components/marvel/marvel.component';
 import { MoreInfoComponent } from './components/more-info/more-info.component';
 import { NotfoundComponent } from './components/notfound/notfound.component';
-import { SearchComponent } from './components/search/search.component';
+import { SearchResultComponent } from './components/search-result/search-result.component';
+
 
 const routes: Routes = [
   {
@@ -16,8 +17,8 @@ const routes: Routes = [
     component: ComicsComponent
   },
   {
-    path: 'search',
-    component: SearchComponent,
+    path: 'search-result',
+    component: SearchResultComponent,
   },
   {
     path: 'moreInfo',
