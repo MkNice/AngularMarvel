@@ -1,7 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { ReplaySubject, Subscription } from 'rxjs';
-import { environment } from 'src/environments/environment';
+import { ReplaySubject } from 'rxjs';
 import { Router } from '@angular/router';
 import { DataSearchService } from 'src/app/share/services/data-search.service';
 import { APIService } from 'src/app/share/services/api.service';

@@ -14,7 +14,6 @@ import { DataSearchService } from 'src/app/share/services/data-search.service';
 })
 
 export class HeroesListComponent implements OnInit, OnDestroy {
-
   public marvelHeroes: MarvelCharacters[] = [];
   public subscriptions: Subscription[] = [];
   public loading: boolean = true;
@@ -25,7 +24,6 @@ export class HeroesListComponent implements OnInit, OnDestroy {
   ngOnInit() {
     const subs = this.marvelService.fetchCharacters()
       .pipe(
-       // delay(1000),
         tap((heroes: DataMarvel) => this.marvelHeroes = heroes.data.results),
       )
       .subscribe(() => {
@@ -33,13 +31,14 @@ export class HeroesListComponent implements OnInit, OnDestroy {
       });
     this.subscriptions.push(subs);
   }
-
+  nextHeroes(message){
+    this.marvelHeroes = message;
+  }
   ngOnDestroy() {
-    this.subscriptions.forEach((subscription) => subscription.unsubscribe()) // Можно через forEach, а можно через ...  takeUntil()... destroy until
+    this.subscriptions.forEach((subscription) => subscription.unsubscribe())
   }
 
   moreInfo() {
-    this.extraInfo = !this.extraInfo;
     this.dataSearch.setData(this.marvelHeroes);
     this.router.navigate(['moreInfo']);
   }
