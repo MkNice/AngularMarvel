@@ -12,12 +12,17 @@ export class MarvelService {
   public loading: boolean = true;
   public marvelHeroes: MarvelCharacters[] = [];
   public collectionSize: number;
+  public giveMeText: any;
 
   constructor(public http: HttpClient) { }
 
-  fetchMarvel(): Observable<DataMarvel> {
-    return this.http.get<DataMarvel>(`${environment['LINK_MARVEL']}/characters?ts=1&hash=${environment['HASH']}&apikey=${environment['PUBLIC_KEY']}`);
-  }
+
+
+  fetchCharacters(name: string = ''): Observable<DataMarvel> {
+    let data: string = '';
+    if (name) { data = `&name=${name}`; }
+    return this.http.get<DataMarvel>(`${environment['LINK_MARVEL']}/characters?ts=1&hash=${environment['HASH']}&apikey=${environment['PUBLIC_KEY']}` + data);
+    }
 
   fetchMarvelPagination(page: number, itemsPerPage: number): Observable<MarvelCharacters[]> {
     const heroes = this.http.get<DataMarvel>(`${environment['LINK_MARVEL']}/characters?ts=1&hash=${environment['HASH']}&apikey=${environment['PUBLIC_KEY']}`)

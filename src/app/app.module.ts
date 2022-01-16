@@ -24,6 +24,10 @@ import { environment } from '../environments/environment';
 import { StoreRouterConnectingModule } from '@ngrx/router-store';
 import { EffectsModule } from '@ngrx/effects';
 import { reducers } from './reducers';
+import { MoreInfoComponent } from './components/more-info/more-info.component';
+import { SearchResultComponent } from './components/search-result/search-result.component';
+import { APIService } from './share/services/api.service';
+
 
 @NgModule({
   declarations: [
@@ -38,6 +42,8 @@ import { reducers } from './reducers';
     ComicsHeaderComponent,
     ComicsListComponent,
     NotfoundComponent,
+    MoreInfoComponent,
+    SearchResultComponent
   ],
   imports: [
     BrowserModule,
@@ -51,7 +57,7 @@ import { reducers } from './reducers';
     StoreRouterConnectingModule.forRoot(),
     EffectsModule.forRoot([])
   ],
-  providers: [MarvelService],
+  providers: [MarvelService, APIService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

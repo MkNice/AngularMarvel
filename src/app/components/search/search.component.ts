@@ -1,32 +1,49 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Subscription } from 'rxjs';
+import { ReplaySubject, Subscription } from 'rxjs';
 import { environment } from 'src/environments/environment';
-import { MarvelCharacters } from 'src/app/share/interfaces/interface-marvel';
+import { Router } from '@angular/router';
+import { DataSearchService } from 'src/app/share/services/data-search.service';
+import { APIService } from 'src/app/share/services/api.service';
+import { takeUntil, tap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-search',
   templateUrl: './search.component.html',
-  styleUrls: ['./search.component.scss']
+  styleUrls: ['./search.component.scss'],
 })
-
 export class SearchComponent implements OnInit, OnDestroy {
 
+  // TODO: make me stupid
   public hero: string = '';
   public response: any;
-  public subscription: Subscription;
+  private destroy$: ReplaySubject<number> = new ReplaySubject<number>(1);
 
-  constructor(private http: HttpClient) { }
+  constructor(
+    private http: HttpClient,
+    private router: Router,
+    private dataSearchService: DataSearchService,
+    private apiService: APIService
+  ) { }
 
   ngOnInit() { }
 
   search() {
-    this.subscription = this.http.get(`${environment['LINK_MARVEL']}/characters?name=${this.hero}&ts=1&hash=${environment['HASH']}&apikey=${environment['PUBLIC_KEY']}`)
-      .subscribe(response => {
-        this.response = response;
-      });
+
+    const searchString: string = `/characters?name=${this.hero}`;
+
+    this.apiService.getData(searchString)
+      .pipe(
+        tap((searchResult) => {
+          this.dataSearchService.setData(this.hero);
+          this.router.navigate(['search-result']);
+        }),
+        takeUntil(this.destroy$)
+      )
+      .subscribe();
   }
+
   ngOnDestroy(): void {
-    this.subscription.unsubscribe();
+    this.destroy$.next();
   }
 }
