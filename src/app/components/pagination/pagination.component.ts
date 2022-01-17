@@ -29,7 +29,7 @@ export class PaginationComponent implements OnInit, OnDestroy {
   ngOnInit() { }
 
   onPageChanged(pageNumber) {
-    const requestString: string = `characters?offset=${pageNumber * this.itemsPerPage}&limit=${this.itemsPerPage}`;
+    const requestString: string = `characters?offset=${(pageNumber * this.itemsPerPage) - 5}&limit=${this.itemsPerPage}`;
 
     this.apiService.getData(requestString)
       .pipe(
@@ -43,5 +43,5 @@ export class PaginationComponent implements OnInit, OnDestroy {
     console.log("page changed:" + pageNumber);
   }
 
-  ngOnDestroy() {  }
+  ngOnDestroy() { }
 }
