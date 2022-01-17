@@ -4,6 +4,7 @@ import { MarvelCharacters } from 'src/app/share/interfaces/interface-marvel';
 import { APIService } from 'src/app/share/services/api.service';
 import { takeUntil, tap } from 'rxjs/operators';
 import { ReplaySubject } from 'rxjs';
+import { DataMarvel } from 'src/app/share/interfaces/interface-data';
 
 @Component({
   selector: 'app-pagination',
@@ -17,7 +18,7 @@ export class PaginationComponent implements OnInit, OnDestroy {
   public collectionSize: number;
   private itemsPerPage: number = 5;
   private destroy$: ReplaySubject<number> = new ReplaySubject<number>(1);
-  @Output() nextHeroes = new EventEmitter<any>();
+  @Output() nextHeroes = new EventEmitter<MarvelCharacters[]>();
 
   constructor(public marvelService: MarvelService, private apiService: APIService) {
     marvelService.fetchMarvelPagination(this.page, this.itemsPerPage)
@@ -33,14 +34,12 @@ export class PaginationComponent implements OnInit, OnDestroy {
 
     this.apiService.getData(requestString)
       .pipe(
-        tap((nextData: any) => {
+        tap((nextData: DataMarvel) => {
           this.nextHeroes.emit(nextData.data.results);
-          console.log('new list of heroes ', nextData.data);
         }),
         takeUntil(this.destroy$)
       )
       .subscribe();
-    console.log("page changed:" + pageNumber);
   }
 
   ngOnDestroy() { }

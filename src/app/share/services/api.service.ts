@@ -10,9 +10,9 @@ export class APIService {
 
   public getData(params: string): Observable<unknown> {
     return this.http.get(
-      `${environment.LINK_MARVEL}/${params}&ts=1&hash=${environment.HASH}&apikey=${environment.PUBLIC_KEY}`// + data
+      `${environment.LINK_MARVEL}/${params}&ts=1&hash=${environment.HASH}&apikey=${environment.PUBLIC_KEY}&limit=5`// + data
     );
-  }
+  }//(`${environment['LINK_MARVEL']}/characters?ts=1&hash=${environment['HASH']}&apikey=${environment['PUBLIC_KEY']}&limit=5`
 
     // public postData(): Observable<unknown> {
     //     return this.http.post(
