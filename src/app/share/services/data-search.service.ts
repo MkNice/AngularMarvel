@@ -5,14 +5,14 @@ import { Injectable } from '@angular/core';
 })
 export class DataSearchService {
 
-  public data: any; // DataMarvel
+  public dataMarvel: any; // dataMarvel
 
   constructor() { }
 
   getData(){
-    return this.data;
+    return this.dataMarvel;
   }
   setData(data){
-    this.data = data;
+    this.dataMarvel = data;
   }
 }

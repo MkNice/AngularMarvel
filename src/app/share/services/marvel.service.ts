@@ -21,7 +21,7 @@ export class MarvelService {
   fetchCharacters(name: string = ''): Observable<DataMarvel> {
     let data: string = '';
     if (name) { data = `&name=${name}`; }
-    return this.http.get<DataMarvel>(`${environment['LINK_MARVEL']}/characters?ts=1&hash=${environment['HASH']}&apikey=${environment['PUBLIC_KEY']}` + data);
+    return this.http.get<DataMarvel>(`${environment['LINK_MARVEL']}/characters?ts=1&hash=${environment['HASH']}&apikey=${environment['PUBLIC_KEY']}&limit=5` + data);
     }
 
   fetchMarvelPagination(page: number, itemsPerPage: number): Observable<MarvelCharacters[]> {
