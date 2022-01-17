@@ -4,15 +4,16 @@ import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 
 @Injectable()
+
 export class APIService {
 
   constructor(public http: HttpClient) {}
 
   public getData(params: string): Observable<unknown> {
     return this.http.get(
-      `${environment.LINK_MARVEL}/${params}&ts=1&hash=${environment.HASH}&apikey=${environment.PUBLIC_KEY}&limit=5`// + data
+      `${environment.LINK_MARVEL}/${params}&ts=1&hash=${environment.HASH}&apikey=${environment.PUBLIC_KEY}&limit=5`
     );
-  }//(`${environment['LINK_MARVEL']}/characters?ts=1&hash=${environment['HASH']}&apikey=${environment['PUBLIC_KEY']}&limit=5`
+  }
 
     // public postData(): Observable<unknown> {
     //     return this.http.post(

@@ -42,5 +42,7 @@ export class PaginationComponent implements OnInit, OnDestroy {
       .subscribe();
   }
 
-  ngOnDestroy() { }
+  ngOnDestroy() {
+    this.destroy$.next();
+  }
 }

@@ -24,7 +24,7 @@ export class HeroesListComponent implements OnInit, OnDestroy {
   constructor(public apiService: APIService, public router: Router, public dataSearch: DataSearchService) { }
 
   ngOnInit() {
-    const requestString: string = 'characters?'
+    const requestString: string = 'characters?';
 
     this.apiService.getData(requestString)
       .pipe(
@@ -38,7 +38,9 @@ export class HeroesListComponent implements OnInit, OnDestroy {
   nextHeroes(heroes) {
     this.marvelHeroes = heroes;
   }
-  ngOnDestroy() { }
+  ngOnDestroy() {
+    this.destroy$.next();
+  }
 
   moreInfo() {
     this.dataSearch.setData(this.marvelHeroes);

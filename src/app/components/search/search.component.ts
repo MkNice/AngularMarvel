@@ -33,7 +33,7 @@ export class SearchComponent implements OnInit, OnDestroy {
 
     this.apiService.getData(searchString)
       .pipe(
-        tap((searchResult) => {
+        tap(() => {
           this.dataSearchService.setData(this.hero);
           this.router.navigate(['search-result']);
         }),

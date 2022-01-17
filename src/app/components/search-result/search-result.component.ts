@@ -1,8 +1,6 @@
-import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { DataSearchService } from 'src/app/share/services/data-search.service';
 import { MarvelService } from 'src/app/share/services/marvel.service';
-import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-search-result',
@@ -14,7 +12,7 @@ export class SearchResultComponent implements OnInit {
   public searchString: string = '';
   public response: any;
 
-  constructor(private dataSearchService: DataSearchService, private http: HttpClient, public marvelService: MarvelService) { }
+  constructor(private dataSearchService: DataSearchService,  public marvelService: MarvelService) { }
 
   ngOnInit(): void {
 
@@ -25,10 +23,6 @@ export class SearchResultComponent implements OnInit {
     this.marvelService.fetchCharacters(this.searchString)
       .subscribe(response => {
         this.response = response;
-        console.log(response);
       });
-      
   }
 }
-
-
