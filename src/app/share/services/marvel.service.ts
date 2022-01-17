@@ -28,7 +28,6 @@ export class MarvelService {
     const heroes = this.http.get<DataMarvel>(`${environment['LINK_MARVEL']}/characters?ts=1&hash=${environment['HASH']}&apikey=${environment['PUBLIC_KEY']}`)
       .pipe(
         tap((heroes: DataMarvel) => {
-          this.marvelHeroes = heroes.data.results;
           this.collectionSize = heroes.data.total;
         })
       );

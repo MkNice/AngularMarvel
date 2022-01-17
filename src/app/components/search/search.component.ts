@@ -19,7 +19,6 @@ export class SearchComponent implements OnInit, OnDestroy {
   private destroy$: ReplaySubject<number> = new ReplaySubject<number>(1);
 
   constructor(
-    private http: HttpClient,
     private router: Router,
     private dataSearchService: DataSearchService,
     private apiService: APIService

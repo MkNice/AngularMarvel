@@ -12,14 +12,9 @@
     </div>
     <p class="hero-name">{{ character.name }}</p>
     <button class="btn btn-info" (click)="moreInfo()">more info</button>
-    <dialog open *ngIf="extraInfo">
-      <p>comics with him: {{ character.comics.available }}</p>
-      last modify:
-      <time> {{ character.modified }}</time>
-    </dialog>
   </div>
 </div>
 <div class="loading-container" *ngIf="loading">
   <progress></progress>
 </div>
-<app-pagination (nextHeroes)="nextHeroes($event)"></app-pagination>
+<app-pagination [link]="linkCharacters" (nextHeroes)="nextHeroes($event)"></app-pagination>

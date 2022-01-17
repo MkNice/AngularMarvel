@@ -20,11 +20,12 @@ export class HeroesListComponent implements OnInit, OnDestroy {
   public loading: boolean = true;
   public extraInfo: boolean = false;
   private destroy$: ReplaySubject<number> = new ReplaySubject<number>(1);
+  public linkCharacters: string = 'characters?';
 
   constructor(public apiService: APIService, public router: Router, public dataSearch: DataSearchService) { }
 
   ngOnInit() {
-    const requestString: string = 'characters?';
+    const requestString: string = 'characters?limit=5';
 
     this.apiService.getData(requestString)
       .pipe(
