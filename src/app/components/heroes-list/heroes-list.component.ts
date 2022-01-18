@@ -7,6 +7,7 @@ import { DataMarvel } from 'src/app/share/interfaces/interface-data';
 import { Router } from '@angular/router';
 import { DataSearchService } from 'src/app/share/services/data-search.service';
 import { APIService } from 'src/app/share/services/api.service';
+import { DataDetailsCharacterService } from 'src/app/share/services/data-details-character.service';
 
 @Component({
   selector: 'app-heroes-list',
@@ -21,8 +22,9 @@ export class HeroesListComponent implements OnInit, OnDestroy {
   public extraInfo: boolean = false;
   private destroy$: ReplaySubject<number> = new ReplaySubject<number>(1);
   public linkCharacters: string = 'characters?';
+  public selectedHero: any;
 
-  constructor(public apiService: APIService, public router: Router, public dataSearch: DataSearchService) { }
+  constructor(public apiService: APIService, public router: Router, public dataDetails: DataDetailsCharacterService) { }
 
   ngOnInit() {
     const requestString: string = 'characters?limit=5';
@@ -36,15 +38,16 @@ export class HeroesListComponent implements OnInit, OnDestroy {
         this.loading = false;
       });
   }
-  nextHeroes(heroes) {
+  nextPage(heroes) {
     this.marvelHeroes = heroes;
   }
   ngOnDestroy() {
     this.destroy$.next();
   }
 
-  moreInfo() {
-    this.dataSearch.setData(this.marvelHeroes);
+  moreInfo(hero: any) {
+    this.selectedHero = hero;
+    this.dataDetails.setDataMoreInfo(this.selectedHero);
     this.router.navigate(['moreInfo']);
   }
 }

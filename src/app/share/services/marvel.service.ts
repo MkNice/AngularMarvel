@@ -16,8 +16,6 @@ export class MarvelService {
 
   constructor(public http: HttpClient) { }
 
-
-
   fetchCharacters(name: string = ''): Observable<DataMarvel> {
     let data: string = '';
     if (name) { data = `&name=${name}`; }

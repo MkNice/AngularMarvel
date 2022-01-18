@@ -13,7 +13,7 @@ export class SearchResultComponent implements OnInit {
   public searchString: string = '';
   public response: any;
 
-  constructor(private dataSearchService: DataSearchService,  public marvelService: MarvelService, public apiService: APIService) { }
+  constructor(private dataSearchService: DataSearchService, private marvelService: MarvelService, private apiService: APIService) { }
 
   ngOnInit(): void {
     this.searchString = this.dataSearchService.getData();

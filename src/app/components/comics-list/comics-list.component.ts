@@ -14,14 +14,13 @@ export class ComicsListComponent implements OnInit, OnDestroy {
 
   public marvelComics: MarvelCharacters[] = [];
   private destroy$: ReplaySubject<number> = new ReplaySubject<number>(1);
-  public linkComics: string = 'comics?';
+  public linkComics: string = 'comics?limit=5&';
 
-  constructor(public apiService: APIService) { }
+  constructor(private apiService: APIService) { }
 
   ngOnInit(): void {
-    const requestString: string = 'comics?limit=5';
 
-    this.apiService.getData(requestString).pipe(
+    this.apiService.getData(this.linkComics).pipe(
       tap((data: DataMarvel) => {
         this.marvelComics = data.data.results;
         console.log(data);
@@ -33,7 +32,7 @@ export class ComicsListComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     this.destroy$.next();
   }
-  nextComics(comics) {
+  nextPage(comics) {
     this.marvelComics = comics;
   }
 }

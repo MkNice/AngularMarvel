@@ -15,7 +15,6 @@ export class SearchComponent implements OnInit, OnDestroy {
 
   // TODO: make me stupid
   public hero: string = '';
-  public response: any;
   private destroy$: ReplaySubject<number> = new ReplaySubject<number>(1);
 
   constructor(

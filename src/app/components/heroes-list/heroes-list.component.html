@@ -11,10 +11,15 @@
       />
     </div>
     <p class="hero-name">{{ character.name }}</p>
-    <button class="btn btn-info" (click)="moreInfo()">more info</button>
+    <button class="btn btn-info" (click)="moreInfo(character)">
+      more info
+    </button>
   </div>
 </div>
 <div class="loading-container" *ngIf="loading">
   <progress></progress>
 </div>
-<app-pagination [link]="linkCharacters" (nextHeroes)="nextHeroes($event)"></app-pagination>
+<app-pagination
+  [link]="linkCharacters"
+  (nextPage)="nextPage($event)"
+></app-pagination>

@@ -19,9 +19,7 @@ export class PaginationComponent implements OnInit, OnDestroy {
   private itemsPerPage: number = 5;
   private destroy$: ReplaySubject<number> = new ReplaySubject<number>(1);
   @Input() link: string = '';
-  @Output() nextHeroes = new EventEmitter<MarvelCharacters[]>();
-  @Output() nextComics = new EventEmitter<MarvelCharacters[]>();
-
+  @Output() nextPage = new EventEmitter<MarvelCharacters[]>();
 
   constructor(public marvelService: MarvelService, private apiService: APIService) {
     marvelService.fetchMarvelPagination(this.page, this.itemsPerPage)
@@ -39,21 +37,7 @@ export class PaginationComponent implements OnInit, OnDestroy {
     this.apiService.getData(requestString)
       .pipe(
         tap((nextData: DataMarvel) => {
-          this.nextHeroes.emit(nextData.data.results);
-          this.nextComics.emit(nextData.data.results);
-        }),
-        takeUntil(this.destroy$)
-      )
-      .subscribe();
-  }
-  onPageChangedForComics(pageNumber) {
-
-    const requestString: string = `comics?offset=${(pageNumber * this.itemsPerPage) - 5}&limit=${this.itemsPerPage}`;
-
-    this.apiService.getData(requestString)
-      .pipe(
-        tap((nextData: DataMarvel) => {
-          this.nextComics.emit(nextData.data.results);
+          this.nextPage.emit(nextData.data.results);
         }),
         takeUntil(this.destroy$)
       )
