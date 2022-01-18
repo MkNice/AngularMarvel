@@ -7,11 +7,11 @@ import { environment } from 'src/environments/environment';
 
 export class APIService {
 
-  constructor(public http: HttpClient) {}
+  constructor(private http: HttpClient) {}
 
   public getData(params: string): Observable<unknown> {
     return this.http.get(
-      `${environment.LINK_MARVEL}/${params}&ts=1&hash=${environment.HASH}&apikey=${environment.PUBLIC_KEY}&limit=5`
+      `${environment.LINK_MARVEL}/${params}&ts=1&hash=${environment.HASH}&apikey=${environment.PUBLIC_KEY}`
     );
   }
 

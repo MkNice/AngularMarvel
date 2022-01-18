@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { DataSearchService } from 'src/app/share/services/data-search.service';
-import { MarvelService } from 'src/app/share/services/marvel.service';
+import { DataDetailsCharacterService } from 'src/app/share/services/data-details-character.service';
+
 
 @Component({
   selector: 'app-more-info',
@@ -9,12 +9,12 @@ import { MarvelService } from 'src/app/share/services/marvel.service';
 })
 export class MoreInfoComponent implements OnInit {
 
-  public characters: any;
+  public character: any;
 
-  constructor(public dataSearch: DataSearchService, public marvelServise: MarvelService) { }
+  constructor(private dataDetails: DataDetailsCharacterService) { }
 
   ngOnInit(): void {
-    this.characters = this.dataSearch.getData()
+    this.character = this.dataDetails.getDataMoreInfo();
   }
 
 }

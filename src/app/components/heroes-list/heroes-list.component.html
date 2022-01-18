@@ -1,4 +1,6 @@
-<app-search></app-search>
+<div class="filler">
+<app-search></app-search><app-sort></app-sort>
+</div>
 <div class="hero-list-container" *ngIf="!loading">
   <div class="heroes-list" *ngFor="let character of marvelHeroes">
     <div>
@@ -11,15 +13,15 @@
       />
     </div>
     <p class="hero-name">{{ character.name }}</p>
-    <button class="btn btn-info" (click)="moreInfo()">more info</button>
-    <dialog open *ngIf="extraInfo">
-      <p>comics with him: {{ character.comics.available }}</p>
-      last modify:
-      <time> {{ character.modified }}</time>
-    </dialog>
+    <button class="btn btn-info" (click)="moreInfo(character)">
+      more info
+    </button>
   </div>
 </div>
 <div class="loading-container" *ngIf="loading">
   <progress></progress>
 </div>
-<app-pagination (nextHeroes)="nextHeroes($event)"></app-pagination>
+<app-pagination
+  [link]="linkCharacters"
+  (nextPage)="nextPage($event)"
+></app-pagination>

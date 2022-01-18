@@ -1,13 +1,16 @@
-<div class="comics-list">
+<div class="comics-list" *ngFor="let comic of marvelComics">
   <img
-    src="/assets/images/comics/deadpool-comics.jpg"
+    src="{{ comic.thumbnail.path }}.{{ comic.thumbnail.extension }}"
     alt="comics"
     class="img-comics"
   />
-  <p class="description-comics">
-    Lorem ipsum dolor sit amet consectetur, adipisicing elit. Perspiciatis
-    reprehenderit repudiandae iste maxime, voluptatem accusantium dolorum unde
-    veritatis autem non consequatur facere error porro quae cumque sequi nulla!
-    Doloremque, aperiam?
-  </p>
+  <div class="description-wrapper">
+    <p class="description-title">
+      {{ comic.title }}
+    </p>
+  </div>
+  <button class="btn btn-info">
+    <a class="link" href="{{ comic.urls[0].url }}">More Info</a>
+  </button>
 </div>
+<app-pagination [link]="linkComics" (nextPage)="nextPage($event)"></app-pagination>

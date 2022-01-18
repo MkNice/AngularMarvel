@@ -14,9 +14,7 @@ export class MarvelService {
   public collectionSize: number;
   public giveMeText: any;
 
-  constructor(public http: HttpClient) { }
-
-
+  constructor(private http: HttpClient) { }
 
   fetchCharacters(name: string = ''): Observable<DataMarvel> {
     let data: string = '';
@@ -28,7 +26,6 @@ export class MarvelService {
     const heroes = this.http.get<DataMarvel>(`${environment['LINK_MARVEL']}/characters?ts=1&hash=${environment['HASH']}&apikey=${environment['PUBLIC_KEY']}`)
       .pipe(
         tap((heroes: DataMarvel) => {
-          this.marvelHeroes = heroes.data.results;
           this.collectionSize = heroes.data.total;
         })
       );

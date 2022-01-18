@@ -1,3 +1,8 @@
+.filler {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
 .heroes-list {
   display: flex;
   justify-content: space-between;
@@ -25,8 +30,4 @@
 .loading-container {
   text-align: center;
   margin: 30px 0;
-}
-dialog {
-  width: 320px;
-  height: 100px;
 }
