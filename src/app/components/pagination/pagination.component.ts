@@ -21,7 +21,7 @@ export class PaginationComponent implements OnInit, OnDestroy {
   @Input() link: string = '';
   @Output() nextPage = new EventEmitter<MarvelCharacters[]>();
 
-  constructor(public marvelService: MarvelService, private apiService: APIService) {
+  constructor(private marvelService: MarvelService, private apiService: APIService) {
     marvelService.fetchMarvelPagination(this.page, this.itemsPerPage)
       .subscribe(() => {
         this.collectionSize = marvelService.collectionSize * 2;

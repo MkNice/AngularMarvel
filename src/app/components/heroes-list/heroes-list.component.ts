@@ -24,7 +24,7 @@ export class HeroesListComponent implements OnInit, OnDestroy {
   public linkCharacters: string = 'characters?';
   public selectedHero: any;
 
-  constructor(public apiService: APIService, public router: Router, public dataDetails: DataDetailsCharacterService) { }
+  constructor(private apiService: APIService, private router: Router, private dataDetails: DataDetailsCharacterService) { }
 
   ngOnInit() {
     const requestString: string = 'characters?limit=5';

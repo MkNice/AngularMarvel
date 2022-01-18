@@ -11,7 +11,7 @@ export class MoreInfoComponent implements OnInit {
 
   public character: any;
 
-  constructor(public dataDetails: DataDetailsCharacterService) { }
+  constructor(private dataDetails: DataDetailsCharacterService) { }
 
   ngOnInit(): void {
     this.character = this.dataDetails.getDataMoreInfo();
