@@ -19,15 +19,14 @@ export class HeroesListComponent implements OnInit, OnDestroy {
   public loading: boolean = true;
   public extraInfo: boolean = false;
   private destroy$: ReplaySubject<number> = new ReplaySubject<number>(1);
-  public linkCharacters: string = 'characters?';
+  public linkCharacters: string = 'characters?limit=5&';
   public selectedHero: any;
 
   constructor(private apiService: APIService, private router: Router, private dataDetails: DataDetailsCharacterService) { }
 
   ngOnInit() {
-    const requestString: string = 'characters?limit=5';
 
-    this.apiService.getData(requestString)
+    this.apiService.getData(this.linkCharacters)
       .pipe(
         tap((heroes: DataMarvel) => this.marvelHeroes = heroes.data.results),
         takeUntil(this.destroy$)

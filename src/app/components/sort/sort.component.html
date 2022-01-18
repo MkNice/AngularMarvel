@@ -4,5 +4,5 @@
 
 <select [(ngModel)]="selectedOption" class="sort">
   <option [value]="null">Не выбрано</option>
-  <option *ngFor="let item of filterCharacters" [value]="item" >{{item.name}}</option>
+  <option *ngFor="let item of filterCharacters" [value]="item.name" >{{item.name}}</option>
 </select>

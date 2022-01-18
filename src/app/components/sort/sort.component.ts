@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FilterDataService } from '../heroes-list/filter-data.service';
 import { HeroesListComponent } from '../heroes-list/heroes-list.component';
 
 @Component({
@@ -16,9 +17,11 @@ export class SortComponent implements OnInit {
     { name: "By Modify" }
   ];
 
-  constructor(private heroesList: HeroesListComponent) { }
+  constructor(private heroesList: HeroesListComponent, private filterData: FilterDataService) { }
+
   // делать запрос на сервак, сортировать данные и отправлять эти данные в компонент где и рисуем всех героев
   ngOnInit(): void {
+    this.filterData.setSortValue(this.selectedOption)
   }
 
   sort() {
