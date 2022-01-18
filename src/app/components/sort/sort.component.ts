@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { MarvelService } from 'src/app/share/services/marvel.service';
+import { HeroesListComponent } from '../heroes-list/heroes-list.component';
 
 @Component({
   selector: 'app-sort',
@@ -9,12 +9,14 @@ import { MarvelService } from 'src/app/share/services/marvel.service';
 
 export class SortComponent implements OnInit {
 
-  constructor(public heroes: MarvelService) { }
+  public filteredCharacters: any;
 
+  constructor(private heroesList: HeroesListComponent) { }
+ // делать запрос на сервак, сортировать данные и отправлять эти данные в компонент где и рисуем всех героев
   ngOnInit(): void {
   }
 
   sort() {
-    this.heroes.marvelHeroes.reverse();
+    this.heroesList.marvelHeroes.reverse();
   }
 }
