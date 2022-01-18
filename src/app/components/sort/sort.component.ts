@@ -9,10 +9,15 @@ import { HeroesListComponent } from '../heroes-list/heroes-list.component';
 
 export class SortComponent implements OnInit {
 
-  public filteredCharacters: any;
+  public selectedOption: any;
+  public filterCharacters: any = [
+    { name: "By A-Z" },
+    { name: "By Z-A" },
+    { name: "By Modify" }
+  ];
 
   constructor(private heroesList: HeroesListComponent) { }
- // делать запрос на сервак, сортировать данные и отправлять эти данные в компонент где и рисуем всех героев
+  // делать запрос на сервак, сортировать данные и отправлять эти данные в компонент где и рисуем всех героев
   ngOnInit(): void {
   }
 

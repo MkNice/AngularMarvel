@@ -1,11 +1,9 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { ReplaySubject, Subscription } from 'rxjs';
-import { MarvelService } from 'src/app/share/services/marvel.service';
+import { ReplaySubject } from 'rxjs';
 import { takeUntil, tap } from 'rxjs/operators';
 import { MarvelCharacters } from 'src/app/share/interfaces/interface-marvel';
 import { DataMarvel } from 'src/app/share/interfaces/interface-data';
 import { Router } from '@angular/router';
-import { DataSearchService } from 'src/app/share/services/data-search.service';
 import { APIService } from 'src/app/share/services/api.service';
 import { DataDetailsCharacterService } from 'src/app/share/services/data-details-character.service';
 
