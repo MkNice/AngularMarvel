@@ -14,7 +14,7 @@ export class MarvelService {
   public collectionSize: number;
   public giveMeText: any;
 
-  constructor(public http: HttpClient) { }
+  constructor(private http: HttpClient) { }
 
   fetchCharacters(name: string = ''): Observable<DataMarvel> {
     let data: string = '';

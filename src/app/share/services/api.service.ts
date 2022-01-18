@@ -7,7 +7,7 @@ import { environment } from 'src/environments/environment';
 
 export class APIService {
 
-  constructor(public http: HttpClient) {}
+  constructor(private http: HttpClient) {}
 
   public getData(params: string): Observable<unknown> {
     return this.http.get(
