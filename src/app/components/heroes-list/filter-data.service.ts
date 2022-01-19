@@ -18,7 +18,7 @@ export class FilterDataService {
     this.sortValue = value;
   }
   getDataForFilter() {
-    return this.apiService.getData(this.requestString).pipe(
+    this.filtered = this.apiService.getData(this.requestString).pipe(
       tap((data: any) => this.filtered = data.data.results)
     );
   }
@@ -28,11 +28,15 @@ export class FilterDataService {
     switch (this.sortValue) {
       case 'By A-Z':
         this.getDataForFilter();
-        this.filtered.reverse();
         break;
       case 'By Z-A':
         this.getDataForFilter();
         this.filtered.reverse();
+        break;
+      case 'By Modify':
+        this.filtered = this.apiService.getData(this.requestString).pipe( // Так мы получим только одну дату, а нужно все, вероятно не нужно делать
+          tap((data: any) => this.filtered = data.data.results[0].modified) // отдельниый запрос, а просто через цикл достать все modified и сделать сортировку
+        );
         break;
       default:
         alert('Can`t sorting')
