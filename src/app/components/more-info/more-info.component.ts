@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { DataMarvel } from 'src/app/share/interfaces/interface-data';
 import { DataDetailsCharacterService } from 'src/app/share/services/data-details-character.service';
 
 
@@ -9,7 +10,7 @@ import { DataDetailsCharacterService } from 'src/app/share/services/data-details
 })
 export class MoreInfoComponent implements OnInit {
 
-  public character: any;
+  public character: DataMarvel[];
 
   constructor(private dataDetails: DataDetailsCharacterService) { }
 

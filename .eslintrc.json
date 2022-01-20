@@ -16,7 +16,7 @@
         "@typescript-eslint"
     ],
     "rules": {
-        "no-unused-vars": "warn",
+        "no-unused-vars":["error", { "vars": "all", "args": "none", "ignoreRestSiblings": false }],
         "no-console": "off",
         "func-names": "off",
         "no-process-exit": "off",
