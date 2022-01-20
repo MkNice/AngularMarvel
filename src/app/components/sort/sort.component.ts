@@ -1,6 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { FilterDataService } from '../heroes-list/filter-data.service';
-import { HeroesListComponent } from '../heroes-list/heroes-list.component';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { SortCharacters } from 'src/app/share/interfaces/interface-sort';
 
 @Component({
   selector: 'app-sort',
@@ -10,21 +9,20 @@ import { HeroesListComponent } from '../heroes-list/heroes-list.component';
 
 export class SortComponent implements OnInit {
 
-  public selectedOption: any;
-  public filterCharacters: any = [
+  @Output() selectedOption = new EventEmitter<string>();
+
+  public valueOption: string = '';
+  public filterCharacters: SortCharacters[] = [
     { name: "By A-Z" },
     { name: "By Z-A" },
     { name: "By Modify" }
   ];
 
-  constructor(private heroesList: HeroesListComponent, private filterData: FilterDataService) { }
+  constructor() { }
 
-  // делать запрос на сервак, сортировать данные и отправлять эти данные в компонент где и рисуем всех героев
-  ngOnInit(): void {
-    this.filterData.setSortValue(this.selectedOption)
-  }
+  ngOnInit(): void { }
 
-  sort() {
-    this.heroesList.marvelHeroes.reverse();
+  emitvalue() {
+    this.selectedOption.emit(this.valueOption);
   }
 }

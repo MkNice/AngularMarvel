@@ -1,5 +1,6 @@
 <div class="filler">
-<app-search></app-search><app-sort></app-sort>
+  <app-search></app-search
+  ><app-sort (selectedOption)="dataFromSort($event)"></app-sort>
 </div>
 <div class="hero-list-container" *ngIf="!loading">
   <div class="heroes-list" *ngFor="let character of marvelHeroes">

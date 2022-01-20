@@ -14,12 +14,13 @@ import { DataMarvel } from 'src/app/share/interfaces/interface-data';
 
 export class PaginationComponent implements OnInit, OnDestroy {
 
+  @Input() link: string = '';
+  @Output() nextPage = new EventEmitter<MarvelCharacters[]>();
+
   public page: number;
   public collectionSize: number;
   private itemsPerPage: number = 5;
   private destroy$: ReplaySubject<number> = new ReplaySubject<number>(1);
-  @Input() link: string = '';
-  @Output() nextPage = new EventEmitter<MarvelCharacters[]>();
 
   constructor(private marvelService: MarvelService, private apiService: APIService) {
     marvelService.fetchMarvelPagination(this.page, this.itemsPerPage)

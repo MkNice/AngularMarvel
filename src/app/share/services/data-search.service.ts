@@ -5,7 +5,7 @@ import { Injectable } from '@angular/core';
 })
 export class DataSearchService {
 
-  public dataMarvel: any; // dataMarvel
+  public dataMarvel: string;
 
   constructor() { }
 

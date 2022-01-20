@@ -1,8 +1,6 @@
-<!--
-<button class="btn btn-sort" (click)="sort()">sort</button>
--->
-
-<select [(ngModel)]="selectedOption" class="sort">
+<select [(ngModel)]="valueOption" (ngModelChange)="emitvalue()" class="sort">
   <option [value]="null">Не выбрано</option>
-  <option *ngFor="let item of filterCharacters" [value]="item.name" >{{item.name}}</option>
+  <option *ngFor="let item of filterCharacters" [value]="item.name">
+    {{ item.name }}
+  </option>
 </select>

@@ -1,11 +1,12 @@
 import { Injectable } from '@angular/core';
+import { DataMarvel } from '../interfaces/interface-data';
 
 @Injectable({
   providedIn: 'root'
 })
 export class DataDetailsCharacterService {
 
-  public dataMoreInfo: any; // Дописать интерфейса DataMarvel и засунть сюда вместо any, ну и в moreInfo и heroes-list. Либо создать новый интерефейс.
+  public dataMoreInfo: DataMarvel[];
 
   constructor() { }
 

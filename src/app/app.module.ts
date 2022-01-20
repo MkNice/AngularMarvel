@@ -52,7 +52,7 @@ import { APIService } from './share/services/api.service';
     FormsModule,
     BrowserAnimationsModule,
     NgbModule,
-    StoreModule.forRoot(reducers), //(reducers,{metaReducers}) ....  {}, {}
+    StoreModule.forRoot(reducers),
     StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production }),
     StoreRouterConnectingModule.forRoot(),
     EffectsModule.forRoot([])

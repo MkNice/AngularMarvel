@@ -6,6 +6,7 @@ import { DataMarvel } from 'src/app/share/interfaces/interface-data';
 import { Router } from '@angular/router';
 import { APIService } from 'src/app/share/services/api.service';
 import { DataDetailsCharacterService } from 'src/app/share/services/data-details-character.service';
+import { SortDataService } from './sort-data.service';
 
 @Component({
   selector: 'app-heroes-list',
@@ -20,9 +21,13 @@ export class HeroesListComponent implements OnInit, OnDestroy {
   public extraInfo: boolean = false;
   private destroy$: ReplaySubject<number> = new ReplaySubject<number>(1);
   public linkCharacters: string = 'characters?limit=5&';
-  public selectedHero: any;
+  public selectedHero: MarvelCharacters;
 
-  constructor(private apiService: APIService, private router: Router, private dataDetails: DataDetailsCharacterService) { }
+  constructor(
+    private apiService: APIService,
+    private router: Router,
+    private dataDetails: DataDetailsCharacterService,
+    private sortService: SortDataService) { }
 
   ngOnInit() {
 
@@ -35,14 +40,29 @@ export class HeroesListComponent implements OnInit, OnDestroy {
         this.loading = false;
       });
   }
-  nextPage(heroes) {
-    this.marvelHeroes = heroes;
-  }
   ngOnDestroy() {
     this.destroy$.next();
   }
 
-  moreInfo(hero: any) {
+  nextPage(heroes: MarvelCharacters[]) {
+    this.marvelHeroes = heroes;
+  }
+  dataFromSort(param) {
+    switch (param) {
+      case 'By A-Z':
+        this.marvelHeroes = this.sortService.sortByAlphabetic(this.marvelHeroes);
+        break;
+      case 'By Z-A':
+        this.marvelHeroes = this.sortService.sortByReverseAlphabetic(this.marvelHeroes);
+        break;
+      case 'By Modify':
+        this.marvelHeroes = this.sortService.sortByDate(this.marvelHeroes);
+        break;
+      default:
+        this.marvelHeroes = this.sortService.sortByAlphabetic(this.marvelHeroes);
+    }
+  }
+  moreInfo(hero: MarvelCharacters) {
     this.selectedHero = hero;
     this.dataDetails.setDataMoreInfo(this.selectedHero);
     this.router.navigate(['moreInfo']);
