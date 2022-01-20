@@ -18,7 +18,6 @@ export class HeroesListComponent implements OnInit, OnDestroy {
 
   public marvelHeroes: MarvelCharacters[] = [];
   public loading: boolean = true;
-  public extraInfo: boolean = false;
   private destroy$: ReplaySubject<number> = new ReplaySubject<number>(1);
   public linkCharacters: string = 'characters?limit=5&';
   public selectedHero: MarvelCharacters;
@@ -47,6 +46,7 @@ export class HeroesListComponent implements OnInit, OnDestroy {
   nextPage(heroes: MarvelCharacters[]) {
     this.marvelHeroes = heroes;
   }
+
   dataFromSort(param) {
     switch (param) {
       case 'By A-Z':
