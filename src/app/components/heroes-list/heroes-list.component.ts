@@ -8,6 +8,8 @@ import { Router } from '@angular/router';
 import { DataSearchService } from 'src/app/share/services/data-search.service';
 import { APIService } from 'src/app/share/services/api.service';
 import { DataDetailsCharacterService } from 'src/app/share/services/data-details-character.service';
+import { Store } from '@ngrx/store';
+import { charactersErrorSelector, charactersLoadingSelector, charactersSelector, dataLoad } from 'src/app/reducers/marvelCharacters';
 
 @Component({
   selector: 'app-heroes-list',
@@ -17,6 +19,20 @@ import { DataDetailsCharacterService } from 'src/app/share/services/data-details
 
 export class HeroesListComponent implements OnInit, OnDestroy {
 
+  //Store
+  public searchName: any = '';
+  public loading$ = this.store.select(charactersLoadingSelector);
+  public characters$ = this.store.select(charactersSelector);
+  public error$ = this.store.select(charactersErrorSelector);
+
+  public search = {
+    searchName: ''
+  };
+  dataLoad() {
+    this.store.dispatch(dataLoad({ heroName: this.searchName }));
+  }
+
+  //Old files
   public marvelHeroes: MarvelCharacters[] = [];
   public loading: boolean = true;
   public extraInfo: boolean = false;
@@ -24,7 +40,11 @@ export class HeroesListComponent implements OnInit, OnDestroy {
   public linkCharacters: string = 'characters?';
   public selectedHero: any;
 
-  constructor(private apiService: APIService, private router: Router, private dataDetails: DataDetailsCharacterService) { }
+  constructor(
+    private apiService: APIService,
+    private router: Router,
+    private dataDetails: DataDetailsCharacterService,
+    private store: Store) { }
 
   ngOnInit() {
     const requestString: string = 'characters?limit=5';

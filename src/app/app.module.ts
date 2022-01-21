@@ -23,10 +23,11 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { environment } from '../environments/environment';
 import { StoreRouterConnectingModule } from '@ngrx/router-store';
 import { EffectsModule } from '@ngrx/effects';
-import { reducers } from './reducers';
+import { metaReducers, reducers } from './reducers';
 import { MoreInfoComponent } from './components/more-info/more-info.component';
 import { SearchResultComponent } from './components/search-result/search-result.component';
 import { APIService } from './share/services/api.service';
+import { AppEffects } from './effects/AppEffects';
 
 
 @NgModule({
@@ -52,10 +53,12 @@ import { APIService } from './share/services/api.service';
     FormsModule,
     BrowserAnimationsModule,
     NgbModule,
-    StoreModule.forRoot(reducers), //(reducers,{metaReducers}) ....  {}, {}
+    StoreModule.forRoot(reducers, {
+      metaReducers
+    }),
     StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production }),
     StoreRouterConnectingModule.forRoot(),
-    EffectsModule.forRoot([])
+    EffectsModule.forRoot([AppEffects])
   ],
   providers: [MarvelService, APIService],
   bootstrap: [AppComponent]
