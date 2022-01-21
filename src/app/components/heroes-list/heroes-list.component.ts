@@ -6,6 +6,8 @@ import { DataMarvel } from 'src/app/share/interfaces/interface-data';
 import { Router } from '@angular/router';
 import { APIService } from 'src/app/share/services/api.service';
 import { DataDetailsCharacterService } from 'src/app/share/services/data-details-character.service';
+import { Store } from '@ngrx/store';
+import { charactersErrorSelector, charactersLoadingSelector, charactersSelector, dataLoad } from 'src/app/reducers/marvelCharacters';
 import { SortDataService } from './sort-data.service';
 
 @Component({
@@ -16,6 +18,20 @@ import { SortDataService } from './sort-data.service';
 
 export class HeroesListComponent implements OnInit, OnDestroy {
 
+  //Store
+  public searchName: any = '';
+  public loading$ = this.store.select(charactersLoadingSelector);
+  public characters$ = this.store.select(charactersSelector);
+  public error$ = this.store.select(charactersErrorSelector);
+
+  public search = {
+    searchName: ''
+  };
+  dataLoad() {
+    this.store.dispatch(dataLoad({ heroName: this.searchName }));
+  }
+
+  //Old files
   public marvelHeroes: MarvelCharacters[] = [];
   public loading: boolean = true;
   private destroy$: ReplaySubject<number> = new ReplaySubject<number>(1);
@@ -26,7 +42,8 @@ export class HeroesListComponent implements OnInit, OnDestroy {
     private apiService: APIService,
     private router: Router,
     private dataDetails: DataDetailsCharacterService,
-    private sortService: SortDataService) { }
+    private sortService: SortDataService,
+    private store: Store) { }
 
   ngOnInit() {
 
