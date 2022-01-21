@@ -1,12 +1,12 @@
 import { Injectable } from '@angular/core';
-import { DataMarvel } from '../interfaces/interface-data';
+import { MarvelCharacters } from '../interfaces/interface-marvel';
 
 @Injectable({
   providedIn: 'root'
 })
 export class DataDetailsCharacterService {
 
-  public dataMoreInfo: DataMarvel[];
+  public dataMoreInfo: MarvelCharacters[];
 
   constructor() { }
 
