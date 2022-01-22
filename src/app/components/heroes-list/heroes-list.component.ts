@@ -20,21 +20,13 @@ import { charactersErrorSelector, charactersLoadingSelector, charactersSelector,
 export class HeroesListComponent implements OnInit, OnDestroy {
 
   //Store
-  public searchName: any = '';
   public loading$ = this.store.select(charactersLoadingSelector);
   public characters$ = this.store.select(charactersSelector);
   public error$ = this.store.select(charactersErrorSelector);
 
-  public search = {
-    searchName: ''
-  };
-  dataLoad() {
-    this.store.dispatch(dataLoad({ heroName: this.searchName }));
-  }
 
   //Old files
   public marvelHeroes: MarvelCharacters[] = [];
-  public loading: boolean = true;
   public extraInfo: boolean = false;
   private destroy$: ReplaySubject<number> = new ReplaySubject<number>(1);
   public linkCharacters: string = 'characters?';
@@ -47,16 +39,7 @@ export class HeroesListComponent implements OnInit, OnDestroy {
     private store: Store) { }
 
   ngOnInit() {
-    const requestString: string = 'characters?limit=5';
-
-    this.apiService.getData(requestString)
-      .pipe(
-        tap((heroes: DataMarvel) => this.marvelHeroes = heroes.data.results),
-        takeUntil(this.destroy$)
-      )
-      .subscribe(() => {
-        this.loading = false;
-      });
+    this.store.dispatch(dataLoad({ heroName: '' }));
   }
   nextPage(heroes) {
     this.marvelHeroes = heroes;
