@@ -1,29 +1,40 @@
-import { Component, OnInit } from '@angular/core';
-import { DataMarvel } from 'src/app/share/interfaces/interface-data';
-import { APIService } from 'src/app/share/services/api.service';
-import { DataSearchService } from 'src/app/share/services/data-search.service';
-import { MarvelService } from 'src/app/share/services/marvel.service';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+import { Store } from '@ngrx/store';
+import { ReplaySubject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
+import { charactersSelector, dataLoad } from 'src/app/reducers/marvelCharacters';
+import { DataDetailsCharacterService } from 'src/app/share/services/data-details-character.service';
 
 @Component({
   selector: 'app-search-result',
   templateUrl: './search-result.component.html',
   styleUrls: ['./search-result.component.scss']
 })
-export class SearchResultComponent implements OnInit {
+export class SearchResultComponent implements OnInit, OnDestroy {
 
+  public characters$ = this.store.select(charactersSelector);
   public searchString: string = '';
-  public response: DataMarvel;
+  public selectedHero: any;
+  private destroy$: ReplaySubject<number> = new ReplaySubject<number>(1);
 
-  constructor(private dataSearchService: DataSearchService, private marvelService: MarvelService, private apiService: APIService) { }
+  constructor(
+    private store: Store,
+    private routerActive: ActivatedRoute,
+    private router: Router,
+    private dataDetails: DataDetailsCharacterService) { }
 
   ngOnInit(): void {
-    this.searchString = this.dataSearchService.getData();
-    this.search();
+    this.routerActive.queryParams.subscribe((obj) => this.searchString = obj.name),
+      takeUntil(this.destroy$);
+    this.store.dispatch(dataLoad({ heroName: this.searchString }));
   }
-  search() {
-    this.marvelService.fetchCharacters(this.searchString)
-      .subscribe((response: DataMarvel) => {
-        this.response = response;
-      });
+  ngOnDestroy() {
+    this.destroy$.next();
+  }
+  moreInfo(hero: any) {
+    this.selectedHero = hero;
+    this.dataDetails.setDataMoreInfo(this.selectedHero);
+    this.router.navigate(['moreInfo']);
   }
 }
