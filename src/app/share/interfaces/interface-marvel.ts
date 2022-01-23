@@ -1,6 +1,10 @@
 export interface MarvelCharacters {
   id: number,
   name: string,
-  url: string,
-  info: string,
+  description: string,
+  modified: string,
+  thumbnail: {
+    path: string,
+    extension: string,
+  },
 }

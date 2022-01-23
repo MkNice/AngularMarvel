@@ -12,7 +12,6 @@ export class MarvelService {
   public loading: boolean = true;
   public marvelHeroes: MarvelCharacters[] = [];
   public collectionSize: number;
-  public giveMeText: any;
 
   constructor(private http: HttpClient) { }
 
