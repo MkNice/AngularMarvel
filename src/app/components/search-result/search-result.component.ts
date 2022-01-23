@@ -5,7 +5,6 @@ import { ReplaySubject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { charactersSelector, dataLoad } from 'src/app/reducers/marvelCharacters';
 import { DataDetailsCharacterService } from 'src/app/share/services/data-details-character.service';
-import { DataSearchService } from 'src/app/share/services/data-search.service';
 
 @Component({
   selector: 'app-search-result',

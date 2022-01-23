@@ -23,7 +23,6 @@ export class ComicsListComponent implements OnInit, OnDestroy {
     this.apiService.getData(this.linkComics).pipe(
       tap((data: DataMarvel) => {
         this.marvelComics = data.data.results;
-        console.log(data);
       }),
       takeUntil(this.destroy$)
     )
