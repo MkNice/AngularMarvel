@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
+import { DataMarvel } from '../interfaces/interface-data';
 
 @Injectable()
 
@@ -9,8 +10,8 @@ export class APIService {
 
   constructor(private http: HttpClient) {}
 
-  public getData(params: string): Observable<unknown> {
-    return this.http.get(
+  public getData(params: string): Observable<DataMarvel> {
+    return this.http.get<DataMarvel>(
       `${environment.LINK_MARVEL}/${params}&ts=1&hash=${environment.HASH}&apikey=${environment.PUBLIC_KEY}`
     );
   }

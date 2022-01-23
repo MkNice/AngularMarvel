@@ -1,8 +1,6 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
-import { ReplaySubject } from 'rxjs';
+import { Component, OnInit } from '@angular/core';
 import { MarvelCharacters } from 'src/app/share/interfaces/interface-marvel';
 import { Router } from '@angular/router';
-import { APIService } from 'src/app/share/services/api.service';
 import { DataDetailsCharacterService } from 'src/app/share/services/data-details-character.service';
 import { Store } from '@ngrx/store';
 import { charactersErrorSelector, charactersLoadingSelector, charactersSelector, dataLoad } from 'src/app/reducers/marvelCharacters';
@@ -14,7 +12,7 @@ import { SortDataService } from './sort-data.service';
   styleUrls: ['./heroes-list.component.scss']
 })
 
-export class HeroesListComponent implements OnInit, OnDestroy {
+export class HeroesListComponent implements OnInit {
 
   //Store
   public loading$ = this.store.select(charactersLoadingSelector);
@@ -24,13 +22,10 @@ export class HeroesListComponent implements OnInit, OnDestroy {
 
   //Old files
   public marvelHeroes: MarvelCharacters[] = [];
-  public extraInfo: boolean = false;
-  private destroy$: ReplaySubject<number> = new ReplaySubject<number>(1);
-  public linkCharacters: string = 'characters?limit=5&';
-  public selectedHero: MarvelCharacters;
+  public linkCharacters: string = 'characters?'; // !!! Need for pagination
+  public selectedHero: any;
 
   constructor(
-    private apiService: APIService,
     private router: Router,
     private dataDetails: DataDetailsCharacterService,
     private sortService: SortDataService,
@@ -39,12 +34,8 @@ export class HeroesListComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.store.dispatch(dataLoad({ heroName: '' }));
   }
-  ngOnDestroy() {
-    this.destroy$.next();
-  }
-
-  nextPage(heroes: MarvelCharacters[]) {
-    this.marvelHeroes = heroes;
+  nextPage(heroes) {
+    this.characters$ = heroes;
   }
 
   dataFromSort(param) {

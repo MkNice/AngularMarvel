@@ -8,14 +8,16 @@ import { dataLoad, dataLoadError, dataLoadSuccess } from '../reducers/marvelChar
 @Injectable()
 export class AppEffects {
 
-  constructor(private actions$: Actions, private marvelServise:MarvelService) { }
+  constructor(
+    private actions$: Actions,
+    private marvelServise: MarvelService) { }
 
   dataLoad$ = createEffect(() => this.actions$.pipe(
     ofType(dataLoad),
-    switchMap((search) =>
-      this.marvelServise.fetchCharacters(search.heroName).pipe(
-        map((data: any) => dataLoadSuccess({ data: data.data.results })),
-        catchError((error) => of(dataLoadError({ err: error })))
+    switchMap((search) => // !! Для пагинации можно будет добавить аргумент и запихивать в него comics или же characters,
+      this.marvelServise.fetchCharacters(search.heroName).pipe( // !! так же можно добавить аргументом номер страницы...
+        map((data: any) => dataLoadSuccess({ data: data.data.results })), // !! Но нельзя чтобы было много параметров, ибо будет не по ООП,
+        catchError((error) => of(dataLoadError({ err: error }))) // !! так что наверное нужно будет продумать еффекты :)
       )
     )
   ));
