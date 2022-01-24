@@ -1,7 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Store } from '@ngrx/store';
 import { ReplaySubject } from 'rxjs';
-import { takeUntil, tap } from 'rxjs/operators';
-import { DataMarvel } from 'src/app/share/interfaces/interface-data';
+import { charactersErrorSelector, charactersLoadingSelector, charactersSelector, dataPagination } from 'src/app/reducers/marvelCharacters';
 import { MarvelCharacters } from 'src/app/share/interfaces/interface-marvel';
 import { APIService } from 'src/app/share/services/api.service';
 
@@ -12,26 +12,27 @@ import { APIService } from 'src/app/share/services/api.service';
 })
 export class ComicsListComponent implements OnInit, OnDestroy {
 
+  //Store
+  public loading$ = this.store.select(charactersLoadingSelector);
+  public marvelComics$ = this.store.select(charactersSelector);
+  public error$ = this.store.select(charactersErrorSelector);
+
+  //Old files
   public marvelComics: MarvelCharacters[] = [];
   private destroy$: ReplaySubject<number> = new ReplaySubject<number>(1);
   public linkComics: string = 'comics?limit=5&';
 
-  constructor(private apiService: APIService) { }
+  constructor(
+    private apiService: APIService,
+    private store: Store) { }
 
   ngOnInit(): void {
-
-    this.apiService.getData(this.linkComics).pipe(
-      tap((data: DataMarvel) => {
-        this.marvelComics = data.data.results;
-      }),
-      takeUntil(this.destroy$)
-    )
-      .subscribe();
+    this.store.dispatch(dataPagination({requestString: this.linkComics}));
   }
   ngOnDestroy(): void {
     this.destroy$.next();
   }
   nextPage(comics) {
-    this.marvelComics = comics;
+    this.marvelComics$ = comics;
   }
 }

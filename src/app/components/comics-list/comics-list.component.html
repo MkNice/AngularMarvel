@@ -1,4 +1,4 @@
-<div class="comics-list" *ngFor="let comic of marvelComics">
+<div class="comics-list" *ngFor="let comic of marvelComics$ | async">
   <img
     src="{{ comic.thumbnail.path }}.{{ comic.thumbnail.extension }}"
     alt="comics"
@@ -13,4 +13,10 @@
     <a class="link" href="{{ comic.urls[0].url }}">More Info</a>
   </button>
 </div>
-<app-pagination [link]="linkComics" (nextPage)="nextPage($event)"></app-pagination>
+<div class="loading-container" *ngIf="loading$ | async">
+  <progress></progress>
+</div>
+<app-pagination
+  [link]="linkComics"
+  (nextPage)="nextPage($event)"
+></app-pagination>

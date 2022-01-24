@@ -19,11 +19,10 @@ export class HeroesListComponent implements OnInit {
   public characters$ = this.store.select(charactersSelector);
   public error$ = this.store.select(charactersErrorSelector);
 
-
   //Old files
   public marvelHeroes: MarvelCharacters[] = [];
   public linkCharacters: string = 'characters?'; // !!! Need for pagination
-  public selectedHero: any;
+  public selectedHero: MarvelCharacters;
 
   constructor(
     private router: Router,

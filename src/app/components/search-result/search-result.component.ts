@@ -14,7 +14,8 @@ import { DataDetailsCharacterService } from 'src/app/share/services/data-details
 export class SearchResultComponent implements OnInit, OnDestroy {
 
   public characters$ = this.store.select(charactersSelector);
-  public searchString: string = '';
+  public searchValue: string = '';
+  public searchString: string = `&name=${this.searchValue}`
   public selectedHero: any;
   private destroy$: ReplaySubject<number> = new ReplaySubject<number>(1);
 
@@ -25,9 +26,9 @@ export class SearchResultComponent implements OnInit, OnDestroy {
     private dataDetails: DataDetailsCharacterService) { }
 
   ngOnInit(): void {
-    this.routerActive.queryParams.subscribe((obj) => this.searchString = obj.name),
+    this.routerActive.queryParams.subscribe((obj) => this.searchValue = obj.name),
       takeUntil(this.destroy$); // !! useless mb...Later return
-    this.store.dispatch(dataLoad({ heroName: this.searchString }));
+    this.store.dispatch(dataLoad({ heroName: this.searchValue }));
   }
   ngOnDestroy() {
     this.destroy$.next();

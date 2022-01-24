@@ -5,4 +5,5 @@ export interface CharactersState {
   loading: boolean;
   error: string;
   search: string;
+  paginationString: string;
 }

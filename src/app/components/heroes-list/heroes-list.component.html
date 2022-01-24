@@ -1,4 +1,4 @@
-<div class="filler"><app-search></app-search><app-sort></app-sort></div>
+<div class="filler"><app-search></app-search><app-sort (selectedOption)="dataFromSort($event)"></app-sort></div>
 <div class="hero-list-container">
   <div class="heroes-list" *ngFor="let character of characters$ | async">
     <div>

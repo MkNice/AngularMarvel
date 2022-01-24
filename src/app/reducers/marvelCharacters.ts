@@ -4,16 +4,21 @@ import { CharactersState } from '../share/interfaces/interface-state';
 
 export const CHARACTERS_KEY = 'marvel';
 
-export const dataLoad = createAction('[MARVELCHARACTERS] dataLoad', props<{ heroName: any; }>());
-export const dataPagination = createAction('[PAGINATION] dataPagination',props<{routePage: string;}>())
-export const dataLoadSuccess = createAction('[MARVELCHARACTERS] dataLoadSuccess', props<{ data: MarvelCharacters[]; }>());
-export const dataLoadError = createAction('[MARVELCHARACTERS] dataLoadError', props<{ err: string; }>());
+export const dataLoad = createAction('[MARVELCHARACTERS] dataLoad',
+  props<{ heroName: any; }>());
+export const dataPagination = createAction('[PAGINATION] dataPagination',
+  props<{ requestString: string; }>());
+export const dataLoadSuccess = createAction('[MARVELCHARACTERS] dataLoadSuccess',
+  props<{ data: MarvelCharacters[]; }>());
+export const dataLoadError = createAction('[MARVELCHARACTERS] dataLoadError',
+  props<{ err: string; }>());
 
 export const charactersInitialState: CharactersState = {
   characters: [],
   loading: false,
   error: '',
-  search: ''
+  search: '',
+  paginationString: ''
 };
 
 export const charactersReducer = createReducer(
@@ -21,7 +26,13 @@ export const charactersReducer = createReducer(
   on(dataLoad, (state, { heroName }) => ({
     ...state,
     loading: true,
-    search: heroName
+    search: heroName,
+  })),
+  on(dataPagination, (state, { requestString }) => ({
+    ...state,
+    loading: true,
+    characters: [],
+    paginationString: requestString,
   })),
   on(dataLoadSuccess, (state, { data }) => ({
     ...state,
@@ -43,6 +54,10 @@ export const charactersSelector = createSelector(
   dataCharactersSelector,
   (stateData => stateData.characters
   ),
+);
+export const charactersPaginationSelector = createSelector(
+  dataCharactersSelector,
+  (stateData => stateData.paginationString)
 );
 export const charactersErrorSelector = createSelector(
   dataCharactersSelector,

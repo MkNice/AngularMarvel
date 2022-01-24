@@ -2,10 +2,9 @@ import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angu
 import { MarvelService } from 'src/app/share/services/marvel.service';
 import { MarvelCharacters } from 'src/app/share/interfaces/interface-marvel';
 import { APIService } from 'src/app/share/services/api.service';
-import { takeUntil, tap } from 'rxjs/operators';
 import { ReplaySubject } from 'rxjs';
-import { DataMarvel } from 'src/app/share/interfaces/interface-data';
 import { Store } from '@ngrx/store';
+import { dataPagination } from 'src/app/reducers/marvelCharacters';
 
 @Component({
   selector: 'app-pagination',
@@ -17,6 +16,8 @@ export class PaginationComponent implements OnInit, OnDestroy {
 
   @Input() link: string = '';
   @Output() nextPage = new EventEmitter<MarvelCharacters[]>();
+
+  public pagination$ = this.store.select(dataPagination);
 
   public page: number;
   public collectionSize: number;
@@ -38,16 +39,9 @@ export class PaginationComponent implements OnInit, OnDestroy {
   onPageChanged(pageNumber) {
 
     const getNumberOffset: number = (pageNumber * this.itemsPerPage) - this.itemsPerPage;
-    const requestString: string = `${this.link}offset=${getNumberOffset}&limit=${this.itemsPerPage}`;
+    const request: string = `${this.link}offset=${getNumberOffset}&limit=${this.itemsPerPage}`;
 
-    this.apiService.getData(requestString)
-      .pipe(
-        tap((nextData: DataMarvel) => {
-          this.nextPage.emit(nextData.data.results);
-        }),
-        takeUntil(this.destroy$)
-      )
-      .subscribe();
+    this.store.dispatch(dataPagination({requestString: request}));
   }
   ngOnDestroy() {
     this.destroy$.next();
