@@ -37,7 +37,8 @@ export class PaginationComponent implements OnInit, OnDestroy {
 
   onPageChanged(pageNumber) {
 
-    const requestString: string = `${this.link}offset=${(pageNumber * this.itemsPerPage) - this.itemsPerPage}&limit=${this.itemsPerPage}`;
+    const getNumberOffset: number = (pageNumber * this.itemsPerPage) - this.itemsPerPage;
+    const requestString: string = `${this.link}offset=${getNumberOffset}&limit=${this.itemsPerPage}`;
 
     this.apiService.getData(requestString)
       .pipe(

@@ -26,7 +26,7 @@ export class SearchResultComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.routerActive.queryParams.subscribe((obj) => this.searchString = obj.name),
-      takeUntil(this.destroy$);
+      takeUntil(this.destroy$); // !! useless mb...Later return
     this.store.dispatch(dataLoad({ heroName: this.searchString }));
   }
   ngOnDestroy() {

@@ -5,6 +5,7 @@ import { CharactersState } from '../share/interfaces/interface-state';
 export const CHARACTERS_KEY = 'marvel';
 
 export const dataLoad = createAction('[MARVELCHARACTERS] dataLoad', props<{ heroName: any; }>());
+export const dataPagination = createAction('[PAGINATION] dataPagination',props<{routePage: string;}>())
 export const dataLoadSuccess = createAction('[MARVELCHARACTERS] dataLoadSuccess', props<{ data: MarvelCharacters[]; }>());
 export const dataLoadError = createAction('[MARVELCHARACTERS] dataLoadError', props<{ err: string; }>());
 
