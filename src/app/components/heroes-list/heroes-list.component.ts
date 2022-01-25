@@ -3,8 +3,7 @@ import { MarvelCharacters } from 'src/app/share/interfaces/interface-marvel';
 import { Router } from '@angular/router';
 import { DataDetailsCharacterService } from 'src/app/share/services/data-details-character.service';
 import { Store } from '@ngrx/store';
-import { charactersErrorSelector, charactersLoadingSelector, charactersSelector, dataLoad } from 'src/app/reducers/marvelCharacters';
-import { SortDataService } from './sort-data.service';
+import { charactersErrorSelector, charactersLoadingSelector, charactersSelector, dataLoad, dataPagination } from 'src/app/reducers/marvelCharacters';
 
 @Component({
   selector: 'app-heroes-list',
@@ -14,45 +13,45 @@ import { SortDataService } from './sort-data.service';
 
 export class HeroesListComponent implements OnInit {
 
-  //Store
   public loading$ = this.store.select(charactersLoadingSelector);
   public characters$ = this.store.select(charactersSelector);
-  public error$ = this.store.select(charactersErrorSelector);
-
-  //Old files
-  public marvelHeroes: MarvelCharacters[] = [];
+  public error$ = this.store.select(charactersErrorSelector); // ? Придумать бы как бы юзать этот ерор
+  public linkForSort: string = '/characters?limit=5&orderBy=';
   public linkCharacters: string = 'characters?'; // !!! Need for pagination
   public selectedHero: MarvelCharacters;
 
   constructor(
     private router: Router,
     private dataDetails: DataDetailsCharacterService,
-    private sortService: SortDataService,
     private store: Store) { }
 
   ngOnInit() {
     this.store.dispatch(dataLoad({ heroName: '' }));
   }
-  nextPage(heroes) {
+  public nextPage(heroes) {
     this.characters$ = heroes;
   }
 
-  dataFromSort(param) {
+  public dataFromSort(param) {
+    const sortByAlphabetic: string = `${this.linkForSort}name&`;
+    const sortByReverseAlphabetic: string = `${this.linkForSort}-name&`;
+    const sortByModified: string = `${this.linkForSort}modified&`;
+
     switch (param) {
       case 'By A-Z':
-        this.marvelHeroes = this.sortService.sortByAlphabetic(this.marvelHeroes);
+        this.store.dispatch(dataPagination({ requestString: sortByAlphabetic }));
         break;
       case 'By Z-A':
-        this.marvelHeroes = this.sortService.sortByReverseAlphabetic(this.marvelHeroes);
+        this.store.dispatch(dataPagination({ requestString: sortByReverseAlphabetic }));
         break;
       case 'By Modify':
-        this.marvelHeroes = this.sortService.sortByDate(this.marvelHeroes);
+        this.store.dispatch(dataPagination({ requestString: sortByModified }));
         break;
       default:
-        this.marvelHeroes = this.sortService.sortByAlphabetic(this.marvelHeroes);
+        this.store.dispatch(dataLoad({ heroName: '' }));
     }
   }
-  moreInfo(hero: MarvelCharacters) {
+  public moreInfo(hero: MarvelCharacters) {
     this.selectedHero = hero;
     this.dataDetails.setDataMoreInfo(this.selectedHero);
     this.router.navigate(['moreInfo']);
