@@ -15,8 +15,8 @@ export class HeroesListComponent implements OnInit {
 
   public loading$ = this.store.select(charactersLoadingSelector);
   public characters$ = this.store.select(charactersSelector);
-  public error$ = this.store.select(charactersErrorSelector); // ? Придумать бы как бы юзать этот ерор
-  public linkCharacters: string = 'characters?limit=5&'; // !!! Need for pagination
+  public error$ = this.store.select(charactersErrorSelector);
+  public linkCharacters: string = 'characters?limit=5&';
   public selectedHero: MarvelCharacters;
 
   constructor(
