@@ -1,8 +1,9 @@
 <ngb-pagination
   class="d-flex justify-content-center"
   size="lg"
-  [collectionSize]="collectionSize"
-  [maxSize]="itemsPerPage"
+  [collectionSize]="collectionSize$ | async"
+  [maxSize]="maxSizePages"
+  [pageSize]="itemsPerPage"
   [boundaryLinks]="true"
   (pageChange)="onPageChanged($event)"
 ></ngb-pagination>

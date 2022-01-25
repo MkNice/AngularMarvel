@@ -26,18 +26,16 @@ export class SearchResultComponent implements OnInit, OnDestroy {
     private dataDetails: DataDetailsCharacterService) { }
 
   ngOnInit(): void {
-    this.routerActive.queryParams.subscribe((obj) => this.searchString += obj.name ),
+    this.routerActive.queryParams.subscribe((obj) => this.searchString += obj.name),
       takeUntil(this.destroy$); // !! useless mb...Later return
     this.store.dispatch(dataLoad({ requestString: this.searchString }));
   }
   ngOnDestroy() {
     this.destroy$.next();
   }
-  moreInfo(hero: MarvelCharacters) {
+  public moreInfo(hero: MarvelCharacters) {
     this.selectedHero = hero;
     this.dataDetails.setDataMoreInfo(this.selectedHero);
     this.router.navigate(['moreInfo']);
   }
 }
-
-

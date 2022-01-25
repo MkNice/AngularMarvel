@@ -22,7 +22,7 @@ export class SortComponent implements OnInit {
 
   ngOnInit(): void { }
 
-  emitvalue() {
+  public emitvalue() {
     this.selectedOption.emit(this.valueOption);
   }
 }

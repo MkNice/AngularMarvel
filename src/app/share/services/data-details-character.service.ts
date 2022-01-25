@@ -6,14 +6,14 @@ import { MarvelCharacters } from '../interfaces/interface-marvel';
 })
 export class DataDetailsCharacterService {
 
-  public dataMoreInfo: MarvelCharacters[];
+  public dataMoreInfo: MarvelCharacters;
 
   constructor() { }
-    // !! убери ты эту помойку и сделай нормально
-  getDataMoreInfo(){
+  // !! убери ты эту помойку и сделай нормально
+  public getDataMoreInfo() {
     return this.dataMoreInfo;
   }
-  setDataMoreInfo(data){
+  public setDataMoreInfo(data) {
     this.dataMoreInfo = data;
   }
 }

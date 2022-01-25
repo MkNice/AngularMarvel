@@ -7,7 +7,7 @@ export const CHARACTERS_KEY = 'marvel';
 export const dataLoad = createAction('[MARVELCHARACTERS] dataLoad',
   props<{ requestString: string; }>());
 export const dataLoadSuccess = createAction('[MARVELCHARACTERS] dataLoadSuccess',
-  props<{ data: MarvelCharacters[]; }>());
+  props<{ character: MarvelCharacters[]; collectionSize: number; }>());
 export const dataLoadError = createAction('[MARVELCHARACTERS] dataLoadError',
   props<{ err: string; }>());
 
@@ -16,6 +16,7 @@ export const charactersInitialState: CharactersState = {
   loading: false,
   error: '',
   search: '',
+  collectionSize: 0,
 };
 
 export const charactersReducer = createReducer(
@@ -26,11 +27,12 @@ export const charactersReducer = createReducer(
     characters: [],
     search: requestString,
   })),
-  on(dataLoadSuccess, (state, { data }) => ({
+  on(dataLoadSuccess, (state, { character, collectionSize }) => ({
     ...state,
     loading: false,
-    characters: data,
+    characters: character,
     error: '',
+    collectionSize: collectionSize,
   })),
   on(dataLoadError, (state, { err }) => ({
     ...state,
@@ -45,6 +47,11 @@ export const dataCharactersSelector = createFeatureSelector<CharactersState>(CHA
 export const charactersSelector = createSelector(
   dataCharactersSelector,
   (stateData => stateData.characters
+  ),
+);
+export const collectionSizeSelector = createSelector(
+  dataCharactersSelector,
+  (stateData => stateData.collectionSize
   ),
 );
 export const charactersErrorSelector = createSelector(

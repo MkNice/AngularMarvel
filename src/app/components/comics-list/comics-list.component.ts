@@ -32,7 +32,7 @@ export class ComicsListComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     this.destroy$.next();
   }
-  nextPage(comics) {
+  public nextPage(comics) {
     this.marvelComics$ = comics;
   }
 }

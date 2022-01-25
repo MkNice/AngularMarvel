@@ -13,11 +13,11 @@ export class AppEffects {
     private actions$: Actions,
     private apiService: APIService) { }
 
-  dataLoad$ = createEffect(() => this.actions$.pipe(
+    public dataLoad$ = createEffect(() => this.actions$.pipe(
     ofType(dataLoad),
     switchMap((pagination) =>
       this.apiService.getData(pagination.requestString).pipe(
-        map((data: DataMarvel) => dataLoadSuccess({ data: data.data.results })),
+        map((data: DataMarvel) => dataLoadSuccess({ character: data.data.results, collectionSize: data.data.total })),
         catchError((error) => of(dataLoadError({ err: error })))
       )
     )

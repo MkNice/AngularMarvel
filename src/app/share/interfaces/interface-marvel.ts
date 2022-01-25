@@ -7,4 +7,8 @@ export interface MarvelCharacters {
     path: string,
     extension: string,
   },
+  stories: {
+    available: number
+    items: []
+  },
 }
