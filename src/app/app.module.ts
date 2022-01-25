@@ -16,7 +16,6 @@ import { ComicsComponent } from './components/comics/comics.component';
 import { ComicsHeaderComponent } from './components/comics-header/comics-header.component';
 import { ComicsListComponent } from './components/comics-list/comics-list.component';
 import { NotfoundComponent } from './components/notfound/notfound.component';
-import { MarvelService } from './share/services/marvel.service';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
@@ -60,7 +59,7 @@ import { AppEffects } from './effects/AppEffects';
     StoreRouterConnectingModule.forRoot(),
     EffectsModule.forRoot([AppEffects])
   ],
-  providers: [MarvelService, APIService],
+  providers: [APIService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

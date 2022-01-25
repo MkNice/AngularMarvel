@@ -47,7 +47,7 @@ export class HeroesListComponent implements OnInit {
         this.store.dispatch(dataLoad({ requestString: sortByModified }));
         break;
       default:
-        this.store.dispatch(dataLoad({ requestString: '' }));
+        this.store.dispatch(dataLoad({ requestString: this.linkCharacters }));
     }
   }
   public moreInfo(hero: MarvelCharacters) {

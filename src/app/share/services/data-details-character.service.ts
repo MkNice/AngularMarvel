@@ -9,7 +9,7 @@ export class DataDetailsCharacterService {
   public dataMoreInfo: MarvelCharacters[];
 
   constructor() { }
-
+    // !! убери ты эту помойку и сделай нормально
   getDataMoreInfo(){
     return this.dataMoreInfo;
   }
