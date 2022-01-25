@@ -1,7 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { ReplaySubject } from 'rxjs';
-import { charactersErrorSelector, charactersLoadingSelector, charactersSelector, dataPagination } from 'src/app/reducers/marvelCharacters';
+import { charactersErrorSelector, charactersLoadingSelector, charactersSelector, dataLoad } from 'src/app/reducers/marvelCharacters';
 import { MarvelCharacters } from 'src/app/share/interfaces/interface-marvel';
 import { APIService } from 'src/app/share/services/api.service';
 
@@ -27,7 +27,7 @@ export class ComicsListComponent implements OnInit, OnDestroy {
     private store: Store) { }
 
   ngOnInit(): void {
-    this.store.dispatch(dataPagination({requestString: this.linkComics}));
+    this.store.dispatch(dataLoad({ requestString: this.linkComics }));
   }
   ngOnDestroy(): void {
     this.destroy$.next();

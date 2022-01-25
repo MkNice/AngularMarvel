@@ -9,17 +9,9 @@ import { DataMarvel } from '../interfaces/interface-data';
 @Injectable()
 export class MarvelService {
 
-  public loading: boolean = true;
-  public marvelHeroes: MarvelCharacters[] = [];
-  public collectionSize: number;
+  public collectionSize: number; // ! Сделал криво, переделывай. И вообще хранить состояния в сервисе?? По жопе тебе надо надавать
 
   constructor(private http: HttpClient) { }
-
-  fetchCharacters(name: string = ''): Observable<DataMarvel> {
-    let data: string = '';
-    if (name) { data = `&name=${name}`; }
-    return this.http.get<DataMarvel>(`${environment['LINK_MARVEL']}/characters?ts=1&hash=${environment['HASH']}&apikey=${environment['PUBLIC_KEY']}&limit=5` + data);
-    }
 
   fetchMarvelPagination(page: number, itemsPerPage: number): Observable<MarvelCharacters[]> {
     const heroes = this.http.get<DataMarvel>(`${environment['LINK_MARVEL']}/characters?ts=1&hash=${environment['HASH']}&apikey=${environment['PUBLIC_KEY']}`)
@@ -35,5 +27,4 @@ export class MarvelService {
   getPageItems(users: any, page: number, itemsPerPage: number): any {
     return users;
   }
-
 }

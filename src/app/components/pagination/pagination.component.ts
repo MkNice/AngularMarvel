@@ -4,7 +4,7 @@ import { MarvelCharacters } from 'src/app/share/interfaces/interface-marvel';
 import { APIService } from 'src/app/share/services/api.service';
 import { ReplaySubject } from 'rxjs';
 import { Store } from '@ngrx/store';
-import { dataPagination } from 'src/app/reducers/marvelCharacters';
+import { dataLoad } from 'src/app/reducers/marvelCharacters';
 
 @Component({
   selector: 'app-pagination',
@@ -17,7 +17,7 @@ export class PaginationComponent implements OnInit, OnDestroy {
   @Input() link: string = '';
   @Output() nextPage = new EventEmitter<MarvelCharacters[]>();
 
-  public pagination$ = this.store.select(dataPagination);
+  public pagination$ = this.store.select(dataLoad);
 
   public page: number;
   public collectionSize: number;
@@ -41,7 +41,7 @@ export class PaginationComponent implements OnInit, OnDestroy {
     const getNumberOffset: number = (pageNumber * this.itemsPerPage) - this.itemsPerPage;
     const request: string = `${this.link}offset=${getNumberOffset}&limit=${this.itemsPerPage}`;
 
-    this.store.dispatch(dataPagination({requestString: request}));
+    this.store.dispatch(dataLoad({requestString: request}));
   }
   ngOnDestroy() {
     this.destroy$.next();
