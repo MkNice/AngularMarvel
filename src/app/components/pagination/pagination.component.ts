@@ -1,7 +1,8 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { MarvelCharacters } from 'src/app/share/interfaces/interface-marvel';
 import { Store } from '@ngrx/store';
-import { collectionSizeSelector, dataLoad } from 'src/app/reducers/marvelCharacters';
+import { charactersSelector, collectionSizeSelector, dataLoad } from 'src/app/reducers/marvelCharacters';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-pagination',
@@ -14,8 +15,8 @@ export class PaginationComponent implements OnInit {
   @Input() link: string = '';
   @Output() nextPage = new EventEmitter<MarvelCharacters[]>();
 
-  public pagination$ = this.store.select(dataLoad);
-  public collectionSize$ = this.store.select(collectionSizeSelector);
+  public pagination$: Observable<MarvelCharacters[]> = this.store.select(charactersSelector);
+  public collectionSize$: Observable<number> = this.store.select(collectionSizeSelector);
   public maxSizePages: number = 5;
   public itemsPerPage: number = 5;
 

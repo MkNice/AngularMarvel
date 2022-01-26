@@ -1,7 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Store } from '@ngrx/store';
-import { ReplaySubject } from 'rxjs';
+import { Observable, ReplaySubject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { charactersSelector, dataLoad } from 'src/app/reducers/marvelCharacters';
 import { MarvelCharacters } from 'src/app/share/interfaces/interface-marvel';
@@ -14,7 +14,7 @@ import { DataDetailsCharacterService } from 'src/app/share/services/data-details
 })
 export class SearchResultComponent implements OnInit, OnDestroy {
 
-  public characters$ = this.store.select(charactersSelector);
+  public characters$: Observable<MarvelCharacters[]>= this.store.select(charactersSelector);
   public searchString: string = `characters?name=`;
   public selectedHero: MarvelCharacters;
   private destroy$: ReplaySubject<number> = new ReplaySubject<number>(1);

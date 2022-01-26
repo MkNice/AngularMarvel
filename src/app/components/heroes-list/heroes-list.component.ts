@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { DataDetailsCharacterService } from 'src/app/share/services/data-details-character.service';
 import { Store } from '@ngrx/store';
 import { charactersErrorSelector, charactersLoadingSelector, charactersSelector, dataLoad } from 'src/app/reducers/marvelCharacters';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-heroes-list',
@@ -13,9 +14,9 @@ import { charactersErrorSelector, charactersLoadingSelector, charactersSelector,
 
 export class HeroesListComponent implements OnInit {
 
-  public loading$ = this.store.select(charactersLoadingSelector);
-  public characters$ = this.store.select(charactersSelector);
-  public error$ = this.store.select(charactersErrorSelector);
+  public loading$: Observable<boolean> = this.store.select(charactersLoadingSelector);
+  public characters$: Observable<MarvelCharacters[]> = this.store.select(charactersSelector);
+  public error$: Observable<string> = this.store.select(charactersErrorSelector);
   public linkCharacters: string = 'characters?limit=5&';
   public selectedHero: MarvelCharacters;
 
