@@ -15,8 +15,8 @@ export class AppEffects {
 
     public dataLoad$ = createEffect(() => this.actions$.pipe(
     ofType(dataLoad),
-    switchMap((pagination) =>
-      this.apiService.getData(pagination.requestString).pipe(
+    switchMap((dataString) =>
+      this.apiService.getData(dataString.requestString).pipe(
         map((data: DataMarvel) => dataLoadSuccess({ character: data.data.results, collectionSize: data.data.total })),
         catchError((error) => of(dataLoadError({ err: error })))
       )
