@@ -1,3 +1,7 @@
+<div class="filler">
+  <app-search [searchString]="searchComics"></app-search>
+  <app-sort (selectedOption)="dataFromSort($event)"></app-sort>
+</div>
 <div class="comics-list" *ngFor="let comic of marvelComics$ | async">
   <img
     src="{{ comic.thumbnail.path }}.{{ comic.thumbnail.extension }}"

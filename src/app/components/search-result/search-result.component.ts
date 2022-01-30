@@ -15,7 +15,7 @@ import { DataDetailsCharacterService } from 'src/app/share/services/data-details
 export class SearchResultComponent implements OnInit, OnDestroy {
 
   public characters$: Observable<MarvelCharacters[]>= this.store.select(charactersSelector);
-  public searchString: string = `characters?name=`;
+  public searchString: string = '';
   public selectedHero: MarvelCharacters;
   private destroy$: ReplaySubject<number> = new ReplaySubject<number>(1);
 

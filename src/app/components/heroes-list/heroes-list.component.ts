@@ -18,6 +18,7 @@ export class HeroesListComponent implements OnInit {
   public characters$: Observable<MarvelCharacters[]> = this.store.select(charactersSelector);
   public error$: Observable<string> = this.store.select(charactersErrorSelector);
   public linkCharacters: string = 'characters?limit=5&';
+  public searchHero: string = 'characters?name=';
   public selectedHero: MarvelCharacters;
 
   constructor(
@@ -28,7 +29,8 @@ export class HeroesListComponent implements OnInit {
   ngOnInit() {
     this.store.dispatch(dataLoad({ requestString: this.linkCharacters }));
   }
-  public nextPage(heroes) {
+
+  public nextPage(heroes: Observable<MarvelCharacters[]>) {
     this.characters$ = heroes;
   }
 
