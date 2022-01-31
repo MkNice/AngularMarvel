@@ -17,7 +17,7 @@ export class HeroesListComponent implements OnInit {
   public loading$: Observable<boolean> = this.store.select(charactersLoadingSelector);
   public characters$: Observable<MarvelCharacters[]> = this.store.select(charactersSelector);
   public error$: Observable<string> = this.store.select(charactersErrorSelector);
-  public linkCharacters: string = 'characters?limit=5&';
+  public linkCharacters: string = 'characters?limit=5';
   public searchHero: string = 'characters?name=';
   public selectedHero: MarvelCharacters;
 
@@ -35,9 +35,9 @@ export class HeroesListComponent implements OnInit {
   }
 
   public dataFromSort(param) {
-    const sortByAlphabetic: string = `${this.linkCharacters}orderBy=name&`;
-    const sortByReverseAlphabetic: string = `${this.linkCharacters}orderBy=-name&`;
-    const sortByModified: string = `${this.linkCharacters}orderBy=modified&`;
+    const sortByAlphabetic: string = `${this.linkCharacters}&orderBy=name&`;
+    const sortByReverseAlphabetic: string = `${this.linkCharacters}&orderBy=-name&`;
+    const sortByModified: string = `${this.linkCharacters}&orderBy=modified&`;
 
     switch (param) {
       case 'By A-Z':

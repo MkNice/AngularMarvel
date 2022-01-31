@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
+import { Observable } from 'rxjs';
 import { charactersErrorSelector, charactersLoadingSelector, charactersSelector, dataLoad } from 'src/app/reducers/marvelCharacters';
+import { MarvelCharacters } from 'src/app/share/interfaces/interface-marvel';
 
 @Component({
   selector: 'app-comics-list',
@@ -9,11 +11,11 @@ import { charactersErrorSelector, charactersLoadingSelector, charactersSelector,
 })
 export class ComicsListComponent implements OnInit {
 
-  public loading$ = this.store.select(charactersLoadingSelector);
-  public marvelComics$ = this.store.select(charactersSelector);
-  public error$ = this.store.select(charactersErrorSelector);
+  public loading$: Observable<boolean> = this.store.select(charactersLoadingSelector);
+  public marvelComics$: Observable<MarvelCharacters[]> = this.store.select(charactersSelector);
+  public error$: Observable<string> = this.store.select(charactersErrorSelector);
 
-  public linkComics: string = 'comics?limit=5&';
+  public linkComics: string = 'comics?limit=5';
   public searchComics: string = 'comics?title=';
 
   constructor(private store: Store) { }
@@ -26,9 +28,9 @@ export class ComicsListComponent implements OnInit {
     this.marvelComics$ = comics;
   }
   public dataFromSort(param) {
-    const sortByAlphabetic: string = `${this.linkComics}orderBy=title&`;
-    const sortByReverseAlphabetic: string = `${this.linkComics}orderBy=-title&`;
-    const sortByModified: string = `${this.linkComics}orderBy=modified&`;
+    const sortByAlphabetic: string = `${this.linkComics}&orderBy=title&`;
+    const sortByReverseAlphabetic: string = `${this.linkComics}&orderBy=-title&`;
+    const sortByModified: string = `${this.linkComics}&orderBy=modified&`;
 
     switch (param) {
       case 'By A-Z':
