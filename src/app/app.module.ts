@@ -27,6 +27,7 @@ import { MoreInfoComponent } from './components/more-info/more-info.component';
 import { SearchResultComponent } from './components/search-result/search-result.component';
 import { APIService } from './share/services/api.service';
 import { AppEffects } from './effects/AppEffects';
+import { ComicsCharactersRowComponent } from './share/comics-characters-row/comics-characters-row.component';
 
 
 @NgModule({
@@ -43,7 +44,8 @@ import { AppEffects } from './effects/AppEffects';
     ComicsListComponent,
     NotfoundComponent,
     MoreInfoComponent,
-    SearchResultComponent
+    SearchResultComponent,
+    ComicsCharactersRowComponent
   ],
   imports: [
     BrowserModule,

@@ -1,10 +1,10 @@
 import { ActionReducerMap, MetaReducer } from '@ngrx/store';
 import { environment } from '../../environments/environment';
-import { CharactersState } from '../share/interfaces/interface-state';
+import { ICharactersState } from '../share/interfaces/interface-state';
 import { charactersReducer, CHARACTERS_KEY } from './marvelCharacters';
 
 export interface State {
-  [CHARACTERS_KEY]: CharactersState;
+  [CHARACTERS_KEY]: ICharactersState;
 }
 
 export const reducers: ActionReducerMap<State> = {

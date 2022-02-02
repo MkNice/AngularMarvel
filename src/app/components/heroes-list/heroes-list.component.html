@@ -4,25 +4,13 @@
 </div>
 <div class="hero-list-container">
   <div class="heroes-list" *ngFor="let character of characters$ | async">
-    <div>
-      <img
-        class="img-hero"
-        src="{{ character.thumbnail.path }}.{{ character.thumbnail.extension }}"
-        alt="{{ character.name }}"
-        width="150"
-        height="150"
-      />
-    </div>
-    <p class="hero-name">{{ character.name }}</p>
-    <button class="btn btn-info" (click)="moreInfo(character)">
-      more info
-    </button>
+    <app-comics-characters-row [data]="character"></app-comics-characters-row>
   </div>
+  <div class="loading-container" *ngIf="loading$ | async">
+    <progress></progress>
+  </div>
+  <app-pagination
+    [link]="linkCharacters"
+    (nextPage)="nextPage($event)"
+  ></app-pagination>
 </div>
-<div class="loading-container" *ngIf="loading$ | async">
-  <progress></progress>
-</div>
-<app-pagination
-  [link]="linkCharacters"
-  (nextPage)="nextPage($event)"
-></app-pagination>

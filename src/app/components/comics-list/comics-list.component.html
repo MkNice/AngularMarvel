@@ -3,19 +3,7 @@
   <app-sort (selectedOption)="dataFromSort($event)"></app-sort>
 </div>
 <div class="comics-list" *ngFor="let comic of marvelComics$ | async">
-  <img
-    src="{{ comic.thumbnail.path }}.{{ comic.thumbnail.extension }}"
-    alt="comics"
-    class="img-comics"
-  />
-  <div class="description-wrapper">
-    <p class="description-title">
-      {{ comic.title }}
-    </p>
-  </div>
-  <button class="btn btn-info">
-    <a class="link" href="{{ comic.urls[0].url }}">More Info</a>
-  </button>
+  <app-comics-characters-row [data]="comic"></app-comics-characters-row>
 </div>
 <div class="loading-container" *ngIf="loading$ | async">
   <progress></progress>

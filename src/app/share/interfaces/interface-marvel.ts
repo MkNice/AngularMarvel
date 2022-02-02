@@ -11,4 +11,5 @@ export interface IMarvelCharacters {
     available: number
     items: []
   },
+  title: string,
 }

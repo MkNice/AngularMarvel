@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { charactersErrorSelector, charactersLoadingSelector, charactersSelector, dataLoad } from 'src/app/reducers/marvelCharacters';
-import { MarvelCharacters } from 'src/app/share/interfaces/interface-marvel';
+import { IMarvelCharacters } from 'src/app/share/interfaces/interface-marvel';
 
 @Component({
   selector: 'app-comics-list',
@@ -12,7 +12,7 @@ import { MarvelCharacters } from 'src/app/share/interfaces/interface-marvel';
 export class ComicsListComponent implements OnInit {
 
   public loading$: Observable<boolean> = this.store.select(charactersLoadingSelector);
-  public marvelComics$: Observable<MarvelCharacters[]> = this.store.select(charactersSelector);
+  public marvelComics$: Observable<IMarvelCharacters[]> = this.store.select(charactersSelector);
   public error$: Observable<string> = this.store.select(charactersErrorSelector);
 
   public linkComics: string = 'comics?limit=5';

@@ -3,3 +3,18 @@
   height: 300px;
   object-fit: cover;
 }
+.tab {
+  width: 750px;
+  margin: 0 auto;
+
+  ul {
+    display: flex;
+    list-style: none;
+    justify-content: space-between;
+
+    li {
+      width: 50%;
+      text-align: center;
+    }
+  }
+}
