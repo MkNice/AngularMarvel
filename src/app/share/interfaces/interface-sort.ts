@@ -1,3 +1,3 @@
-export interface SortCharacters {
+export interface ISortCharacters {
   name: string;
 }

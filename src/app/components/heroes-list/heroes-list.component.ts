@@ -1,8 +1,8 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ReplaySubject } from 'rxjs';
 import { takeUntil, tap } from 'rxjs/operators';
-import { MarvelCharacters } from 'src/app/share/interfaces/interface-marvel';
-import { DataMarvel } from 'src/app/share/interfaces/interface-data';
+import { IMarvelCharacters } from 'src/app/share/interfaces/interface-marvel';
+import { IDataMarvel } from 'src/app/share/interfaces/interface-data';
 import { Router } from '@angular/router';
 import { APIService } from 'src/app/share/services/api.service';
 import { DataDetailsCharacterService } from 'src/app/share/services/data-details-character.service';
@@ -16,11 +16,11 @@ import { SortDataService } from './sort-data.service';
 
 export class HeroesListComponent implements OnInit, OnDestroy {
 
-  public marvelHeroes: MarvelCharacters[] = [];
+  public marvelHeroes: IMarvelCharacters[] = [];
   public loading: boolean = true;
   private destroy$: ReplaySubject<number> = new ReplaySubject<number>(1);
   public linkCharacters: string = 'characters?limit=5&';
-  public selectedHero: MarvelCharacters;
+  public selectedHero: IMarvelCharacters;
 
   constructor(
     private apiService: APIService,
@@ -30,9 +30,9 @@ export class HeroesListComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
 
-    this.apiService.getData(this.linkCharacters)
+    this.apiService.getDataCharacters('3-d Man')
       .pipe(
-        tap((heroes: DataMarvel) => this.marvelHeroes = heroes.data.results),
+        tap((heroes: IDataMarvel) => this.marvelHeroes = heroes.data.results),
         takeUntil(this.destroy$)
       )
       .subscribe(() => {
@@ -43,7 +43,7 @@ export class HeroesListComponent implements OnInit, OnDestroy {
     this.destroy$.next();
   }
 
-  nextPage(heroes: MarvelCharacters[]) {
+  nextPage(heroes: IMarvelCharacters[]) {
     this.marvelHeroes = heroes;
   }
 
@@ -62,7 +62,7 @@ export class HeroesListComponent implements OnInit, OnDestroy {
         this.marvelHeroes = this.sortService.sortByAlphabetic(this.marvelHeroes);
     }
   }
-  moreInfo(hero: MarvelCharacters) {
+  moreInfo(hero: IMarvelCharacters) {
     this.selectedHero = hero;
     this.dataDetails.setDataMoreInfo(this.selectedHero);
     this.router.navigate(['moreInfo']);

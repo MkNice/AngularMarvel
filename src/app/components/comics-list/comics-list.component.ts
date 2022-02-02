@@ -1,8 +1,8 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ReplaySubject } from 'rxjs';
 import { takeUntil, tap } from 'rxjs/operators';
-import { DataMarvel } from 'src/app/share/interfaces/interface-data';
-import { MarvelCharacters } from 'src/app/share/interfaces/interface-marvel';
+import { IDataMarvel } from 'src/app/share/interfaces/interface-data';
+import { IMarvelCharacters } from 'src/app/share/interfaces/interface-marvel';
 import { APIService } from 'src/app/share/services/api.service';
 
 @Component({
@@ -12,7 +12,7 @@ import { APIService } from 'src/app/share/services/api.service';
 })
 export class ComicsListComponent implements OnInit, OnDestroy {
 
-  public marvelComics: MarvelCharacters[] = [];
+  public marvelComics: IMarvelCharacters[] = [];
   private destroy$: ReplaySubject<number> = new ReplaySubject<number>(1);
   public linkComics: string = 'comics?limit=5&';
 
@@ -20,10 +20,9 @@ export class ComicsListComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
 
-    this.apiService.getData(this.linkComics).pipe(
-      tap((data: DataMarvel) => {
+    this.apiService.getDataCharacters(this.linkComics).pipe(
+      tap((data: IDataMarvel) => {
         this.marvelComics = data.data.results;
-        console.log(data);
       }),
       takeUntil(this.destroy$)
     )

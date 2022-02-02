@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { DataMarvel } from 'src/app/share/interfaces/interface-data';
+import { IDataMarvel } from 'src/app/share/interfaces/interface-data';
 import { APIService } from 'src/app/share/services/api.service';
 import { DataSearchService } from 'src/app/share/services/data-search.service';
 import { MarvelService } from 'src/app/share/services/marvel.service';
@@ -12,7 +12,7 @@ import { MarvelService } from 'src/app/share/services/marvel.service';
 export class SearchResultComponent implements OnInit {
 
   public searchString: string = '';
-  public response: DataMarvel;
+  public response: IDataMarvel;
 
   constructor(private dataSearchService: DataSearchService, private marvelService: MarvelService, private apiService: APIService) { }
 
@@ -22,7 +22,7 @@ export class SearchResultComponent implements OnInit {
   }
   search() {
     this.marvelService.fetchCharacters(this.searchString)
-      .subscribe((response: DataMarvel) => {
+      .subscribe((response: IDataMarvel) => {
         this.response = response;
       });
   }

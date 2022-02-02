@@ -28,7 +28,7 @@ export class SearchComponent implements OnInit, OnDestroy {
 
     const searchString: string = `/characters?name=${this.hero}`;
 
-    this.apiService.getData(searchString)
+    this.apiService.getDataCharacters(searchString)
       .pipe(
         tap(() => {
           this.dataSearchService.setData(this.hero);
