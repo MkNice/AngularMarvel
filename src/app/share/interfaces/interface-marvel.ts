@@ -1,4 +1,4 @@
-export interface MarvelCharacters {
+export interface IMarvelCharacters {
   id: number,
   name: string,
   description: string,

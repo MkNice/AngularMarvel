@@ -1,7 +1,7 @@
-import { MarvelCharacters } from './interface-marvel';
+import { IMarvelCharacters } from './interface-marvel';
 
-export interface CharactersState {
-  characters: MarvelCharacters[];
+export interface ICharactersState {
+  characters: IMarvelCharacters[];
   loading: boolean;
   error: string;
   search: string;

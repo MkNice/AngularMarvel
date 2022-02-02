@@ -4,7 +4,7 @@ import { Store } from '@ngrx/store';
 import { Observable, ReplaySubject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { charactersSelector, dataLoad } from 'src/app/reducers/marvelCharacters';
-import { MarvelCharacters } from 'src/app/share/interfaces/interface-marvel';
+import { IMarvelCharacters } from 'src/app/share/interfaces/interface-marvel';
 import { DataDetailsCharacterService } from 'src/app/share/services/data-details-character.service';
 
 @Component({
@@ -14,9 +14,9 @@ import { DataDetailsCharacterService } from 'src/app/share/services/data-details
 })
 export class SearchResultComponent implements OnInit, OnDestroy {
 
-  public characters$: Observable<MarvelCharacters[]>= this.store.select(charactersSelector);
+  public characters$: Observable<IMarvelCharacters[]>= this.store.select(charactersSelector);
   public searchString: string = '';
-  public selectedHero: MarvelCharacters;
+  public selectedHero: IMarvelCharacters;
   private destroy$: ReplaySubject<number> = new ReplaySubject<number>(1);
 
   constructor(
@@ -33,7 +33,7 @@ export class SearchResultComponent implements OnInit, OnDestroy {
   ngOnDestroy() {
     this.destroy$.next();
   }
-  public moreInfo(hero: MarvelCharacters) {
+  public moreInfo(hero: IMarvelCharacters) {
     this.selectedHero = hero;
     this.dataDetails.setDataMoreInfo(this.selectedHero);
     this.router.navigate(['moreInfo']);

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { MarvelCharacters } from 'src/app/share/interfaces/interface-marvel';
+import { IMarvelCharacters } from 'src/app/share/interfaces/interface-marvel';
 import { DataDetailsCharacterService } from 'src/app/share/services/data-details-character.service';
 
 
@@ -10,7 +10,7 @@ import { DataDetailsCharacterService } from 'src/app/share/services/data-details
 })
 export class MoreInfoComponent implements OnInit {
 
-  public character: MarvelCharacters;
+  public character: IMarvelCharacters;
 
   constructor(private dataDetails: DataDetailsCharacterService) { }
 

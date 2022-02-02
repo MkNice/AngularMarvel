@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { MarvelCharacters } from 'src/app/share/interfaces/interface-marvel';
+import { IMarvelCharacters } from 'src/app/share/interfaces/interface-marvel';
 import { Router } from '@angular/router';
 import { DataDetailsCharacterService } from 'src/app/share/services/data-details-character.service';
 import { Store } from '@ngrx/store';
@@ -15,11 +15,11 @@ import { Observable } from 'rxjs';
 export class HeroesListComponent implements OnInit {
 
   public loading$: Observable<boolean> = this.store.select(charactersLoadingSelector);
-  public characters$: Observable<MarvelCharacters[]> = this.store.select(charactersSelector);
+  public characters$: Observable<IMarvelCharacters[]> = this.store.select(charactersSelector);
   public error$: Observable<string> = this.store.select(charactersErrorSelector);
   public linkCharacters: string = 'characters?limit=5';
   public searchHero: string = 'characters?name=';
-  public selectedHero: MarvelCharacters;
+  public selectedHero: IMarvelCharacters;
 
   constructor(
     private router: Router,
@@ -30,7 +30,7 @@ export class HeroesListComponent implements OnInit {
     this.store.dispatch(dataLoad({ requestString: this.linkCharacters }));
   }
 
-  public nextPage(heroes: Observable<MarvelCharacters[]>) {
+  public nextPage(heroes: Observable<IMarvelCharacters[]>) {
     this.characters$ = heroes;
   }
 
@@ -53,7 +53,7 @@ export class HeroesListComponent implements OnInit {
         this.store.dispatch(dataLoad({ requestString: this.linkCharacters }));
     }
   }
-  public moreInfo(hero: MarvelCharacters) {
+  public moreInfo(hero: IMarvelCharacters) {
     this.selectedHero = hero;
     this.dataDetails.setDataMoreInfo(this.selectedHero);
     this.router.navigate(['moreInfo']);
