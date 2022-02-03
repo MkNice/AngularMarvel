@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { IMarvelCharacters } from '../interfaces/interface-marvel';
 import { HttpClient } from '@angular/common/http';
-import { tap } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 import { IDataMarvel } from '../interfaces/interface-data';
 
@@ -21,18 +20,18 @@ export class MarvelService {
     return this.http.get<IDataMarvel>(`${environment['LINK_MARVEL']}/characters?ts=1&hash=${environment['HASH']}&apikey=${environment['PUBLIC_KEY']}&limit=5` + data);
     }
 
-  fetchMarvelPagination(page: number, itemsPerPage: number): Observable<IMarvelCharacters[]> {
-    const heroes = this.http.get<IDataMarvel>(`${environment['LINK_MARVEL']}/characters?ts=1&hash=${environment['HASH']}&apikey=${environment['PUBLIC_KEY']}`)
-      .pipe(
-        tap((heroes: IDataMarvel) => {
-          this.collectionSize = heroes.data.total;
-        })
-      );
+  // fetchMarvelPagination(page: number, itemsPerPage: number): Observable<IMarvelCharacters[]> {
+  //   const heroes = this.http.get<IDataMarvel>(`${environment['LINK_MARVEL']}/characters?ts=1&hash=${environment['HASH']}&apikey=${environment['PUBLIC_KEY']}`)
+  //     .pipe(
+  //       tap((heroes: IDataMarvel) => {
+  //         this.collectionSize = heroes.data.total;
+  //       })
+  //     );
 
-    return this.getPageItems(heroes, page, itemsPerPage);
-  }
+  //   return this.getPageItems(heroes, page, itemsPerPage);
+  // }
 
-  getPageItems(users: any, page: number, itemsPerPage: number): any {
-    return users;
-  }
+  // getPageItems(users: any, page: number, itemsPerPage: number): any {
+  //   return users;
+  // }
 }

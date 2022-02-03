@@ -3,9 +3,7 @@ import { ReplaySubject } from 'rxjs';
 import { takeUntil, tap } from 'rxjs/operators';
 import { IMarvelCharacters } from 'src/app/share/interfaces/interface-marvel';
 import { IDataMarvel } from 'src/app/share/interfaces/interface-data';
-import { Router } from '@angular/router';
 import { APIService } from 'src/app/share/services/api.service';
-import { DataDetailsCharacterService } from 'src/app/share/services/data-details-character.service';
 import { SortDataService } from './sort-data.service';
 
 @Component({
@@ -24,13 +22,11 @@ export class HeroesListComponent implements OnInit, OnDestroy {
 
   constructor(
     private apiService: APIService,
-    private router: Router,
-    private dataDetails: DataDetailsCharacterService,
     private sortService: SortDataService) { }
 
   ngOnInit() {
 
-    this.apiService.getDataCharacters('3-d Man')
+    this.apiService.getDataCharacters()
       .pipe(
         tap((heroes: IDataMarvel) => this.marvelHeroes = heroes.data.results),
         takeUntil(this.destroy$)
@@ -39,21 +35,31 @@ export class HeroesListComponent implements OnInit, OnDestroy {
         this.loading = false;
       });
   }
-  ngOnDestroy() {
-    this.destroy$.next();
-  }
 
+  pagination() {
+   // const offset: string = `${(pageNumber * this.itemsPerPage) - 5}`;
+
+    this.apiService.getDataCharacters('', '5', ) //offset
+      .pipe(
+        tap((nextData: IDataMarvel) => {
+          nextData.data.results;
+        }),
+        takeUntil(this.destroy$)
+      )
+      .subscribe();
+  }
   nextPage(heroes: IMarvelCharacters[]) {
     this.marvelHeroes = heroes;
   }
 
-  dataFromSort(param) {
+  dataFromSortLocal(param) {
     switch (param) {
       case 'By A-Z':
         this.marvelHeroes = this.sortService.sortByAlphabetic(this.marvelHeroes);
         break;
       case 'By Z-A':
         this.marvelHeroes = this.sortService.sortByReverseAlphabetic(this.marvelHeroes);
+
         break;
       case 'By Modify':
         this.marvelHeroes = this.sortService.sortByDate(this.marvelHeroes);
@@ -62,9 +68,43 @@ export class HeroesListComponent implements OnInit, OnDestroy {
         this.marvelHeroes = this.sortService.sortByAlphabetic(this.marvelHeroes);
     }
   }
-  moreInfo(hero: IMarvelCharacters) {
-    this.selectedHero = hero;
-    this.dataDetails.setDataMoreInfo(this.selectedHero);
-    this.router.navigate(['moreInfo']);
+  dataFromSortGlobal(param) {
+    switch (param) {
+      case 'By A-Z':
+        this.apiService.getDataCharacters('', '5', '', 'name')
+          .pipe(
+            tap((heroes: IDataMarvel) => this.marvelHeroes = heroes.data.results
+            ),
+            takeUntil(this.destroy$)
+          )
+          .subscribe();
+        break;
+      case 'By Z-A':
+        this.apiService.getDataCharacters('', '5', '', '-name')
+          .pipe(
+            tap((heroes: IDataMarvel) => this.marvelHeroes = heroes.data.results),
+            takeUntil(this.destroy$)
+          )
+          .subscribe();
+        break;
+      case 'By Modify':
+        this.apiService.getDataCharacters('', '5', '', 'modified')
+          .pipe(
+            tap((heroes: IDataMarvel) => this.marvelHeroes = heroes.data.results),
+            takeUntil(this.destroy$)
+          )
+          .subscribe();
+        break;
+      default:
+        this.apiService.getDataCharacters('', '5', '', 'name')
+          .pipe(
+            tap((heroes: IDataMarvel) => this.marvelHeroes = heroes.data.results),
+            takeUntil(this.destroy$)
+          )
+          .subscribe();
+    }
+  }
+  ngOnDestroy() {
+    this.destroy$.next();
   }
 }

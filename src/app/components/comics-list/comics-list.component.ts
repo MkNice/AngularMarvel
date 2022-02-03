@@ -20,7 +20,7 @@ export class ComicsListComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
 
-    this.apiService.getDataCharacters(this.linkComics).pipe(
+    this.apiService.getDataComics().pipe(
       tap((data: IDataMarvel) => {
         this.marvelComics = data.data.results;
       }),

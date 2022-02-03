@@ -1,16 +1,7 @@
 <div class="comics-list" *ngFor="let comic of marvelComics">
-  <img
-    src="{{ comic.thumbnail.path }}.{{ comic.thumbnail.extension }}"
-    alt="comics"
-    class="img-comics"
-  />
-  <div class="description-wrapper">
-    <p class="description-title">
-      {{ comic.title }}
-    </p>
-  </div>
-  <button class="btn btn-info">
-    <a class="link" href="{{ comic.urls[0].url }}">More Info</a>
-  </button>
+  <app-comics-characters-row [data]="comic"></app-comics-characters-row>
 </div>
-<app-pagination [link]="linkComics" (nextPage)="nextPage($event)"></app-pagination>
+<app-pagination
+  [link]="linkComics"
+  (nextPage)="nextPage($event)"
+></app-pagination>

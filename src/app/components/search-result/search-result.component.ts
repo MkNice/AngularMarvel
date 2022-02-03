@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { IDataMarvel } from 'src/app/share/interfaces/interface-data';
+import { IMarvelCharacters } from 'src/app/share/interfaces/interface-marvel';
 import { APIService } from 'src/app/share/services/api.service';
-import { DataSearchService } from 'src/app/share/services/data-search.service';
-import { MarvelService } from 'src/app/share/services/marvel.service';
 
 @Component({
   selector: 'app-search-result',
@@ -12,18 +12,18 @@ import { MarvelService } from 'src/app/share/services/marvel.service';
 export class SearchResultComponent implements OnInit {
 
   public searchString: string = '';
-  public response: IDataMarvel;
+  public selectedHero: IMarvelCharacters[];
 
-  constructor(private dataSearchService: DataSearchService, private marvelService: MarvelService, private apiService: APIService) { }
+  constructor(private apiService: APIService, private routerActive: ActivatedRoute,) { }
 
   ngOnInit(): void {
-    this.searchString = this.dataSearchService.getData();
     this.search();
   }
   search() {
-    this.marvelService.fetchCharacters(this.searchString)
-      .subscribe((response: IDataMarvel) => {
-        this.response = response;
-      });
+    this.routerActive.queryParams.subscribe((obj) => this.searchString += obj.name),
+      this.apiService.getDataCharacters(this.searchString)
+        .subscribe((response: IDataMarvel) => {
+          this.selectedHero = response.data.results;
+        });
   }
 }

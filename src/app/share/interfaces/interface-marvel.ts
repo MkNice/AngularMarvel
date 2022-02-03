@@ -7,4 +7,5 @@ export interface IMarvelCharacters {
     path: string,
     extension: string,
   },
+  title: string,
 }

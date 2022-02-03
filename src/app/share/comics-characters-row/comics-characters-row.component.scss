@@ -1,14 +1,9 @@
-.filler {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  width: 100%;
-}
-.heroes-list {
+.comics-characters-wrapper {
   display: flex;
   justify-content: space-between;
   align-items: center;
   margin-bottom: 15px;
+  width: 750px;
   .img-hero {
     width: 150px;
     height: 150px;
@@ -23,9 +18,4 @@
     height: 50px;
     float: right;
   }
-}
-
-.loading-container {
-  text-align: center;
-  margin: 30px 0;
 }

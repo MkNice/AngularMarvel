@@ -2,7 +2,8 @@
   class="d-flex justify-content-center"
   size="lg"
   [collectionSize]="collectionSize"
-  [maxSize]="5"
   [boundaryLinks]="true"
   (pageChange)="onPageChanged($event)"
+  [maxSize]="numberPagesDisplay"
+  [pageSize]="itemsPerPage"
 ></ngb-pagination>
