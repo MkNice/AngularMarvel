@@ -9,7 +9,20 @@ import { IDataMarvel } from '../interfaces/interface-data';
 export class APIService {
 
   constructor(private http: HttpClient) {}
+  
+  public exper(params): Observable<IDataMarvel> { // params === {name='3-d Man'}
 
+    return this.http.get<IDataMarvel>(
+      `${environment.LINK_MARVEL}/characters`, {
+      params: {
+        ...params,
+        ts: '1',
+        hash: environment.HASH,
+        apikey: environment.PUBLIC_KEY
+      }
+    }
+    );
+  }
   public getData(params: string): Observable<IDataMarvel> {
     return this.http.get<IDataMarvel>(
       `${environment.LINK_MARVEL}/${params}&ts=1&hash=${environment.HASH}&apikey=${environment.PUBLIC_KEY}`
