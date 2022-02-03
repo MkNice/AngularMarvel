@@ -1,0 +1,21 @@
+.comics-characters-wrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px;
+  width: 750px;
+  .img-hero {
+    width: 150px;
+    height: 150px;
+    border-radius: 100%;
+  }
+  .hero-name {
+    width: 390px;
+    text-align: center;
+  }
+  .btn-info {
+    width: 100px;
+    height: 50px;
+    float: right;
+  }
+}

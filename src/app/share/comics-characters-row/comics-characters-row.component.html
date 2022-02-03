@@ -1,0 +1,12 @@
+<div class="comics-characters-wrapper" *ngIf="data">
+  <img
+    src="{{ data.thumbnail.path }}.{{ data.thumbnail.extension }}"
+    class="img-hero"
+  />
+  <div class="description-wrapper">
+    <p class="description-title">
+      {{ data.name || data.title }}
+    </p>
+  </div>
+  <button class="btn btn-info" (click)="moreInfo(data)">More Info</button>
+</div>
