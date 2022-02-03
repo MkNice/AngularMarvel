@@ -9,7 +9,7 @@ export const dataLoadCharacters = createAction('[MARVELCHARACTERS] dataLoadChara
 export const dataLoadComics = createAction('[MARVELCHARACTERS] dataLoadComics',
   props<{ searchName?: string, limit?: string, offset?: string, sortBy?: string; }>());
 export const dataLoadSuccess = createAction('[MARVELCHARACTERS] dataLoadSuccess',
-  props<{ character: IMarvelCharacters[]; collectionSize: number; }>());
+  props<{ data: IMarvelCharacters[]; collectionSize: number; }>());
 export const dataLoadError = createAction('[MARVELCHARACTERS] dataLoadError',
   props<{ err: string; }>());
 
@@ -35,7 +35,7 @@ export const charactersReducer = createReducer(
     characters: [],
     searchString: searchName + limit + offset + sortBy,
   })),
-  on(dataLoadSuccess, (state, { character, collectionSize }) => ({
+  on(dataLoadSuccess, (state, { data: character, collectionSize }) => ({
     ...state,
     loading: false,
     characters: character,

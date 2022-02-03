@@ -1,3 +1,4 @@
+<button class="btn btn-back" (click)="back()">Back</button>
 <div *ngIf="character" class="more-info">
   <img
     class="img-hero"
@@ -6,7 +7,9 @@
     width="150"
     height="150px"
   />
-  <span>Name: {{ character.name || character.title }} id: {{ character.id }} </span>
+  <span
+    >Name: {{ character.name || character.title }} id: {{ character.id }}
+  </span>
   <span>modified: {{ character.modified }}</span>
   <p>Stories: {{ character.stories.available }}</p>
   <p *ngFor="let item of character.stories.items">

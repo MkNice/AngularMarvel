@@ -22,7 +22,7 @@ export class AppEffects {
         dataString.offset,
         dataString.sortBy)
         .pipe(
-          map((data: IDataMarvel) => dataLoadSuccess({ character: data.data.results, collectionSize: data.data.total })),
+          map((data: IDataMarvel) => dataLoadSuccess({ data: data.data.results, collectionSize: data.data.total })),
           catchError((error) => of(dataLoadError({ err: error })))
         )
     )
@@ -36,7 +36,7 @@ export class AppEffects {
         dataString.offset,
         dataString.sortBy)
         .pipe(
-          map((data: IDataMarvel) => dataLoadSuccess({ character: data.data.results, collectionSize: data.data.total })),
+          map((data: IDataMarvel) => dataLoadSuccess({ data: data.data.results, collectionSize: data.data.total })),
           catchError((error) => of(dataLoadError({ err: error })))
         )
     )

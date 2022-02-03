@@ -17,5 +17,7 @@ export class MoreInfoComponent implements OnInit {
   ngOnInit(): void {
     this.character = this.dataDetails.getDataMoreInfo();
   }
-
+  back() {
+    window.history.back();
+  }
 }

@@ -1,5 +1,6 @@
+<button class="btn btn-back" (click)="back()">Back</button>
 <div class="response">
-  <div *ngFor="let hero of selectedHero" class="response-container">
+  <div *ngFor="let hero of selectedHero$ | async" class="response-container">
     <app-comics-characters-row [data]="hero"></app-comics-characters-row>
   </div>
 </div>
