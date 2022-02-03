@@ -5,10 +5,12 @@
     class="logo"
   />
 </h1>
-<div class="tab">
-  <ul>
-    <li routerLink="home">Characters</li>
-    <li routerLink="comics">Comics</li>
-  </ul>
+<div class="wrapper">
+  <div class="wrapper-list">
+    <ul class="list">
+      <li class="list-element btn" routerLink="home">Characters</li>
+      <li class="list-element btn" routerLink="comics">Comics</li>
+    </ul>
+  </div>
+  <router-outlet></router-outlet>
 </div>
-<router-outlet></router-outlet>
