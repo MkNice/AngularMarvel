@@ -17,3 +17,6 @@
     <p>{{ character.description }}</p>
   </div>
 </div>
+<div class="empty-result" *ngIf="!character">
+  <h1>Sorry information missing</h1>
+</div>

@@ -14,7 +14,7 @@ export class ComicsListComponent implements OnInit, OnDestroy {
 
   public loading: boolean = true;
   public marvelComics: IMarvelCharacters[] = [];
-  public collectionSize: number = 1559;
+  public collectionSize: number ;
   public numberPagesDisplay: number = 5;
   public itemsPerPage: number = 5;
   public limit: string = '5';
@@ -27,6 +27,7 @@ export class ComicsListComponent implements OnInit, OnDestroy {
     this.apiService.getDataComics().pipe(
       tap((data: IDataMarvel) => {
         this.marvelComics = data.data.results;
+        this.collectionSize = data.data.total
       }),
       takeUntil(this.destroy$)
     )

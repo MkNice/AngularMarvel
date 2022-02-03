@@ -3,3 +3,6 @@
     <app-comics-characters-row [data]="hero"></app-comics-characters-row>
   </div>
 </div>
+<div class="empty-result" *ngIf="result">
+  <h1>Sorry this character not found</h1>
+</div>

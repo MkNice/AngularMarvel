@@ -6,7 +6,7 @@ import { IMarvelCharacters } from '../interfaces/interface-marvel';
 })
 export class DataDetailsCharacterService {
 
-  public dataMoreInfo: IMarvelCharacters[];
+  public dataMoreInfo: IMarvelCharacters;
 
   constructor() { }
 

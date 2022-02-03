@@ -30,7 +30,10 @@ export class HeroesListComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.apiService.getDataCharacters()
       .pipe(
-        tap((heroes: IDataMarvel) => this.marvelHeroes = heroes.data.results),
+        tap((heroes: IDataMarvel) => {
+          this.marvelHeroes = heroes.data.results;
+          this.collectionSize = heroes.data.total;
+        }),
         takeUntil(this.destroy$)
       )
       .subscribe(() => {
@@ -45,7 +48,7 @@ export class HeroesListComponent implements OnInit, OnDestroy {
       .pipe(
         tap((nextData: IDataMarvel) => {
           this.marvelHeroes = nextData.data.results;
-          this.collectionSize = nextData.data.total
+          this.collectionSize = nextData.data.total;
         }),
         takeUntil(this.destroy$)
       )
