@@ -1,12 +1,12 @@
-<div class="comics-list" *ngFor="let comic of marvelComics">
+<div class="comics-list" *ngFor="let comic of comics$ | async">
   <app-comics-characters-row [data]="comic"></app-comics-characters-row>
 </div>
-<div class="loading-container" *ngIf="loading">
+<div class="loading-container" *ngIf="loading$ | async">
   <progress></progress>
 </div>
 <app-pagination
   (currentPageNumber)="pagination($event)"
-  [collectionSize]="collectionSize"
+  [collectionSize]="collectionSize$ | async"
   [numberPagesDisplay]="numberPagesDisplay"
   [itemsPerPage]="itemsPerPage"
 ></app-pagination>

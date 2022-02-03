@@ -1,54 +1,33 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
-import { ReplaySubject } from 'rxjs';
-import { takeUntil, tap } from 'rxjs/operators';
-import { IDataMarvel } from 'src/app/share/interfaces/interface-data';
+import { Component, OnInit } from '@angular/core';
+import { Store } from '@ngrx/store';
+import { Observable } from 'rxjs';
+import { charactersErrorSelector, charactersLoadingSelector, charactersSelector, collectionSizeSelector, dataLoadComics } from 'src/app/reducers/marvelCharacters';
 import { IMarvelCharacters } from 'src/app/share/interfaces/interface-marvel';
-import { APIService } from 'src/app/share/services/api.service';
 
 @Component({
   selector: 'app-comics-list',
   templateUrl: './comics-list.component.html',
   styleUrls: ['./comics-list.component.scss']
 })
-export class ComicsListComponent implements OnInit, OnDestroy {
+export class ComicsListComponent implements OnInit {
 
-  public loading: boolean = true;
-  public marvelComics: IMarvelCharacters[] = [];
-  public collectionSize: number ;
+  public loading$: Observable<boolean> = this.store.select(charactersLoadingSelector);
+  public comics$: Observable<IMarvelCharacters[]> = this.store.select(charactersSelector);
+  public error$: Observable<string> = this.store.select(charactersErrorSelector);
+  public collectionSize$: Observable<number> = this.store.select(collectionSizeSelector);
+
   public numberPagesDisplay: number = 5;
   public itemsPerPage: number = 5;
   public limit: string = '5';
-  private destroy$: ReplaySubject<number> = new ReplaySubject<number>(1);
 
-  constructor(private apiService: APIService) { }
+  constructor(private store: Store) { }
 
   ngOnInit(): void {
-
-    this.apiService.getDataComics().pipe(
-      tap((data: IDataMarvel) => {
-        this.marvelComics = data.data.results;
-        this.collectionSize = data.data.total
-      }),
-      takeUntil(this.destroy$)
-    )
-      .subscribe(() => {
-        this.loading = false;
-      });
+    this.store.dispatch(dataLoadComics({}));
   }
 
   pagination(currentPage: number) {
     const offset: string = `${(currentPage * this.itemsPerPage) - this.itemsPerPage}`;
-
-    this.apiService.getDataComics('', this.limit, offset, '')
-      .pipe(
-        tap((nextData: IDataMarvel) => {
-          this.marvelComics = nextData.data.results;
-        }),
-        takeUntil(this.destroy$)
-      )
-      .subscribe();
-  }
-  ngOnDestroy(): void {
-    this.destroy$.next();
+    this.store.dispatch(dataLoadComics({ searchName: '', limit: this.limit, offset: offset }));
   }
 }
