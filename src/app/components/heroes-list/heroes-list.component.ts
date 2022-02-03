@@ -1,10 +1,12 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { ReplaySubject } from 'rxjs';
+import { Observable, ReplaySubject } from 'rxjs';
 import { takeUntil, tap } from 'rxjs/operators';
 import { IMarvelCharacters } from 'src/app/share/interfaces/interface-marvel';
 import { IDataMarvel } from 'src/app/share/interfaces/interface-data';
 import { APIService } from 'src/app/share/services/api.service';
 import { SortDataService } from './sort-data.service';
+import { Store } from '@ngrx/store';
+import { charactersErrorSelector, charactersLoadingSelector, charactersSelector, collectionSizeSelector, dataLoadCharacters } from 'src/app/reducers/marvelCharacters';
 
 @Component({
   selector: 'app-heroes-list',
@@ -23,12 +25,20 @@ export class HeroesListComponent implements OnInit, OnDestroy {
   public limit: string = '5';
   private destroy$: ReplaySubject<number> = new ReplaySubject<number>(1);
 
+  //Store
+  public loading$: Observable<boolean> = this.store.select(charactersLoadingSelector);
+  public characters$: Observable<IMarvelCharacters[]> = this.store.select(charactersSelector);
+  public error$: Observable<string> = this.store.select(charactersErrorSelector);
+  public collectionSize$: Observable<number> = this.store.select(collectionSizeSelector);
+
   constructor(
     private apiService: APIService,
-    private sortService: SortDataService) { }
+    private sortService: SortDataService,
+    private store: Store) { }
 
   ngOnInit() {
-    this.apiService.getDataCharacters()
+    this.store.dispatch(dataLoadCharacters({}));
+    /*this.apiService.getDataCharacters()
       .pipe(
         tap((heroes: IDataMarvel) => {
           this.marvelHeroes = heroes.data.results;
@@ -39,22 +49,13 @@ export class HeroesListComponent implements OnInit, OnDestroy {
       .subscribe(() => {
         this.loading = false;
       });
+      */
   }
 
   pagination(currentPage: number) {
     const offset: string = `${(currentPage * this.itemsPerPage) - this.itemsPerPage}`;
+    this.store.dispatch(dataLoadCharacters({ searchName: '', limit: this.limit, offset: offset }));
 
-    this.apiService.getDataCharacters('', this.limit, offset, '')
-      .pipe(
-        tap((nextData: IDataMarvel) => {
-          this.marvelHeroes = nextData.data.results;
-          this.collectionSize = nextData.data.total;
-        }),
-        takeUntil(this.destroy$)
-      )
-      .subscribe(() => {
-        this.loading = false;
-      });
   }
 
   dataFromSortLocal(param) {

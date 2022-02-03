@@ -5,9 +5,11 @@ import { ICharactersState } from '../share/interfaces/interface-state';
 export const CHARACTERS_KEY = 'marvel';
 
 export const dataLoadCharacters = createAction('[MARVELCHARACTERS] dataLoadCharacters',
-  props<{ requestString: string; }>());  // model, searchName, limit, offset, sortBy, sortOrder
+  props<{  searchName?: string, limit?: string, offset?: string, sortBy?: string }>());
+/*
 export const dataLoadComics = createAction('[MARVELCHARACTERS] dataLoadComics',
   props<{ searchName: string, limit: string, offset: string, sortBy: string, sortOrder: string; }>());
+  */
 export const dataLoadSuccess = createAction('[MARVELCHARACTERS] dataLoadSuccess',
   props<{ character: IMarvelCharacters[]; collectionSize: number; }>());
 export const dataLoadError = createAction('[MARVELCHARACTERS] dataLoadError',
@@ -23,11 +25,11 @@ export const charactersInitialState: ICharactersState = {
 
 export const charactersReducer = createReducer(
   charactersInitialState,
-  on(dataLoadCharacters, (state, { requestString }) => ({
+  on(dataLoadCharacters, (state, { searchName, limit, offset, sortBy }) => ({
     ...state,
     loading: true,
     characters: [],
-    search: requestString,
+    searchString: searchName + limit + offset + sortBy,
   })),
   on(dataLoadSuccess, (state, { character, collectionSize }) => ({
     ...state,

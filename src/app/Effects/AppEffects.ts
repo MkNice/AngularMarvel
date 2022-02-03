@@ -16,7 +16,12 @@ export class AppEffects {
     public dataLoad$ = createEffect(() => this.actions$.pipe(
     ofType(dataLoadCharacters),
     switchMap((dataString) =>
-      this.apiService.getDataCharacters(dataString.requestString).pipe(
+      this.apiService.getDataCharacters(
+        dataString.searchName,
+        dataString.limit,
+        dataString.offset,
+        dataString.sortBy)
+      .pipe(
         map((data: IDataMarvel) => dataLoadSuccess({ character: data.data.results, collectionSize: data.data.total })),
         catchError((error) => of(dataLoadError({ err: error })))
       )
