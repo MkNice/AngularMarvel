@@ -12,9 +12,13 @@ import { APIService } from 'src/app/share/services/api.service';
 })
 export class ComicsListComponent implements OnInit, OnDestroy {
 
+  public loading: boolean = true;
   public marvelComics: IMarvelCharacters[] = [];
+  public collectionSize: number = 1559;
+  public numberPagesDisplay: number = 5;
+  public itemsPerPage: number = 5;
+  public limit: string = '5';
   private destroy$: ReplaySubject<number> = new ReplaySubject<number>(1);
-  public linkComics: string = 'comics?limit=5&';
 
   constructor(private apiService: APIService) { }
 
@@ -26,12 +30,24 @@ export class ComicsListComponent implements OnInit, OnDestroy {
       }),
       takeUntil(this.destroy$)
     )
+      .subscribe(() => {
+        this.loading = false;
+      });
+  }
+
+  pagination(currentPage: number) {
+    const offset: string = `${(currentPage * this.itemsPerPage) - this.itemsPerPage}`;
+
+    this.apiService.getDataComics('', this.limit, offset, '')
+      .pipe(
+        tap((nextData: IDataMarvel) => {
+          this.marvelComics = nextData.data.results;
+        }),
+        takeUntil(this.destroy$)
+      )
       .subscribe();
   }
   ngOnDestroy(): void {
     this.destroy$.next();
-  }
-  nextPage(comics) {
-    this.marvelComics = comics;
   }
 }

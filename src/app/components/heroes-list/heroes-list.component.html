@@ -1,6 +1,5 @@
 <div class="filler">
-  <app-search></app-search
-  >
+  <app-search></app-search>
   local:<app-sort (selectedOption)="dataFromSortLocal($event)"></app-sort>
   global:<app-sort (selectedOption)="dataFromSortGlobal($event)"></app-sort>
 </div>
@@ -12,7 +11,9 @@
     <progress></progress>
   </div>
   <app-pagination
-    [link]="linkCharacters"
-    (nextPage)="nextPage($event)"
+    (currentPageNumber)="pagination($event)"
+    [collectionSize]="collectionSize"
+    [numberPagesDisplay]="numberPagesDisplay"
+    [itemsPerPage]="itemsPerPage"
   ></app-pagination>
 </div>

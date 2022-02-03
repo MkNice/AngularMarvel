@@ -16,16 +16,18 @@ export class HeroesListComponent implements OnInit, OnDestroy {
 
   public marvelHeroes: IMarvelCharacters[] = [];
   public loading: boolean = true;
-  private destroy$: ReplaySubject<number> = new ReplaySubject<number>(1);
-  public linkCharacters: string = 'characters?limit=5&';
   public selectedHero: IMarvelCharacters;
+  public collectionSize: number;
+  public numberPagesDisplay: number = 5;
+  public itemsPerPage: number = 5;
+  public limit: string = '5';
+  private destroy$: ReplaySubject<number> = new ReplaySubject<number>(1);
 
   constructor(
     private apiService: APIService,
     private sortService: SortDataService) { }
 
   ngOnInit() {
-
     this.apiService.getDataCharacters()
       .pipe(
         tap((heroes: IDataMarvel) => this.marvelHeroes = heroes.data.results),
@@ -36,20 +38,20 @@ export class HeroesListComponent implements OnInit, OnDestroy {
       });
   }
 
-  pagination() {
-   // const offset: string = `${(pageNumber * this.itemsPerPage) - 5}`;
+  pagination(currentPage: number) {
+    const offset: string = `${(currentPage * this.itemsPerPage) - this.itemsPerPage}`;
 
-    this.apiService.getDataCharacters('', '5', ) //offset
+    this.apiService.getDataCharacters('', this.limit, offset, '')
       .pipe(
         tap((nextData: IDataMarvel) => {
-          nextData.data.results;
+          this.marvelHeroes = nextData.data.results;
+          this.collectionSize = nextData.data.total
         }),
         takeUntil(this.destroy$)
       )
-      .subscribe();
-  }
-  nextPage(heroes: IMarvelCharacters[]) {
-    this.marvelHeroes = heroes;
+      .subscribe(() => {
+        this.loading = false;
+      });
   }
 
   dataFromSortLocal(param) {
@@ -71,7 +73,7 @@ export class HeroesListComponent implements OnInit, OnDestroy {
   dataFromSortGlobal(param) {
     switch (param) {
       case 'By A-Z':
-        this.apiService.getDataCharacters('', '5', '', 'name')
+        this.apiService.getDataCharacters('', this.limit, '', 'name')
           .pipe(
             tap((heroes: IDataMarvel) => this.marvelHeroes = heroes.data.results
             ),
@@ -80,7 +82,7 @@ export class HeroesListComponent implements OnInit, OnDestroy {
           .subscribe();
         break;
       case 'By Z-A':
-        this.apiService.getDataCharacters('', '5', '', '-name')
+        this.apiService.getDataCharacters('', this.limit, '', '-name')
           .pipe(
             tap((heroes: IDataMarvel) => this.marvelHeroes = heroes.data.results),
             takeUntil(this.destroy$)
@@ -88,7 +90,7 @@ export class HeroesListComponent implements OnInit, OnDestroy {
           .subscribe();
         break;
       case 'By Modify':
-        this.apiService.getDataCharacters('', '5', '', 'modified')
+        this.apiService.getDataCharacters('', this.limit, '', 'modified')
           .pipe(
             tap((heroes: IDataMarvel) => this.marvelHeroes = heroes.data.results),
             takeUntil(this.destroy$)
@@ -96,7 +98,7 @@ export class HeroesListComponent implements OnInit, OnDestroy {
           .subscribe();
         break;
       default:
-        this.apiService.getDataCharacters('', '5', '', 'name')
+        this.apiService.getDataCharacters('', this.limit, '', 'name')
           .pipe(
             tap((heroes: IDataMarvel) => this.marvelHeroes = heroes.data.results),
             takeUntil(this.destroy$)

@@ -1,7 +1,12 @@
 <div class="comics-list" *ngFor="let comic of marvelComics">
   <app-comics-characters-row [data]="comic"></app-comics-characters-row>
 </div>
+<div class="loading-container" *ngIf="loading">
+  <progress></progress>
+</div>
 <app-pagination
-  [link]="linkComics"
-  (nextPage)="nextPage($event)"
+  (currentPageNumber)="pagination($event)"
+  [collectionSize]="collectionSize"
+  [numberPagesDisplay]="numberPagesDisplay"
+  [itemsPerPage]="itemsPerPage"
 ></app-pagination>

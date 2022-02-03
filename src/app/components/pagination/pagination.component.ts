@@ -1,10 +1,4 @@
-import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
-import { MarvelService } from 'src/app/share/services/marvel.service';
-import { IMarvelCharacters } from 'src/app/share/interfaces/interface-marvel';
-import { APIService } from 'src/app/share/services/api.service';
-import { takeUntil, tap } from 'rxjs/operators';
-import { ReplaySubject } from 'rxjs';
-import { IDataMarvel } from 'src/app/share/interfaces/interface-data';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 
 @Component({
   selector: 'app-pagination',
@@ -12,47 +6,18 @@ import { IDataMarvel } from 'src/app/share/interfaces/interface-data';
   styleUrls: ['./pagination.component.scss']
 })
 
-export class PaginationComponent implements OnInit, OnDestroy {
+export class PaginationComponent implements OnInit {
 
-  @Input() link: string = '';
-  @Output() nextPage = new EventEmitter<IMarvelCharacters[]>();
+  @Input() collectionSize;
+  @Input() numberPagesDisplay;
+  @Input() itemsPerPage;
+  @Output() currentPageNumber = new EventEmitter<number>();
 
-  
-
-  public collectionSize: number = 1559;
-  public numberPagesDisplay: number = 5; // Так и должно быть я думаю
-  public itemsPerPage: number = 5; // и это тоже
-  private destroy$: ReplaySubject<number> = new ReplaySubject<number>(1);
-
-  constructor(private marvelService: MarvelService, private apiService: APIService) { }
+  constructor() { }
 
   ngOnInit() { }
 
   onPageChanged(pageNumber) {
- // click to pageNumber 2
- // Братан heroes-list, на меня тыкнули и у меня страница 2, что делать?
- // Без паники, передай мне эту цифру, я сделаю запрос и отрисую
-    const offset: string = `${(pageNumber * this.itemsPerPage) - 5}`;
-
-    this.apiService.getDataCharacters('', '5', offset)
-      .pipe(
-        tap((nextData: IDataMarvel) => {
-          this.nextPage.emit(nextData.data.results);
-        }),
-        takeUntil(this.destroy$)
-      )
-      .subscribe();
-
-    // this.apiService.getDataComics('', '5', offset)
-    //   .pipe(
-    //     tap((nextData: IDataMarvel) => {
-    //       this.nextPage.emit(nextData.data.results);
-    //     }),
-    //     takeUntil(this.destroy$)
-    //   )
-    //   .subscribe();
-  }
-  ngOnDestroy() {
-    this.destroy$.next();
+    this.currentPageNumber.emit(pageNumber);
   }
 }
