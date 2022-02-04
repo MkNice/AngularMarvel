@@ -9,5 +9,8 @@
   <progress></progress>
 </div>
 <app-pagination
-  (nextPage)="nextPage($event)"
+(nextPage)="pagination($event)"
+[collectionSize]="collectionSize$ | async"
+[maxSizePages]="maxSizePages"
+[itemsPerPage]="itemsPerPage"
 ></app-pagination>
