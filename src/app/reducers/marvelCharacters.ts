@@ -1,13 +1,16 @@
 import { createAction, createFeatureSelector, createReducer, createSelector, on, props } from '@ngrx/store';
+import { IParamsCharacters, IParamsComics } from '../share/interfaces/interace-params';
 import { IMarvelCharacters } from '../share/interfaces/interface-marvel';
 import { ICharactersState } from '../share/interfaces/interface-state';
 
 export const CHARACTERS_KEY = 'marvel';
 
-export const dataLoad = createAction('[MARVELCHARACTERS] dataLoad',
-  props<{ requestString: string; }>());
+export const dataLoadCharacters = createAction('[MARVELCHARACTERS] dataLoadCharacters',
+  props<{ params: IParamsCharacters }>());
+export const dataLoadComics = createAction('[MARVELCHARACTERS] dataLoadComics',
+  props<{ params: IParamsComics }>());
 export const dataLoadSuccess = createAction('[MARVELCHARACTERS] dataLoadSuccess',
-  props<{ character: IMarvelCharacters[]; collectionSize: number; }>());
+  props<{ data: IMarvelCharacters[]; collectionSize: number; }>());
 export const dataLoadError = createAction('[MARVELCHARACTERS] dataLoadError',
   props<{ err: string; }>());
 
@@ -15,19 +18,25 @@ export const charactersInitialState: ICharactersState = {
   characters: [],
   loading: false,
   error: '',
-  search: '',
+  search: {},
   collectionSize: 0,
 };
 
 export const charactersReducer = createReducer(
   charactersInitialState,
-  on(dataLoad, (state, { requestString }) => ({
+  on(dataLoadCharacters, (state, { params }) => ({
     ...state,
     loading: true,
     characters: [],
-    search: requestString,
+    search: params,
   })),
-  on(dataLoadSuccess, (state, { character, collectionSize }) => ({
+  on(dataLoadComics, (state, { params }) => ({
+    ...state,
+    loading: true,
+    characters: [],
+    search: params,
+  })),
+  on(dataLoadSuccess, (state, { data: character, collectionSize }) => ({
     ...state,
     loading: false,
     characters: character,

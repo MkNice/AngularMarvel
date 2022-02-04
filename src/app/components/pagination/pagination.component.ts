@@ -1,7 +1,4 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { IMarvelCharacters } from 'src/app/share/interfaces/interface-marvel';
-import { Store } from '@ngrx/store';
-import { charactersSelector, collectionSizeSelector, dataLoad } from 'src/app/reducers/marvelCharacters';
 import { Observable } from 'rxjs';
 
 @Component({
@@ -12,23 +9,17 @@ import { Observable } from 'rxjs';
 
 export class PaginationComponent implements OnInit {
 
-  @Input() link: string = '';
-  @Output() nextPage = new EventEmitter<IMarvelCharacters[]>();
+  @Input() collectionSize: Observable<number>;
+  @Input() maxSizePages: number;
+  @Input() itemsPerPage: number;
 
-  public pagination$: Observable<IMarvelCharacters[]> = this.store.select(charactersSelector);
-  public collectionSize$: Observable<number> = this.store.select(collectionSizeSelector);
-  public maxSizePages: number = 5;
-  public itemsPerPage: number = 5;
+  @Output() nextPage = new EventEmitter<number>();
 
-  constructor(private store: Store) { }
+  constructor() { }
 
   ngOnInit() { }
 
-  public onPageChanged(pageNumber) {
-
-    const getNumberOffset: number = (pageNumber * this.itemsPerPage) - this.itemsPerPage;
-    const request: string = `${this.link}offset=${getNumberOffset}&limit=${this.itemsPerPage}`;
-
-    this.store.dispatch(dataLoad({ requestString: request }));
+  public onPageChanged(pageNumber: number) {
+    this.nextPage.emit(pageNumber);
   }
 }

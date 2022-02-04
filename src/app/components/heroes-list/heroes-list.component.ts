@@ -1,9 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { IMarvelCharacters } from 'src/app/share/interfaces/interface-marvel';
-import { Router } from '@angular/router';
-import { DataDetailsCharacterService } from 'src/app/share/services/data-details-character.service';
 import { Store } from '@ngrx/store';
-import { charactersErrorSelector, charactersLoadingSelector, charactersSelector, dataLoad } from 'src/app/reducers/marvelCharacters';
+import { charactersErrorSelector, charactersLoadingSelector, charactersSelector, collectionSizeSelector, dataLoadCharacters } from 'src/app/reducers/marvelCharacters';
 import { Observable } from 'rxjs';
 
 @Component({
@@ -17,45 +15,36 @@ export class HeroesListComponent implements OnInit {
   public loading$: Observable<boolean> = this.store.select(charactersLoadingSelector);
   public characters$: Observable<IMarvelCharacters[]> = this.store.select(charactersSelector);
   public error$: Observable<string> = this.store.select(charactersErrorSelector);
-  public linkCharacters: string = 'characters?limit=5';
-  public searchHero: string = 'characters?name=';
-  public selectedHero: IMarvelCharacters;
 
-  constructor(
-    private router: Router,
-    private dataDetails: DataDetailsCharacterService,
-    private store: Store) { }
+  public collectionSize$: Observable<number> = this.store.select(collectionSizeSelector);
+  public maxSizePages: number = 5;
+  public itemsPerPage: number = 5;
+
+  constructor(private store: Store) { }
+
 
   ngOnInit() {
-    this.store.dispatch(dataLoad({ requestString: this.linkCharacters }));
+    this.store.dispatch(dataLoadCharacters({ params: { limit: '5' } }));
   }
 
-  public nextPage(heroes: Observable<IMarvelCharacters[]>) {
-    this.characters$ = heroes;
+  public pagination(curentPage: number) {
+    const offset = `${(this.itemsPerPage * curentPage) - this.itemsPerPage}`;
+    this.store.dispatch(dataLoadCharacters({ params: { limit: '5', offset: offset } }));
   }
 
   public dataFromSort(param) {
-    const sortByAlphabetic: string = `${this.linkCharacters}&orderBy=name&`;
-    const sortByReverseAlphabetic: string = `${this.linkCharacters}&orderBy=-name&`;
-    const sortByModified: string = `${this.linkCharacters}&orderBy=modified&`;
-
     switch (param) {
       case 'By A-Z':
-        this.store.dispatch(dataLoad({ requestString: sortByAlphabetic }));
+        this.store.dispatch(dataLoadCharacters({ params: { limit: '5', orderBy: 'name' } }));
         break;
       case 'By Z-A':
-        this.store.dispatch(dataLoad({ requestString: sortByReverseAlphabetic }));
+        this.store.dispatch(dataLoadCharacters({ params: { limit: '5', orderBy: '-name' } }));
         break;
       case 'By Modify':
-        this.store.dispatch(dataLoad({ requestString: sortByModified }));
+        this.store.dispatch(dataLoadCharacters({ params: { limit: '5', orderBy: 'modified' } }));
         break;
       default:
-        this.store.dispatch(dataLoad({ requestString: this.linkCharacters }));
+        this.store.dispatch(dataLoadCharacters({ params: { limit: '5', orderBy: 'name' } }));
     }
-  }
-  public moreInfo(hero: IMarvelCharacters) {
-    this.selectedHero = hero;
-    this.dataDetails.setDataMoreInfo(this.selectedHero);
-    this.router.navigate(['moreInfo']);
   }
 }

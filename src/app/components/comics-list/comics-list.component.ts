@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
-import { charactersErrorSelector, charactersLoadingSelector, charactersSelector, dataLoad } from 'src/app/reducers/marvelCharacters';
+import { charactersErrorSelector, charactersLoadingSelector, charactersSelector, dataLoadComics } from 'src/app/reducers/marvelCharacters';
 import { IMarvelCharacters } from 'src/app/share/interfaces/interface-marvel';
 
 @Component({
@@ -15,35 +15,28 @@ export class ComicsListComponent implements OnInit {
   public marvelComics$: Observable<IMarvelCharacters[]> = this.store.select(charactersSelector);
   public error$: Observable<string> = this.store.select(charactersErrorSelector);
 
-  public linkComics: string = 'comics?limit=5';
-  public searchComics: string = 'comics?title=';
-
   constructor(private store: Store) { }
 
   ngOnInit(): void {
-    this.store.dispatch(dataLoad({ requestString: this.linkComics }));
+    this.store.dispatch(dataLoadComics({ params: { limit: '5' } }));
   }
 
   public nextPage(comics) {
     this.marvelComics$ = comics;
   }
   public dataFromSort(param) {
-    const sortByAlphabetic: string = `${this.linkComics}&orderBy=title&`;
-    const sortByReverseAlphabetic: string = `${this.linkComics}&orderBy=-title&`;
-    const sortByModified: string = `${this.linkComics}&orderBy=modified&`;
-
     switch (param) {
       case 'By A-Z':
-        this.store.dispatch(dataLoad({ requestString: sortByAlphabetic }));
+        this.store.dispatch(dataLoadComics({ params: { limit: '5', orderBy: 'title' } }));
         break;
       case 'By Z-A':
-        this.store.dispatch(dataLoad({ requestString: sortByReverseAlphabetic }));
+        this.store.dispatch(dataLoadComics({ params: { limit: '5', orderBy: '-title' } }));
         break;
       case 'By Modify':
-        this.store.dispatch(dataLoad({ requestString: sortByModified }));
+        this.store.dispatch(dataLoadComics({ params: { limit: '5', orderBy: 'modified' } }));
         break;
       default:
-        this.store.dispatch(dataLoad({ requestString: this.linkComics }));
+        this.store.dispatch(dataLoadComics({ params: { limit: '5', orderBy: 'title' } }));
     }
   }
 }

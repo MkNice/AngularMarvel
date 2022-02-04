@@ -1,5 +1,5 @@
 <div class="filler">
-  <app-search [searchString]="searchHero"></app-search>
+  <app-search></app-search>
   <app-sort (selectedOption)="dataFromSort($event)"></app-sort>
 </div>
 <div class="hero-list-container">
@@ -10,7 +10,9 @@
     <progress></progress>
   </div>
   <app-pagination
-    [link]="linkCharacters"
-    (nextPage)="nextPage($event)"
+    (nextPage)="pagination($event)"
+    [collectionSize]="collectionSize$ | async"
+    [maxSizePages]="maxSizePages"
+    [itemsPerPage]="itemsPerPage"
   ></app-pagination>
 </div>
