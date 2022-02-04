@@ -2,15 +2,17 @@
   <app-search></app-search>
   <app-sort (selectedOption)="dataFromSort($event)"></app-sort>
 </div>
-<div class="comics-list" *ngFor="let comic of marvelComics$ | async">
-  <app-comics-characters-row [data]="comic"></app-comics-characters-row>
+<div class="comics-list-wrapper">
+  <div class="comics-list" *ngFor="let comic of marvelComics$ | async">
+    <app-comics-characters-row [data]="comic"></app-comics-characters-row>
+  </div>
+  <app-pagination
+    (nextPage)="pagination($event)"
+    [collectionSize]="collectionSize$ | async"
+    [maxSizePages]="maxSizePages"
+    [itemsPerPage]="itemsPerPage"
+  ></app-pagination>
 </div>
 <div class="loading-container" *ngIf="loading$ | async">
-  <progress></progress>
+  <app-loader></app-loader>
 </div>
-<app-pagination
-(nextPage)="pagination($event)"
-[collectionSize]="collectionSize$ | async"
-[maxSizePages]="maxSizePages"
-[itemsPerPage]="itemsPerPage"
-></app-pagination>

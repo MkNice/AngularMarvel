@@ -13,7 +13,6 @@ import { HeroesListComponent } from './components/heroes-list/heroes-list.compon
 import { MarvelComponent } from './components/./marvel/marvel.component';
 import { PaginationComponent } from './components/pagination/pagination.component';
 import { ComicsComponent } from './components/comics/comics.component';
-import { ComicsHeaderComponent } from './components/comics-header/comics-header.component';
 import { ComicsListComponent } from './components/comics-list/comics-list.component';
 import { NotfoundComponent } from './components/notfound/notfound.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -28,6 +27,7 @@ import { SearchResultComponent } from './components/search-result/search-result.
 import { APIService } from './share/services/api.service';
 import { AppEffects } from './effects/AppEffects';
 import { ComicsCharactersRowComponent } from './share/comics-characters-row/comics-characters-row.component';
+import { LoaderComponent } from './share/loader/loader.component';
 
 
 @NgModule({
@@ -40,12 +40,12 @@ import { ComicsCharactersRowComponent } from './share/comics-characters-row/comi
     MarvelComponent,
     PaginationComponent,
     ComicsComponent,
-    ComicsHeaderComponent,
     ComicsListComponent,
     NotfoundComponent,
     MoreInfoComponent,
     SearchResultComponent,
-    ComicsCharactersRowComponent
+    ComicsCharactersRowComponent,
+    LoaderComponent
   ],
   imports: [
     BrowserModule,

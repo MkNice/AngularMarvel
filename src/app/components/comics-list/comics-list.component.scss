@@ -3,6 +3,10 @@
   justify-content: space-between;
   align-items: center;
 }
+.comics-list-wrapper{
+  background: rgba(0, 0, 0, 0.9);
+  border-radius: 10px;
+}
 .comics-list {
   display: flex;
   justify-content: space-between;
@@ -21,6 +25,7 @@
       padding-left: 30px;
       width: 390px;
       text-align: center;
+      color: #fff;
     }
     .description-stories {
       text-align: center;
