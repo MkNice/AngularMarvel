@@ -3,6 +3,7 @@ export interface IParamsCharacters{
   name?:string,
   offset?:string,
   orderBy?:string,
+  nameStartsWith?:string
 }
 export interface IParamsComics{
   limit?: string,
