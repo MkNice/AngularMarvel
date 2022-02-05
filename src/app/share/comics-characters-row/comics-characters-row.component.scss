@@ -6,7 +6,7 @@
   width: 700px;
   .description-title{
     color: #fff;
-    text-shadow:2px 2px 5px rgb(255, 255, 255);
+    text-shadow:2px 2px 3px rgb(255, 255, 255);
   }
   .img-hero {
     width: 150px;
@@ -22,6 +22,10 @@
   .btn-info {
     width: 100px;
     height: 50px;
-    float: right;
+    box-shadow: 0 0 5px #fff;
+  }
+  .btn-info:hover{
+    box-shadow: 0 0 7px #f00;
+    border: 1px solid #f00;
   }
 }

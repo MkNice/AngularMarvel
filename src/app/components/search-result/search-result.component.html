@@ -1,5 +1,9 @@
+<button class="btn" (click)="backPage()">Back</button>
 <div class="response">
   <div *ngFor="let character of characters$ | async" class="response-container">
     <app-comics-characters-row [data]="character"></app-comics-characters-row>
   </div>
+</div>
+<div class="empty-result" *ngIf="result">
+  <h1>Sorry this character not found</h1>
 </div>
