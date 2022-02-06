@@ -22,7 +22,6 @@ export class HeroesListComponent implements OnInit {
 
   constructor(private store: Store) { }
 
-
   ngOnInit() {
     this.store.dispatch(dataLoadCharacters({ params: { limit: '5' } }));
   }

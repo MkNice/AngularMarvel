@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { Store } from '@ngrx/store';
+import { Observable } from 'rxjs';
+import { charactersSelector, dataLoadCharacters } from 'src/app/reducers/marvelCharacters';
 import { IMarvelCharacters } from 'src/app/share/interfaces/interface-marvel';
-import { DataDetailsCharacterService } from 'src/app/share/services/data-details-character.service';
 
 
 @Component({
@@ -10,11 +13,14 @@ import { DataDetailsCharacterService } from 'src/app/share/services/data-details
 })
 export class MoreInfoComponent implements OnInit {
 
-  public character: IMarvelCharacters;
+  public characters$: Observable<IMarvelCharacters[]> = this.store.select(charactersSelector);
 
-  constructor(private dataDetails: DataDetailsCharacterService) { }
+  public selectedNameHero: string;
+
+  constructor(private store: Store, private routerActive: ActivatedRoute) { }
 
   ngOnInit(): void {
-    this.character = this.dataDetails.getDataMoreInfo();
+    this.routerActive.queryParams.subscribe((obj) => this.selectedNameHero = obj.name);
+    this.store.dispatch(dataLoadCharacters({ params: { name: this.selectedNameHero } }));
   }
 }
