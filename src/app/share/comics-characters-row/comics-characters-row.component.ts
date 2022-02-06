@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { IMarvelCharacters } from '../interfaces/interface-marvel';
+import { DataDetailsCharacterService } from '../services/data-details-character.service';
 
 @Component({
   selector: 'app-comics-characters-row',
@@ -11,14 +12,15 @@ export class ComicsCharactersRowComponent implements OnInit {
 
   @Input() dataMarvel: IMarvelCharacters;
 
-  constructor(private router: Router) { }
+  public selectedHero;
+
+  constructor(private dataDetails: DataDetailsCharacterService, private router: Router) { }
 
   ngOnInit(): void { }
 
   moreInfo(hero: IMarvelCharacters) {
-    this.router.navigate(['moreInfo'], { queryParams: { name: hero.name } });
-  }
-  backPage() {
-    window.history.back();
+    this.selectedHero = hero;
+    this.dataDetails.setDataMoreInfo(this.selectedHero);
+    this.router.navigate(['moreInfo']);
   }
 }
