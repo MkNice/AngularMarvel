@@ -9,7 +9,7 @@ import { IMarvelCharacters } from '../interfaces/interface-marvel';
 })
 export class ComicsCharactersRowComponent implements OnInit {
 
-  @Input() data: IMarvelCharacters;
+  @Input() dataMarvel: IMarvelCharacters;
 
   constructor(private router: Router) { }
 
@@ -17,5 +17,8 @@ export class ComicsCharactersRowComponent implements OnInit {
 
   moreInfo(hero: IMarvelCharacters) {
     this.router.navigate(['moreInfo'], { queryParams: { name: hero.name } });
+  }
+  backPage() {
+    window.history.back();
   }
 }

@@ -23,4 +23,7 @@ export class MoreInfoComponent implements OnInit {
     this.routerActive.queryParams.subscribe((obj) => this.selectedNameHero = obj.name);
     this.store.dispatch(dataLoadCharacters({ params: { name: this.selectedNameHero } }));
   }
+  backPage() {
+    window.history.back();
+  }
 }

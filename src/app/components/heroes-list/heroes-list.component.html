@@ -4,7 +4,7 @@
 </div>
 <div class="hero-list-container">
   <div class="heroes-list" *ngFor="let character of characters$ | async">
-    <app-comics-characters-row [data]="character"></app-comics-characters-row>
+    <app-comics-characters-row [dataMarvel]="character"></app-comics-characters-row>
   </div>
   <app-pagination
     (nextPage)="pagination($event)"
