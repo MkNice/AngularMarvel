@@ -1,15 +1,9 @@
+<button class="btn" (click)="backPage()">Back</button>
 <div class="response">
-  <div *ngIf="response" class="response-container">
-    <img
-      class="img-hero"
-      src="{{ response.data.results[0].thumbnail.path }}.{{
-        response.data.results[0].thumbnail.extension
-      }}"
-      alt=""
-      width="150"
-      height="150px"
-    />
-    <span>{{ response.data.results[0].name }}</span>
-    <button class="btn btn-info">more info</button>
+  <div *ngFor="let character of characters$ | async" class="response-container">
+    <app-comics-characters-row [dataMarvel]="character"></app-comics-characters-row>
   </div>
+</div>
+<div class="empty-result" *ngIf="result">
+  <h1>Sorry this character not found</h1>
 </div>

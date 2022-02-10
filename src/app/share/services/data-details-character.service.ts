@@ -1,19 +1,19 @@
 import { Injectable } from '@angular/core';
-import { MarvelCharacters } from '../interfaces/interface-marvel';
+import { IMarvelCharacters } from '../interfaces/interface-marvel';
 
 @Injectable({
   providedIn: 'root'
 })
 export class DataDetailsCharacterService {
 
-  public dataMoreInfo: MarvelCharacters[];
+  public dataMoreInfo: IMarvelCharacters;
 
   constructor() { }
-
-  getDataMoreInfo(){
+  // !! убери ты эту помойку и сделай нормально
+  public getDataMoreInfo() {
     return this.dataMoreInfo;
   }
-  setDataMoreInfo(data){
+  public setDataMoreInfo(data) {
     this.dataMoreInfo = data;
   }
 }

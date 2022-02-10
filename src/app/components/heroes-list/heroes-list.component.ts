@@ -1,12 +1,8 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
-import { ReplaySubject } from 'rxjs';
-import { takeUntil, tap } from 'rxjs/operators';
-import { MarvelCharacters } from 'src/app/share/interfaces/interface-marvel';
-import { DataMarvel } from 'src/app/share/interfaces/interface-data';
-import { Router } from '@angular/router';
-import { APIService } from 'src/app/share/services/api.service';
-import { DataDetailsCharacterService } from 'src/app/share/services/data-details-character.service';
-import { SortDataService } from './sort-data.service';
+import { Component, OnInit } from '@angular/core';
+import { IMarvelCharacters } from 'src/app/share/interfaces/interface-marvel';
+import { Store } from '@ngrx/store';
+import { charactersErrorSelector, charactersLoadingSelector, charactersSelector, collectionSizeSelector, dataLoadCharacters } from 'src/app/reducers/marvelCharacters';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-heroes-list',
@@ -14,57 +10,40 @@ import { SortDataService } from './sort-data.service';
   styleUrls: ['./heroes-list.component.scss']
 })
 
-export class HeroesListComponent implements OnInit, OnDestroy {
+export class HeroesListComponent implements OnInit {
 
-  public marvelHeroes: MarvelCharacters[] = [];
-  public loading: boolean = true;
-  private destroy$: ReplaySubject<number> = new ReplaySubject<number>(1);
-  public linkCharacters: string = 'characters?limit=5&';
-  public selectedHero: MarvelCharacters;
+  public loading$: Observable<boolean> = this.store.select(charactersLoadingSelector);
+  public characters$: Observable<IMarvelCharacters[]> = this.store.select(charactersSelector);
+  public error$: Observable<string> = this.store.select(charactersErrorSelector);
 
-  constructor(
-    private apiService: APIService,
-    private router: Router,
-    private dataDetails: DataDetailsCharacterService,
-    private sortService: SortDataService) { }
+  public collectionSize$: Observable<number> = this.store.select(collectionSizeSelector);
+  public maxSizePages: number = 5;
+  public itemsPerPage: number = 5;
+
+  constructor(private store: Store) { }
 
   ngOnInit() {
-
-    this.apiService.getData(this.linkCharacters)
-      .pipe(
-        tap((heroes: DataMarvel) => this.marvelHeroes = heroes.data.results),
-        takeUntil(this.destroy$)
-      )
-      .subscribe(() => {
-        this.loading = false;
-      });
-  }
-  ngOnDestroy() {
-    this.destroy$.next();
+    this.store.dispatch(dataLoadCharacters({ params: { limit: '5' } }));
   }
 
-  nextPage(heroes: MarvelCharacters[]) {
-    this.marvelHeroes = heroes;
+  public pagination(curentPage: number) {
+    const offset = `${(this.itemsPerPage * curentPage) - this.itemsPerPage}`;
+    this.store.dispatch(dataLoadCharacters({ params: { limit: '5', offset: offset } }));
   }
 
-  dataFromSort(param) {
+  public dataFromSort(param) {
     switch (param) {
       case 'By A-Z':
-        this.marvelHeroes = this.sortService.sortByAlphabetic(this.marvelHeroes);
+        this.store.dispatch(dataLoadCharacters({ params: { limit: '5', orderBy: 'name' } }));
         break;
       case 'By Z-A':
-        this.marvelHeroes = this.sortService.sortByReverseAlphabetic(this.marvelHeroes);
+        this.store.dispatch(dataLoadCharacters({ params: { limit: '5', orderBy: '-name' } }));
         break;
       case 'By Modify':
-        this.marvelHeroes = this.sortService.sortByDate(this.marvelHeroes);
+        this.store.dispatch(dataLoadCharacters({ params: { limit: '5', orderBy: 'modified' } }));
         break;
       default:
-        this.marvelHeroes = this.sortService.sortByAlphabetic(this.marvelHeroes);
+        this.store.dispatch(dataLoadCharacters({ params: { limit: '5', orderBy: 'name' } }));
     }
-  }
-  moreInfo(hero: MarvelCharacters) {
-    this.selectedHero = hero;
-    this.dataDetails.setDataMoreInfo(this.selectedHero);
-    this.router.navigate(['moreInfo']);
   }
 }

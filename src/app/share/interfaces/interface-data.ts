@@ -1,8 +1,8 @@
-import { MarvelCharacters } from './interface-marvel';
+import { IMarvelCharacters } from './interface-marvel';
 
-export interface DataMarvel {
+export interface IDataMarvel {
   data: {
-    results: MarvelCharacters[],
+    results: IMarvelCharacters[],
     total: number
   };
 }

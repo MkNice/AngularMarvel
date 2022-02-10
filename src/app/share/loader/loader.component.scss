@@ -1,0 +1,434 @@
+.cssload-body {
+  position: absolute;
+  margin-left: -119px;
+  left: 50%;
+  animation: speeder 0.02s linear infinite;
+  -o-animation: speeder 0.02s linear infinite;
+  -ms-animation: speeder 0.02s linear infinite;
+  -webkit-animation: speeder 0.02s linear infinite;
+  -moz-animation: speeder 0.02s linear infinite;
+}
+
+.cssload-body > span {
+  height: 12px;
+  width: 83px;
+  background: rgb(255, 255, 255);
+  position: absolute;
+  top: -45px;
+  left: 143px;
+  border-radius: 5px 24px 2px 0;
+}
+
+.cssload-base span {
+  position: absolute;
+  width: 0;
+  height: 0;
+  border-top: 14px solid transparent;
+  border-right: 238px solid rgb(255, 255, 255);
+  border-bottom: 14px solid transparent;
+}
+
+.cssload-base span:after {
+  content: '';
+  height: 52px;
+  width: 52px;
+  border-radius: 50%;
+  background: rgb(255, 255, 255);
+  position: absolute;
+  right: -261px;
+  top: -38px;
+}
+
+.cssload-base span:before {
+  content: '';
+  position: absolute;
+  width: 0;
+  height: 0;
+  border-top: 0 solid transparent;
+  border-right: 131px solid rgb(255, 255, 255);
+  border-bottom: 38px solid transparent;
+  top: -38px;
+  right: -233px;
+}
+
+.cssload-face {
+  position: absolute;
+  height: 29px;
+  width: 48px;
+  background: rgb(255, 255, 255);
+  border-radius: 48px 48px 0 0;
+  transform: rotate(-40deg);
+  -o-transform: rotate(-40deg);
+  -ms-transform: rotate(-40deg);
+  -webkit-transform: rotate(-40deg);
+  -moz-transform: rotate(-40deg);
+  right: -297px;
+  top: -36px;
+}
+
+.cssload-face:after {
+  content: '';
+  height: 29px;
+  width: 29px;
+  background: rgb(255, 255, 255);
+  right: 10px;
+  top: 17px;
+  position: absolute;
+  border-radius: 0 0 0 5px;
+  transform: rotate(40deg);
+  -o-transform: rotate(40deg);
+  -ms-transform: rotate(40deg);
+  -webkit-transform: rotate(40deg);
+  -moz-transform: rotate(40deg);
+  transform-origin: 50% 50%;
+  -o-transform-origin: 50% 50%;
+  -ms-transform-origin: 50% 50%;
+  -webkit-transform-origin: 50% 50%;
+  -moz-transform-origin: 50% 50%;
+}
+
+.cssload-body > span > span:nth-child(1),
+.cssload-body > span > span:nth-child(2),
+.cssload-body > span > span:nth-child(3),
+.cssload-body > span > span:nth-child(4) {
+  width: 71px;
+  height: 2px;
+  background: rgb(255, 255, 255);
+  position: absolute;
+  animation: fazer1 0.01s linear infinite;
+  -o-animation: fazer1 0.01s linear infinite;
+  -ms-animation: fazer1 0.01s linear infinite;
+  -webkit-animation: fazer1 0.01s linear infinite;
+  -moz-animation: fazer1 0.01s linear infinite;
+}
+
+.cssload-body > span > span:nth-child(2) {
+  top: 7px;
+  animation: fazer2 0.02s linear infinite;
+  -o-animation: fazer2 0.02s linear infinite;
+  -ms-animation: fazer2 0.02s linear infinite;
+  -webkit-animation: fazer2 0.02s linear infinite;
+  -moz-animation: fazer2 0.02s linear infinite;
+}
+
+.cssload-body > span > span:nth-child(3) {
+  top: 2px;
+  animation: fazer3 0.02s linear infinite;
+  -o-animation: fazer3 0.02s linear infinite;
+  -ms-animation: fazer3 0.02s linear infinite;
+  -webkit-animation: fazer3 0.02s linear infinite;
+  -moz-animation: fazer3 0.02s linear infinite;
+  animation-delay: -0.05s;
+  -o-animation-delay: -0.05s;
+  -ms-animation-delay: -0.05s;
+  -webkit-animation-delay: -0.05s;
+  -moz-animation-delay: -0.05s;
+}
+
+.cssload-body > span > span:nth-child(4) {
+  top: 10px;
+  animation: fazer4 0.05s linear infinite;
+  -o-animation: fazer4 0.05s linear infinite;
+  -ms-animation: fazer4 0.05s linear infinite;
+  -webkit-animation: fazer4 0.05s linear infinite;
+  -moz-animation: fazer4 0.05s linear infinite;
+  animation-delay: -0.05s;
+  -o-animation-delay: -0.05s;
+  -ms-animation-delay: -0.05s;
+  -webkit-animation-delay: -0.05s;
+  -moz-animation-delay: -0.05s;
+}
+
+.cssload-longfazers {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+}
+
+.cssload-longfazers span {
+  position: absolute;
+  height: 5px;
+  width: 20%;
+  background: rgb(255, 255, 255);
+}
+
+.cssload-longfazers span:nth-child(1) {
+  top: 20%;
+  animation: cssload-lf 0.03s linear infinite;
+  -o-animation: cssload-lf 0.03s linear infinite;
+  -ms-animation: cssload-lf 0.03s linear infinite;
+  -webkit-animation: cssload-lf 0.03s linear infinite;
+  -moz-animation: cssload-lf 0.03s linear infinite;
+  animation-delay: -0.25s;
+  -o-animation-delay: -0.25s;
+  -ms-animation-delay: -0.25s;
+  -webkit-animation-delay: -0.25s;
+  -moz-animation-delay: -0.25s;
+}
+
+.cssload-longfazers span:nth-child(2) {
+  top: 40%;
+  animation: cssload-lf 0.04s linear infinite;
+  -o-animation: cssload-lf 0.04s linear infinite;
+  -ms-animation: cssload-lf 0.04s linear infinite;
+  -webkit-animation: cssload-lf 0.04s linear infinite;
+  -moz-animation: cssload-lf 0.04s linear infinite;
+  animation-delay: -0.05s;
+  -o-animation-delay: -0.05s;
+  -ms-animation-delay: -0.05s;
+  -webkit-animation-delay: -0.05s;
+  -moz-animation-delay: -0.05s;
+}
+
+.cssload-longfazers span:nth-child(3) {
+  top: 60%;
+  animation: cssload-lf 0.03s linear infinite;
+  -o-animation: cssload-lf 0.03s linear infinite;
+  -ms-animation: cssload-lf 0.03s linear infinite;
+  -webkit-animation: cssload-lf 0.03s linear infinite;
+  -moz-animation: cssload-lf 0.03s linear infinite;
+}
+
+.cssload-longfazers span:nth-child(4) {
+  top: 80%;
+  animation: cssload-lf 0.025s linear infinite;
+  -o-animation: cssload-lf 0.025s linear infinite;
+  -ms-animation: cssload-lf 0.025s linear infinite;
+  -webkit-animation: cssload-lf 0.025s linear infinite;
+  -moz-animation: cssload-lf 0.025s linear infinite;
+  animation-delay: -0.15s;
+  -o-animation-delay: -0.15s;
+  -ms-animation-delay: -0.15s;
+  -webkit-animation-delay: -0.15s;
+  -moz-animation-delay: -0.15s;
+}
+
+@keyframes speeder {
+  0% {
+    transform: translate(5px, 2px) rotate(0deg);
+  }
+  10% {
+    transform: translate(-2px, -7px) rotate(-1deg);
+  }
+  20% {
+    transform: translate(-5px, 0px) rotate(1deg);
+  }
+  30% {
+    transform: translate(2px, 5px) rotate(0deg);
+  }
+  40% {
+    transform: translate(2px, -2px) rotate(1deg);
+  }
+  50% {
+    transform: translate(-2px, 7px) rotate(-1deg);
+  }
+  60% {
+    transform: translate(-2px, 2px) rotate(0deg);
+  }
+  70% {
+    transform: translate(7px, 2px) rotate(-1deg);
+  }
+  80% {
+    transform: translate(-5px, -2px) rotate(1deg);
+  }
+  90% {
+    transform: translate(5px, 2px) rotate(0deg);
+  }
+  100% {
+    transform: translate(2px, -5px) rotate(-1deg);
+  }
+}
+
+@-o-keyframes speeder {
+  0% {
+    -o-transform: translate(5px, 2px) rotate(0deg);
+  }
+  10% {
+    -o-transform: translate(-2px, -7px) rotate(-1deg);
+  }
+  20% {
+    -o-transform: translate(-5px, 0px) rotate(1deg);
+  }
+  30% {
+    -o-transform: translate(2px, 5px) rotate(0deg);
+  }
+  40% {
+    -o-transform: translate(2px, -2px) rotate(1deg);
+  }
+  50% {
+    -o-transform: translate(-2px, 7px) rotate(-1deg);
+  }
+  60% {
+    -o-transform: translate(-2px, 2px) rotate(0deg);
+  }
+  70% {
+    -o-transform: translate(7px, 2px) rotate(-1deg);
+  }
+  80% {
+    -o-transform: translate(-5px, -2px) rotate(1deg);
+  }
+  90% {
+    -o-transform: translate(5px, 2px) rotate(0deg);
+  }
+  100% {
+    -o-transform: translate(2px, -5px) rotate(-1deg);
+  }
+}
+
+@-ms-keyframes speeder {
+  0% {
+    -ms-transform: translate(5px, 2px) rotate(0deg);
+  }
+  10% {
+    -ms-transform: translate(-2px, -7px) rotate(-1deg);
+  }
+  20% {
+    -ms-transform: translate(-5px, 0px) rotate(1deg);
+  }
+  30% {
+    -ms-transform: translate(2px, 5px) rotate(0deg);
+  }
+  40% {
+    -ms-transform: translate(2px, -2px) rotate(1deg);
+  }
+  50% {
+    -ms-transform: translate(-2px, 7px) rotate(-1deg);
+  }
+  60% {
+    -ms-transform: translate(-2px, 2px) rotate(0deg);
+  }
+  70% {
+    -ms-transform: translate(7px, 2px) rotate(-1deg);
+  }
+  80% {
+    -ms-transform: translate(-5px, -2px) rotate(1deg);
+  }
+  90% {
+    -ms-transform: translate(5px, 2px) rotate(0deg);
+  }
+  100% {
+    -ms-transform: translate(2px, -5px) rotate(-1deg);
+  }
+}
+
+@-webkit-keyframes speeder {
+  0% {
+    -webkit-transform: translate(5px, 2px) rotate(0deg);
+  }
+  10% {
+    -webkit-transform: translate(-2px, -7px) rotate(-1deg);
+  }
+  20% {
+    -webkit-transform: translate(-5px, 0px) rotate(1deg);
+  }
+  30% {
+    -webkit-transform: translate(2px, 5px) rotate(0deg);
+  }
+  40% {
+    -webkit-transform: translate(2px, -2px) rotate(1deg);
+  }
+  50% {
+    -webkit-transform: translate(-2px, 7px) rotate(-1deg);
+  }
+  60% {
+    -webkit-transform: translate(-2px, 2px) rotate(0deg);
+  }
+  70% {
+    -webkit-transform: translate(7px, 2px) rotate(-1deg);
+  }
+  80% {
+    -webkit-transform: translate(-5px, -2px) rotate(1deg);
+  }
+  90% {
+    -webkit-transform: translate(5px, 2px) rotate(0deg);
+  }
+  100% {
+    -webkit-transform: translate(2px, -5px) rotate(-1deg);
+  }
+}
+
+@-moz-keyframes speeder {
+  0% {
+    -moz-transform: translate(5px, 2px) rotate(0deg);
+  }
+  10% {
+    -moz-transform: translate(-2px, -7px) rotate(-1deg);
+  }
+  20% {
+    -moz-transform: translate(-5px, 0px) rotate(1deg);
+  }
+  30% {
+    -moz-transform: translate(2px, 5px) rotate(0deg);
+  }
+  40% {
+    -moz-transform: translate(2px, -2px) rotate(1deg);
+  }
+  50% {
+    -moz-transform: translate(-2px, 7px) rotate(-1deg);
+  }
+  60% {
+    -moz-transform: translate(-2px, 2px) rotate(0deg);
+  }
+  70% {
+    -moz-transform: translate(7px, 2px) rotate(-1deg);
+  }
+  80% {
+    -moz-transform: translate(-5px, -2px) rotate(1deg);
+  }
+  90% {
+    -moz-transform: translate(5px, 2px) rotate(0deg);
+  }
+  100% {
+    -moz-transform: translate(2px, -5px) rotate(-1deg);
+  }
+}
+
+@keyframes cssload-lf {
+  0% {
+    left: 200%;
+  }
+  100% {
+    left: -200%;
+    opacity: 0;
+  }
+}
+
+@-o-keyframes cssload-lf {
+  0% {
+    left: 200%;
+  }
+  100% {
+    left: -200%;
+    opacity: 0;
+  }
+}
+
+@-ms-keyframes cssload-lf {
+  0% {
+    left: 200%;
+  }
+  100% {
+    left: -200%;
+    opacity: 0;
+  }
+}
+
+@-webkit-keyframes cssload-lf {
+  0% {
+    left: 200%;
+  }
+  100% {
+    left: -200%;
+    opacity: 0;
+  }
+}
+
+@-moz-keyframes cssload-lf {
+  0% {
+    left: 200%;
+  }
+  100% {
+    left: -200%;
+    opacity: 0;
+  }
+}

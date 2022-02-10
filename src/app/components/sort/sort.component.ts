@@ -1,5 +1,5 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
-import { SortCharacters } from 'src/app/share/interfaces/interface-sort';
+import { ISortCharacters } from 'src/app/share/interfaces/interface-sort';
 
 @Component({
   selector: 'app-sort',
@@ -12,7 +12,7 @@ export class SortComponent implements OnInit {
   @Output() selectedOption = new EventEmitter<string>();
 
   public valueOption: string = '';
-  public filterCharacters: SortCharacters[] = [
+  public filterCharacters: ISortCharacters[] = [
     { name: "By A-Z" },
     { name: "By Z-A" },
     { name: "By Modify" }
@@ -22,7 +22,7 @@ export class SortComponent implements OnInit {
 
   ngOnInit(): void { }
 
-  emitvalue() {
+  public emitvalue() {
     this.selectedOption.emit(this.valueOption);
   }
 }

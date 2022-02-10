@@ -1,29 +1,48 @@
-import { Component, OnInit } from '@angular/core';
-import { DataMarvel } from 'src/app/share/interfaces/interface-data';
-import { APIService } from 'src/app/share/services/api.service';
-import { DataSearchService } from 'src/app/share/services/data-search.service';
-import { MarvelService } from 'src/app/share/services/marvel.service';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { Store } from '@ngrx/store';
+import { Observable, ReplaySubject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
+import { charactersSelector, dataLoadCharacters } from 'src/app/reducers/marvelCharacters';
+import { IMarvelCharacters } from 'src/app/share/interfaces/interface-marvel';
 
 @Component({
   selector: 'app-search-result',
   templateUrl: './search-result.component.html',
   styleUrls: ['./search-result.component.scss']
 })
-export class SearchResultComponent implements OnInit {
+export class SearchResultComponent implements OnInit, OnDestroy {
 
+  public characters$: Observable<IMarvelCharacters[]> = this.store.select(charactersSelector);
+  private destroy$: ReplaySubject<number> = new ReplaySubject<number>(1);
   public searchString: string = '';
-  public response: DataMarvel;
+  public result: boolean;
 
-  constructor(private dataSearchService: DataSearchService, private marvelService: MarvelService, private apiService: APIService) { }
+  constructor(
+    private store: Store,
+    private routerActive: ActivatedRoute) { }
 
+  // TODO можно тут сделать тонну логики по проверкам, тип если при запросе title: searchString приходит пустой массив, то спускаемся ниже и пробуем
+  // TODO через nameStartsWith, ну и элементарная проверка на пустоту строки не нужна будет, лишь бы научится проверять обсёрвбл массив
   ngOnInit(): void {
-    this.searchString = this.dataSearchService.getData();
     this.search();
   }
+
   search() {
-    this.marvelService.fetchCharacters(this.searchString)
-      .subscribe((response: DataMarvel) => {
-        this.response = response;
-      });
+    this.routerActive.queryParams.subscribe((obj) => this.searchString += obj.name),
+      takeUntil(this.destroy$); // !! useless mb...Later return
+    if (this.searchString.length === 0) {
+      this.result = true;
+      this.characters$ = null;
+    } else {
+      this.store.dispatch(dataLoadCharacters({ params: { nameStartsWith: this.searchString } }));
+      this.result = false;
+    }
+  }
+  ngOnDestroy() {
+    this.destroy$.next();
+  }
+  backPage() {
+    window.history.back();
   }
 }

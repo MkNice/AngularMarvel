@@ -1,4 +1,4 @@
-export interface MarvelCharacters {
+export interface IMarvelCharacters {
   id: number,
   name: string,
   description: string,
@@ -7,4 +7,9 @@ export interface MarvelCharacters {
     path: string,
     extension: string,
   },
+  stories: {
+    available: number
+    items: []
+  },
+  title: string,
 }

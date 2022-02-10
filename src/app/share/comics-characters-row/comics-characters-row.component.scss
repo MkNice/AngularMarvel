@@ -1,0 +1,31 @@
+.comics-characters-wrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 15px 25px 15px 25px;
+  width: 700px;
+  .description-title{
+    color: #fff;
+    text-shadow:2px 2px 3px rgb(255, 255, 255);
+  }
+  .img-hero {
+    width: 150px;
+    height: 150px;
+    border-radius: 100%;
+    border: 5px solid rgb(255, 255, 255);
+    box-shadow: 0 0 10px #fff;
+  }
+  .hero-name {
+    width: 390px;
+    text-align: center;
+  }
+  .btn-info {
+    width: 100px;
+    height: 50px;
+    box-shadow: 0 0 5px #fff;
+  }
+  .btn-info:hover{
+    box-shadow: 0 0 7px #f00;
+    border: 1px solid #f00;
+  }
+}

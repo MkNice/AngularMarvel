@@ -1,6 +1,8 @@
 .response {
-  width: 700px;
-  margin: 50px auto 0;
+  width: 750px;
+  margin: 25px auto 0;
+  background: rgba(0, 0, 0, 0.9);
+  border-radius: 10px;
 }
 
 .response-container {
@@ -20,4 +22,11 @@
   .btn-info:active {
     background-color: #000;
   }
+}
+.empty-result {
+  background-color: rgb(0, 0, 0, 0.8);
+  text-align: center;
+  color: #fff;
+  padding: 30px;
+  border-radius: 10px;
 }
