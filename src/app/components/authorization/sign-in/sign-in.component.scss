@@ -1,0 +1,17 @@
+.wrapper-sign-in {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 10px 0;
+
+  label,
+  span {
+    color: #fff;
+    margin: 0;
+  }
+  input {
+    box-shadow: 0 0 5px #fff;
+    border: 2px solid #fff;
+    border-radius: 5px;
+  }
+}
