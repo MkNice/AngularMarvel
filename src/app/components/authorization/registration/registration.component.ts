@@ -6,6 +6,7 @@ import { FormControl, FormGroup } from '@angular/forms';
   templateUrl: './registration.component.html',
   styleUrls: ['./registration.component.scss']
 })
+
 export class RegistrationComponent implements OnInit {
 
   public buyTicketForm: FormGroup;
@@ -18,6 +19,7 @@ export class RegistrationComponent implements OnInit {
   private _createForm() {
     this.buyTicketForm = new FormGroup({
       fio: new FormControl(null),
+      login: new FormControl(null),
       email: new FormControl(null),
       pass: new FormControl(null),
       phone: new FormControl(null),

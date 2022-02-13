@@ -7,5 +7,13 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
 
-  constructor() { }
+  public data;
+
+  constructor() {
+    this.data = JSON.parse(localStorage.getItem('userData'));
+  }
+  logOut() {
+    localStorage.clear();
+    this.data = ''
+  }
 }

@@ -6,7 +6,12 @@
   />
 </h1>
 <div class="wrapper">
-  <app-sign-in></app-sign-in>
+  <div *ngIf="data" class="welcome-wrapper">
+    <span class="welcome"> Hi {{ data.login }}</span> <button class="btn" (click)="logOut()">Log out</button>
+  </div>
+  <div *ngIf="!data">
+    <button class="btn" routerLink="authorization">sign in</button>
+  </div>
   <div class="wrapper-list">
     <ul class="list">
       <li class="list-element btn" routerLink="home">Characters</li>

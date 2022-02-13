@@ -8,13 +8,13 @@ import { SignInComponent } from './sign-in/sign-in.component';
 
 const routerChild: Routes = [
   {
-    path: 'login',
+    path: 'authorization',
     component: SignInComponent,
   },
   {
     path: 'registration',
     component: RegistrationComponent
-  }
+  },
 ];
 @NgModule({
   declarations: [
