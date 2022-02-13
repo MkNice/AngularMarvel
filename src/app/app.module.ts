@@ -28,6 +28,7 @@ import { APIService } from './share/services/api.service';
 import { AppEffects } from './effects/AppEffects';
 import { ComicsCharactersRowComponent } from './share/comics-characters-row/comics-characters-row.component';
 import { LoaderComponent } from './share/loader/loader.component';
+import { AuthorizationModule } from './components/authorization/authorization.module';
 
 
 @NgModule({
@@ -48,6 +49,7 @@ import { LoaderComponent } from './share/loader/loader.component';
     LoaderComponent
   ],
   imports: [
+    AuthorizationModule,
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
