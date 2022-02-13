@@ -1,13 +1,12 @@
 <div class="wrapper-sign-in">
   <label for="email"
     >Email:
-    <input type="email" id="email" />
+    <input type="email" id="email" [(ngModel)]="login" />
   </label>
   <label for="password"
     >Password:
-    <input type="password" id="password" />
+    <input type="password" id="password" [(ngModel)]="pass" />
   </label>
-  <button class="btn">Sign in</button>
+  <button class="btn" (click)="signIn()">Sign in</button>
   <span>or</span>
-  <button class="btn">Registration</button>
-</div>
+  <button class="btn"routerLink="registration">Registration</button>
