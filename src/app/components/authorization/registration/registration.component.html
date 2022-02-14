@@ -1,5 +1,5 @@
 <div class="wrapper-registration">
-  <form class="registration" [formGroup]="buyTicketForm" novalidate>
+  <form class="registration" [formGroup]="user" novalidate>
     <span class="desctioprion-input"> FIO:</span
     ><label for="name">
       <input type="text" id="name" formControlName="fio"
@@ -13,15 +13,19 @@
       <input type="password" id="pass-registration" formControlName="pass"
     /></label>
     <span class="desctioprion-input"> Email:</span
-      ><label for="email-registration">
-        <input type="email" id="email-registration" formControlName="email"
-      /></label>
+    ><label for="email-registration">
+      <input type="email" id="email-registration" formControlName="email"
+    /></label>
     <span class="desctioprion-input"> Phone:</span
     ><label for="phone">
       <input type="phone" id="phone" formControlName="phone"
     /></label>
     <button class="btn btn-registration" (click)="registration()">
       Confirm
+    </button>
+    <span>Already registered?</span>
+    <button class="btn btn-authorization" routerLink="/authorization">
+      authorization
     </button>
   </form>
 </div>

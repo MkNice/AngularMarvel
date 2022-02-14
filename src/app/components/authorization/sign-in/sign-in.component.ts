@@ -16,15 +16,13 @@ export class SignInComponent implements OnInit {
 
   ngOnInit(): void { }
 
-  signIn() {
-    const user = {
-      login: this.login,
-      pass: this.pass
-    };
-    localStorage.setItem('userData', JSON.stringify(user));
-    this.dataLocalStorage = JSON.parse(localStorage.getItem('userData'));
-    this.login = '';
-    this.pass = '';
-    alert('Success');
+  public signIn() {
+    const login = localStorage.getItem('login');
+    const pass = localStorage.getItem('pass');
+    if(this.login === login && this.pass === pass){
+      alert('Success');
+      this.login = '';
+      this.pass = '';
+    } else { alert('User can`t found')}
   }
 }
