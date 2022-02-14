@@ -10,7 +10,7 @@ export class AppComponent {
   public data;
 
   constructor() {
-    this.data = JSON.parse(localStorage.getItem('userData'));
+    this.data = localStorage.getItem('login');
   }
   logOut() {
     localStorage.clear();
