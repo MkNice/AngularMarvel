@@ -1,5 +1,5 @@
-import { IParamsCharacters } from './interace-params';
-import { IMarvelCharacters } from './interface-marvel';
+import { IParamsCharacters } from './params.interface';
+import { IMarvelCharacters } from './marvel.interface';
 
 export interface ICharactersState {
   characters: IMarvelCharacters[];

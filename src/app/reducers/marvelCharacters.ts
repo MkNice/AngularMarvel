@@ -1,7 +1,7 @@
 import { createAction, createFeatureSelector, createReducer, createSelector, on, props } from '@ngrx/store';
-import { IParamsCharacters, IParamsComics } from '../share/interfaces/interace-params';
-import { IMarvelCharacters } from '../share/interfaces/interface-marvel';
-import { ICharactersState } from '../share/interfaces/interface-state';
+import { IParamsCharacters, IParamsComics } from '../share/interfaces/params.interface';
+import { IMarvelCharacters } from '../share/interfaces/marvel.interface';
+import { ICharactersState } from '../share/interfaces/state.interface';
 
 export const CHARACTERS_KEY = 'marvel';
 

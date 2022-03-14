@@ -3,7 +3,7 @@ import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { of } from 'rxjs';
 import { catchError, map, switchMap } from 'rxjs/operators';
 import { dataLoadCharacters, dataLoadComics, dataLoadError, dataLoadSuccess } from '../reducers/marvelCharacters';
-import { IDataMarvel } from '../share/interfaces/interface-data';
+import { IDataMarvel } from '../share/interfaces/data.interface';
 import { APIService } from '../share/services/api.service';
 
 @Injectable()

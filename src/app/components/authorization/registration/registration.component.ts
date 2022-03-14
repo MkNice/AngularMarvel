@@ -27,15 +27,6 @@ export class RegistrationComponent implements OnInit {
   }
 
   public registration(): void {
-    const fio = this.user.get('fio');
-    const login = this.user.get('login');
-    const email = this.user.get('email');
-    const pass = this.user.get('pass');
-    const phone = this.user.get('phone');
-    localStorage.setItem('login', login.value);
-    localStorage.setItem('pass', pass.value);
-    localStorage.setItem('fio', fio.value);
-    localStorage.setItem('email', email.value);
-    localStorage.setItem('phone', phone.value);
+    localStorage.setItem('userData', JSON.stringify(this.user.value))
   }
 }

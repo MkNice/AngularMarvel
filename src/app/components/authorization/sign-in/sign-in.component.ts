@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { dataLocalStorage } from './dataLocalStorage';
+import { TestService } from 'src/app/share/services/test.service';
+import { dataLocalStorage } from './dataLocalStorage.interface';
 
 @Component({
   selector: 'app-sign-in',
@@ -12,17 +13,17 @@ export class SignInComponent implements OnInit {
   public pass: string = '';
   public dataLocalStorage: dataLocalStorage;
 
-  constructor() { }
+  constructor(private testService: TestService) { }
 
   ngOnInit(): void { }
 
   public signIn() {
-    const login = localStorage.getItem('login');
-    const pass = localStorage.getItem('pass');
-    if(this.login === login && this.pass === pass){
+    const userData = JSON.parse(localStorage.getItem('userData'));
+    if (this.login === userData.login && this.pass === userData.pass) {
       alert('Success');
+      this.testService.loginName.next('Hello dear');
       this.login = '';
       this.pass = '';
-    } else { alert('User can`t found')}
+    } else { alert('User can`t found'); }
   }
 }

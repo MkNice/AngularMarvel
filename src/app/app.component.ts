@@ -1,19 +1,31 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { tap } from 'rxjs/operators';
+import { TestService } from './share/services/test.service';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
 
-  public data;
+  public data: string = '';
 
-  constructor() {
-    this.data = localStorage.getItem('login');
+  constructor(private testService: TestService) {
+    if (localStorage.getItem('userData')) {
+      this.data = JSON.parse(localStorage.getItem('userData')).login;
+    }
   }
+
   logOut() {
     localStorage.clear();
-    this.data = ''
+    this.data = '';
+  }
+  ngOnInit(): void {
+    this.testService.loginName.pipe(
+      tap((data: string) => {
+        this.data = data;
+      })
+    ).subscribe();
   }
 }

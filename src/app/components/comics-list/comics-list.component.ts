@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { charactersErrorSelector, charactersLoadingSelector, charactersSelector, collectionSizeSelector, dataLoadComics } from 'src/app/reducers/marvelCharacters';
-import { IMarvelCharacters } from 'src/app/share/interfaces/interface-marvel';
+import { IMarvelCharacters } from 'src/app/share/interfaces/marvel.interface';
 
 @Component({
   selector: 'app-comics-list',

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { IMarvelCharacters } from 'src/app/share/interfaces/interface-marvel';
+import { IMarvelCharacters } from 'src/app/share/interfaces/marvel.interface';
 import { DataDetailsCharacterService } from 'src/app/share/services/data-details-character.service';
 
 
