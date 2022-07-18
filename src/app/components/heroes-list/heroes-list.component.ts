@@ -30,7 +30,6 @@ export class HeroesListComponent implements OnInit {
     const offset = `${(this.itemsPerPage * curentPage) - this.itemsPerPage}`;
     this.store.dispatch(dataLoadCharacters({ params: { limit: '5', offset: offset } }));
   }
-
   public dataFromSort(param) {
     switch (param) {
       case 'By A-Z':
