@@ -1,6 +1,6 @@
 import { ActionReducerMap, MetaReducer } from '@ngrx/store';
 import { environment } from '../../environments/environment';
-import { ICharactersState } from '../share/interfaces/interface-state';
+import { ICharactersState } from '../share/interfaces/state.interface';
 import { charactersReducer, CHARACTERS_KEY } from './marvelCharacters';
 
 export interface State {

@@ -1,5 +1,5 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
-import { ISortCharacters } from 'src/app/share/interfaces/interface-sort';
+import { ISortCharacters } from 'src/app/share/interfaces/sort.interface';
 
 @Component({
   selector: 'app-sort',

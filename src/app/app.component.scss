@@ -6,7 +6,16 @@
 .wrapper {
   width: 750px;
   margin: 0 auto;
-  .wrapper-list{
+  .welcome-wrapper{
+    display: flex;
+    justify-content: space-between;
+    .welcome{
+    color: #fff;
+    text-shadow: 0 2 3px #fff;
+    font-size: 30px;
+  }}
+
+  .wrapper-list {
     background-image: url(/assets/images/tab.jpg);
     background-position: center;
     border-radius: 26px;

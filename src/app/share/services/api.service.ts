@@ -2,8 +2,8 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
-import { IParamsCharacters } from '../interfaces/interace-params';
-import { IDataMarvel } from '../interfaces/interface-data';
+import { IParamsCharacters } from '../interfaces/params.interface';
+import { IDataMarvel } from '../interfaces/data.interface';
 
 @Injectable()
 

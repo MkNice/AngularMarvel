@@ -1,4 +1,4 @@
-import { IMarvelCharacters } from './interface-marvel';
+import { IMarvelCharacters } from './marvel.interface';
 
 export interface IDataMarvel {
   data: {

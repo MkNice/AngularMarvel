@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { IMarvelCharacters } from 'src/app/share/interfaces/interface-marvel';
+import { IMarvelCharacters } from 'src/app/share/interfaces/marvel.interface';
 import { Store } from '@ngrx/store';
 import { charactersErrorSelector, charactersLoadingSelector, charactersSelector, collectionSizeSelector, dataLoadCharacters } from 'src/app/reducers/marvelCharacters';
 import { Observable } from 'rxjs';

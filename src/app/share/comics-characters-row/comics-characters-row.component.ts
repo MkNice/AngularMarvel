@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { IMarvelCharacters } from '../interfaces/interface-marvel';
+import { IMarvelCharacters } from '../interfaces/marvel.interface';
 import { DataDetailsCharacterService } from '../services/data-details-character.service';
 
 @Component({

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { IMarvelCharacters } from '../interfaces/interface-marvel';
+import { IMarvelCharacters } from '../interfaces/marvel.interface';
 
 @Injectable({
   providedIn: 'root'
