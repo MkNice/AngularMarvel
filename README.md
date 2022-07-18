@@ -1,4 +1,7 @@
 # AngularMarvel
+WARNING!!!
+IMPORTANT
+DELETE - "jasmine-core": "~3.5.0", in packaje.json - then everything will work properly.
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 9.1.15.
 
