@@ -1,0 +1,12 @@
+<div class="comics-characters-wrapper" *ngIf="dataMarvel">
+  <img
+    src="{{ dataMarvel.thumbnail.path }}.{{ dataMarvel.thumbnail.extension }}"
+    class="img-hero"
+  />
+  <div class="description-wrapper">
+    <p class="description-title">
+      {{ dataMarvel.name || dataMarvel.title }}
+    </p>
+  </div>
+  <button class="btn btn-info" (click)="moreInfo(dataMarvel)">More Info</button>
+</div>

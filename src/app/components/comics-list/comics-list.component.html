@@ -1,13 +1,18 @@
-<div class="comics-list">
-  <img
-    src="/assets/images/comics/deadpool-comics.jpg"
-    alt="comics"
-    class="img-comics"
-  />
-  <p class="description-comics">
-    Lorem ipsum dolor sit amet consectetur, adipisicing elit. Perspiciatis
-    reprehenderit repudiandae iste maxime, voluptatem accusantium dolorum unde
-    veritatis autem non consequatur facere error porro quae cumque sequi nulla!
-    Doloremque, aperiam?
-  </p>
+<div class="filler">
+  <app-search></app-search>
+  <app-sort (selectedOption)="dataFromSort($event)"></app-sort>
+</div>
+<div class="comics-list-wrapper">
+  <div class="comics-list" *ngFor="let comic of marvelComics$ | async">
+    <app-comics-characters-row [dataMarvel]="comic"></app-comics-characters-row>
+  </div>
+  <app-pagination
+    (nextPage)="pagination($event)"
+    [collectionSize]="collectionSize$ | async"
+    [maxSizePages]="maxSizePages"
+    [itemsPerPage]="itemsPerPage"
+  ></app-pagination>
+</div>
+<div class="loading-container" *ngIf="loading$ | async">
+  <app-loader></app-loader>
 </div>

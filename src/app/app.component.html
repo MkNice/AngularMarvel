@@ -1,1 +1,26 @@
-<router-outlet></router-outlet>
+<h1>
+  <img
+    src="/assets/images/Marvel_Studios_logo.jpg"
+    alt="Marvel Logo"
+    class="logo"
+  />
+</h1>
+<div class="wrapper">
+  <div *ngIf="data; else registration" class="welcome-wrapper">
+    <span class="welcome">{{ data }}</span>
+    <button class="btn" (click)="logOut()">Log out</button>
+  </div>
+  <ng-template #registration>
+    <div>
+      <button class="btn" routerLink="registration">Registration</button>
+    </div>
+  </ng-template>
+
+  <div class="wrapper-list">
+    <ul class="list">
+      <li class="list-element btn" routerLink="home">Characters</li>
+      <li class="list-element btn" routerLink="comics">Comics</li>
+    </ul>
+  </div>
+  <router-outlet></router-outlet>
+</div>

@@ -1,6 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { MarvelService } from 'src/app/share/services/marvel.service';
-import { MarvelCharacters } from 'src/app/share/interfaces/interface-marvel';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-pagination',
@@ -10,24 +9,17 @@ import { MarvelCharacters } from 'src/app/share/interfaces/interface-marvel';
 
 export class PaginationComponent implements OnInit {
 
-  public page: number;
-  public collectionSize: number;
-  public heroes: MarvelCharacters[] = [];;
-  public itemsPerPage: number = 4;
+  @Input() collectionSize: Observable<number>;
+  @Input() maxSizePages: number;
+  @Input() itemsPerPage: number;
 
-  constructor(public marvelService: MarvelService) {
-    this.page = 1;
-    marvelService.fetchMarvelPagination(this.page, this.itemsPerPage)
-      .subscribe(heroes => {
-        this.heroes = heroes;
-        this.collectionSize = marvelService.marvelHeroes.length;
-      });
-  }
+  @Output() nextPage = new EventEmitter<number>();
+
+  constructor() { }
 
   ngOnInit() { }
 
-  onPageChanged(pageNumber) {
-    console.log("page changed:" + pageNumber);
+  public onPageChanged(pageNumber: number) {
+    this.nextPage.emit(pageNumber);
   }
-
 }

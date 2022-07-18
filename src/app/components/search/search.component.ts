@@ -1,33 +1,20 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { Subscription } from 'rxjs';
-import { environment } from 'src/environments/environment';
-import { MarvelCharacters } from 'src/app/share/interfaces/interface-marvel';
+import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-search',
   templateUrl: './search.component.html',
-  styleUrls: ['./search.component.scss']
+  styleUrls: ['./search.component.scss'],
 })
+export class SearchComponent implements OnInit {
 
-export class SearchComponent implements OnInit, OnDestroy {
+  public searchName: string = '';
 
-  public hero: string = '';
-  public response: any;
-  public subscription: Subscription;
-
-  constructor(private http: HttpClient) { }
+  constructor(private router: Router) { }
 
   ngOnInit() { }
 
-  search() {
-    this.subscription = this.http.get(`${environment['LINK_MARVEL']}/characters?name=${this.hero}&ts=1&hash=${environment['HASH']}&apikey=${environment['PUBLIC_KEY']}`)
-      .subscribe(response => {
-        this.response = response;
-      });
+  public search() {
+    this.router.navigate(['search-result'], { queryParams: { name:this.searchName } });
   }
-  ngOnDestroy(): void {
-    this.subscription.unsubscribe();
-  }
-
 }

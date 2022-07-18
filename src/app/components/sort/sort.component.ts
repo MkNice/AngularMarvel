@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { MarvelService } from 'src/app/share/services/marvel.service';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { ISortCharacters } from 'src/app/share/interfaces/sort.interface';
 
 @Component({
   selector: 'app-sort',
@@ -9,12 +9,20 @@ import { MarvelService } from 'src/app/share/services/marvel.service';
 
 export class SortComponent implements OnInit {
 
-  constructor(public heroes: MarvelService) { }
+  @Output() selectedOption = new EventEmitter<string>();
 
-  ngOnInit(): void {
-  }
+  public valueOption: string = '';
+  public filterCharacters: ISortCharacters[] = [
+    { name: "By A-Z" },
+    { name: "By Z-A" },
+    { name: "By Modify" }
+  ];
 
-  sort() {
-    this.heroes.marvelHeroes.reverse();
+  constructor() { }
+
+  ngOnInit(): void { }
+
+  public emitvalue() {
+    this.selectedOption.emit(this.valueOption);
   }
 }

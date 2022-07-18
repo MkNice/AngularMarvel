@@ -1,1 +1,8 @@
-<button class="btn btn-sort" (click)="sort()">sort</button>
+<span class="custom-dropdown big">
+  <select [(ngModel)]="valueOption" (ngModelChange)="emitvalue()" class="cs-select cs-skin-rotate">
+    <option [value]="null">Не выбрано</option>
+    <option *ngFor="let item of filterCharacters" [value]="item.name">
+      {{ item.name }}
+    </option>
+  </select>
+</span>

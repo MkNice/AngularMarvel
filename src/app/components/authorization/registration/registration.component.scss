@@ -1,0 +1,24 @@
+.wrapper-registration{
+    background: rgba(0, 0, 0, 0.9);
+    border-radius: 10px;
+    margin-top: 20px;
+    .registration{
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 15px;
+      .desctioprion-input{
+        color: #fff;
+      }
+      .btn-registration{
+        margin-bottom: 20px;
+      }
+      span{
+        color: #fff
+      }
+      .btn-authorization{
+        margin: 20px 0;
+      }
+    }
+}

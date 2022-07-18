@@ -1,9 +1,8 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
-import { Subscription, Observable } from 'rxjs';
-import { MarvelService } from 'src/app/share/services/marvel.service';
-import { delay, tap, takeUntil } from 'rxjs/operators';
-import { MarvelCharacters } from 'src/app/share/interfaces/interface-marvel';
-import { DataMarvel } from 'src/app/share/interfaces/interface-data';
+import { Component, OnInit } from '@angular/core';
+import { IMarvelCharacters } from 'src/app/share/interfaces/marvel.interface';
+import { Store } from '@ngrx/store';
+import { charactersErrorSelector, charactersLoadingSelector, charactersSelector, collectionSizeSelector, dataLoadCharacters } from 'src/app/reducers/marvelCharacters';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-heroes-list',
@@ -11,28 +10,39 @@ import { DataMarvel } from 'src/app/share/interfaces/interface-data';
   styleUrls: ['./heroes-list.component.scss']
 })
 
-export class HeroesListComponent implements OnInit, OnDestroy {
+export class HeroesListComponent implements OnInit {
 
-  public marvelHeroes: MarvelCharacters[] = [];
-  public subscriptions: Subscription[] = [];
-  public loading: boolean = true;
+  public loading$: Observable<boolean> = this.store.select(charactersLoadingSelector);
+  public characters$: Observable<IMarvelCharacters[]> = this.store.select(charactersSelector);
+  public error$: Observable<string> = this.store.select(charactersErrorSelector);
 
-  constructor(public marvelService: MarvelService) { }
+  public collectionSize$: Observable<number> = this.store.select(collectionSizeSelector);
+  public maxSizePages: number = 5;
+  public itemsPerPage: number = 5;
+
+  constructor(private store: Store) { }
 
   ngOnInit() {
-    const subs = this.marvelService.fetchMarvel()
-      .pipe(
-        delay(1000),
-        tap((heroes: DataMarvel) => this.marvelHeroes = heroes.data.results),
-
-      )
-      .subscribe(() => {
-        this.loading = false;
-      });
-    this.subscriptions.push(subs);
+    this.store.dispatch(dataLoadCharacters({ params: { limit: '5' } }));
   }
 
-  ngOnDestroy() {
-    this.subscriptions.forEach((subscription) => subscription.unsubscribe()); // Можно через forEach, а можно через ...  takeUntil()... destroy until
+  public pagination(curentPage: number) {
+    const offset = `${(this.itemsPerPage * curentPage) - this.itemsPerPage}`;
+    this.store.dispatch(dataLoadCharacters({ params: { limit: '5', offset: offset } }));
+  }
+  public dataFromSort(param) {
+    switch (param) {
+      case 'By A-Z':
+        this.store.dispatch(dataLoadCharacters({ params: { limit: '5', orderBy: 'name' } }));
+        break;
+      case 'By Z-A':
+        this.store.dispatch(dataLoadCharacters({ params: { limit: '5', orderBy: '-name' } }));
+        break;
+      case 'By Modify':
+        this.store.dispatch(dataLoadCharacters({ params: { limit: '5', orderBy: 'modified' } }));
+        break;
+      default:
+        this.store.dispatch(dataLoadCharacters({ params: { limit: '5', orderBy: 'name' } }));
+    }
   }
 }

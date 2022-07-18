@@ -1,0 +1,25 @@
+.more-info {
+  text-align: center;
+  margin-top: 100px;
+  background: rgba(0, 0, 0, 0.9);
+  border-radius: 10px;
+  .img-hero {
+    margin: 25px;
+    width: 150px;
+    height: 150px;
+    border-radius: 100%;
+    border: 5px solid white;
+    box-shadow: 0 0 10px #fff;
+  }
+  span {
+    color: #fff;
+    text-shadow: 2px 2px 5px white;
+  }
+  p {
+    color: #fff;
+    text-shadow: 2px 2px 5px white;
+  }
+  p:last-child{
+    padding-bottom: 15px;
+  }
+}
